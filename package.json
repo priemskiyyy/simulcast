@@ -15,7 +15,8 @@
     "test:unit": "vitest run",
     "test:unit:watch": "vitest",
     "generate:hooks": "pnpm -r --filter './examples/*' generate:hooks",
-    "validate:generated": "pnpm -r --filter './examples/*' validate:generated"
+    "validate:generated": "pnpm -r --filter './examples/*' validate:generated",
+    "test:examples": "pnpm build && pnpm generate:hooks && pnpm -r --filter './examples/*' build && playwright test -c examples/playwright.config.ts"
   },
   "devDependencies": {
     "@eslint/js": "9.39.4",
