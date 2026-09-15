@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" fill="none">
+  <rect width="1200" height="630" fill="#102a24" />
+  <path d="M800 0v630M1000 0v630M0 126h1200M0 504h1200" stroke="#234037" stroke-opacity=".5" />
+  <g transform="translate(80 70)">
+    <rect width="68" height="68" rx="20" fill="#1c4537" />
+    <path d="M46 19H31a7.5 7.5 0 0 0 0 15h8a7.5 7.5 0 0 1 0 15H24" stroke="#ccfbef" stroke-width="6" stroke-linecap="round" />
+    <path d="M32 34h17" stroke="#5eead4" stroke-width="6" stroke-linecap="round" />
+    <circle cx="49" cy="34" r="4" fill="#5eead4" />
+    <circle cx="46" cy="19" r="3" fill="#5eead4" />
+    <circle cx="24" cy="49" r="3" fill="#5eead4" />
+  </g>
+  <g font-family="Arial, Helvetica, sans-serif">
+    <text x="80" y="282" fill="#ecf8ef" font-size="106" font-weight="600" letter-spacing="-6">Simulcast</text>
+    <text x="85" y="366" fill="#b8d2c0" font-size="34" letter-spacing="-1">Realtime subscriptions.</text>
+    <text x="85" y="412" fill="#7fe0b1" font-size="34" letter-spacing="-1">Shared across your app.</text>
+  </g>
+  <path d="M832 315h47c42 0 42-89 84-89h73M879 315h157M879 315c42 0 42 89 84 89h73" stroke="#578b6e" stroke-width="3" stroke-linecap="round" />
+  <circle cx="832" cy="315" r="10" fill="#ccfbef" />
+  <circle cx="1042" cy="226" r="7" fill="#79dca6" />
+  <circle cx="1042" cy="315" r="7" fill="#79dca6" />
+  <circle cx="1042" cy="404" r="7" fill="#79dca6" />
+  <path d="M85 532h48" stroke="#79dca6" stroke-width="3" stroke-linecap="round" />
+</svg>
