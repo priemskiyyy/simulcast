@@ -148,6 +148,12 @@ importers:
         specifier: workspace:*
         version: link:../../core
 
+  packages/adapters/broadcast-channel:
+    devDependencies:
+      simulcast:
+        specifier: workspace:*
+        version: link:../../core
+
   packages/adapters/centrifugo:
     dependencies:
       centrifuge:
