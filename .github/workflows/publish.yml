@@ -1,0 +1,68 @@
+name: publish
+
+on:
+  release:
+    types: [published]
+
+permissions:
+  contents: read
+
+jobs:
+  metadata:
+    runs-on: ubuntu-latest
+    outputs:
+      package: ${{ steps.verify.outputs.package }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      # The release tag is `<package>-v<version>`; the script resolves and validates the package.
+      - id: verify
+        run: node scripts/verify-release.mjs
+        env:
+          RELEASE_TAG: ${{ github.event.release.tag_name }}
+          RELEASE_PRERELEASE: ${{ github.event.release.prerelease }}
+  packages:
+    needs: metadata
+    uses: ./.github/workflows/packages.test.yml
+  integrations:
+    needs: metadata
+    uses: ./.github/workflows/providers.test.yml
+  browsers:
+    needs: metadata
+    uses: ./.github/workflows/browser.test.yml
+  format:
+    needs: metadata
+    uses: ./.github/workflows/common.format.yml
+  verified:
+    needs: metadata
+    uses: ./.github/workflows/packages.verify.yml
+  docs:
+    needs: metadata
+    uses: ./.github/workflows/docs.test.yml
+  publish:
+    needs: [metadata, packages, integrations, browsers, format, verified, docs]
+    runs-on: ubuntu-latest
+    environment: npm
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          registry-url: https://registry.npmjs.org
+      - uses: actions/download-artifact@v4
+        with:
+          name: release
+          path: release
+      - name: Publish the verified package
+        working-directory: release/${{ needs.metadata.outputs.package }}
+        env:
+          NPM_TAG: ${{ github.event.release.prerelease && 'next' || 'latest' }}
+        run: |
+          sha256sum --check SHA256SUMS
+          npm publish ./*.tgz --access public --provenance --tag "$NPM_TAG"
