@@ -1,0 +1,18 @@
+{
+  "name": "test-services",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "vitest run --config vitest.config.ts",
+    "services:up": "docker compose up --build --wait --wait-timeout 180",
+    "services:down": "docker compose down --volumes --remove-orphans",
+    "lint:typescript": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@types/ws": "8.18.1",
+    "simulcast": "workspace:*",
+    "simulcast-phoenix": "workspace:*",
+    "simulcast-supabase": "workspace:*",
+    "ws": "8.21.3"
+  }
+}

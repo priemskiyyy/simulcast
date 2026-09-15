@@ -20,7 +20,9 @@
     "test:examples": "pnpm build && pnpm generate:hooks && pnpm -r --filter './examples/*' build && playwright test -c examples/playwright.config.ts",
     "test:providers": "pnpm --filter test-providers test",
     "test:partykit": "pnpm --filter test-partykit test",
-    "test:pusher": "pnpm --filter test-pusher test"
+    "test:pusher": "pnpm --filter test-pusher test",
+    "test:services": "pnpm --filter test-services test",
+    "test:integrations": "pnpm test:providers && pnpm test:partykit && pnpm test:pusher && pnpm test:services"
   },
   "devDependencies": {
     "@eslint/js": "9.39.4",

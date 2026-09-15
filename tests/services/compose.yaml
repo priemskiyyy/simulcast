@@ -1,0 +1,56 @@
+name: simulcast-services
+
+services:
+  phoenix:
+    build: ./phoenix
+    ports:
+      - "127.0.0.1:54331:4000"
+    healthcheck:
+      test: ["CMD", "wget", "-q", "--spider", "http://127.0.0.1:4000/health"]
+      interval: 2s
+      timeout: 5s
+      retries: 30
+
+  database:
+    image: supabase/postgres:17.6.1.136
+    environment:
+      POSTGRES_PASSWORD: local-postgres-password
+      POSTGRES_DB: postgres
+    volumes:
+      - ./supabase/init.sql:/docker-entrypoint-initdb.d/99-realtime.sql:ro
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "postgres"]
+      interval: 2s
+      timeout: 5s
+      retries: 30
+
+  supabase:
+    image: supabase/realtime:v2.134.10
+    depends_on:
+      database:
+        condition: service_healthy
+    ports:
+      - "127.0.0.1:54332:4000"
+    environment:
+      PORT: "4000"
+      DB_HOST: database
+      DB_PORT: "5432"
+      DB_USER: supabase_admin
+      DB_PASSWORD: local-postgres-password
+      DB_NAME: postgres
+      DB_AFTER_CONNECT_QUERY: SET search_path TO _realtime
+      DB_ENC_KEY: supabaserealtime
+      API_JWT_SECRET: local-simulcast-jwt-secret-at-least-32-characters
+      SECRET_KEY_BASE: local-simulcast-secret-key-base-with-at-least-sixty-four-characters
+      METRICS_JWT_SECRET: local-simulcast-jwt-secret-at-least-32-characters
+      ERL_AFLAGS: -proto_dist inet_tcp
+      DNS_NODES: "''"
+      APP_NAME: realtime
+      SEED_SELF_HOST: "true"
+      RUN_JANITOR: "true"
+      DISABLE_HEALTHCHECK_LOGGING: "true"
+    healthcheck:
+      test: ["CMD", "curl", "-sf", "http://localhost:4000/healthcheck"]
+      interval: 2s
+      timeout: 5s
+      retries: 60
