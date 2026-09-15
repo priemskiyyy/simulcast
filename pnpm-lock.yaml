@@ -164,6 +164,16 @@ importers:
         specifier: workspace:*
         version: link:../../react
 
+  packages/adapters/phoenix:
+    dependencies:
+      phoenix:
+        specifier: '>=1.7.0 <2'
+        version: 1.8.14
+    devDependencies:
+      simulcast:
+        specifier: workspace:*
+        version: link:../../core
+
   packages/adapters/pusher:
     dependencies:
       pusher-js:
