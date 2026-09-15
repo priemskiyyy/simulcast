@@ -1,0 +1,68 @@
+{
+  "name": "simulcast-codegen",
+  "version": "0.1.0",
+  "description": "Generate typed React hooks for simulcast-react from your TypeScript event map.",
+  "type": "module",
+  "license": "MIT",
+  "sideEffects": false,
+  "engines": {
+    "node": ">=22.18.0"
+  },
+  "files": [
+    "bin",
+    "dist",
+    "config.schema.json",
+    "README.md",
+    "LICENSE"
+  ],
+  "main": "./dist/index.mjs",
+  "types": "./dist/index.d.mts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.mts",
+      "import": "./dist/index.mjs"
+    },
+    "./config.schema.json": "./config.schema.json"
+  },
+  "bin": {
+    "simulcast-codegen": "./bin/cli.mjs"
+  },
+  "scripts": {
+    "build": "tsdown && node scripts/generate-config-schema.ts",
+    "lint:typescript": "tsc --noEmit -p .",
+    "lint:eslint": "eslint src scripts",
+    "test:unit": "vitest run --root ../.. --project codegen"
+  },
+  "peerDependencies": {
+    "typescript": ">=5.8 <6"
+  },
+  "keywords": [
+    "react",
+    "react-hooks",
+    "realtime",
+    "codegen",
+    "code-generation",
+    "cli",
+    "typescript",
+    "typed-events",
+    "simulcast",
+    "subscriptions"
+  ],
+  "dependencies": {
+    "@effect/cli": "0.77.1",
+    "@effect/platform-node": "0.108.2",
+    "effect": "3.22.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/priemskiyyy/simulcast.git",
+    "directory": "packages/codegen"
+  },
+  "bugs": {
+    "url": "https://github.com/priemskiyyy/simulcast/issues"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "homepage": "https://priemskiyyy.github.io/simulcast/"
+}
