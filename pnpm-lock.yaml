@@ -239,6 +239,43 @@ importers:
         specifier: 4.3.3
         version: 4.3.3
 
+  examples/svelte:
+    dependencies:
+      clsx:
+        specifier: 2.1.1
+        version: 2.1.1
+      example-shared:
+        specifier: workspace:*
+        version: link:../shared
+      phosphor-svelte:
+        specifier: 3.1.0
+        version: 3.1.0(svelte@5.57.0(@typescript-eslint/types@8.70.0))(vite@8.3.0(@types/node@22.20.2)(jiti@2.7.0)(terser@5.51.2)(yaml@2.9.1))
+      simulcast:
+        specifier: workspace:*
+        version: link:../../packages/core
+      simulcast-svelte:
+        specifier: workspace:*
+        version: link:../../packages/svelte
+      svelte:
+        specifier: 5.57.0
+        version: 5.57.0(@typescript-eslint/types@8.70.0)
+      ts-pattern:
+        specifier: 5.9.0
+        version: 5.9.0
+    devDependencies:
+      '@tailwindcss/vite':
+        specifier: 4.3.3
+        version: 4.3.3(vite@8.3.0(@types/node@22.20.2)(jiti@2.7.0)(terser@5.51.2)(yaml@2.9.1))
+      simulcast-codegen:
+        specifier: workspace:*
+        version: link:../../packages/codegen
+      simulcast-devtools:
+        specifier: workspace:*
+        version: link:../../packages/devtools
+      tailwindcss:
+        specifier: 4.3.3
+        version: 4.3.3
+
   examples/vue:
     dependencies:
       '@phosphor-icons/vue':
@@ -3207,6 +3244,15 @@ packages:
 
   phoenix@1.8.14:
     resolution: {integrity: sha512-erAGbssrbK7xe4l/tWXZTdsstCY+ufGTt/Kdin4uwceaP2TVqSL6v4s3flQOvIxShpwQx2/8NcOcBXOqgQ+ltw==}
+
+  phosphor-svelte@3.1.0:
+    resolution: {integrity: sha512-nldtxx+XCgNREvrb7O5xgDsefytXpSkPTx8Rnu3f2qQCUZLDV1rLxYSd2Jcwckuo9lZB1qKMqGR17P4UDC0PrA==}
+    peerDependencies:
+      svelte: ^5.0.0 || ^5.0.0-next.96
+      vite: '>=5'
+    peerDependenciesMeta:
+      vite:
+        optional: true
 
   picocolors@1.1.1:
     resolution: {integrity: sha512-xceH2snhtb5M9liqDsmEw56le376mTZkEX/jEb/RxNFyegNul7eNslCXP9FDj/Lcu0X8KEyMceP2ntpaHrDEVA==}
@@ -6564,6 +6610,14 @@ snapshots:
   perfect-debounce@1.0.0: {}
 
   phoenix@1.8.14: {}
+
+  phosphor-svelte@3.1.0(svelte@5.57.0(@typescript-eslint/types@8.70.0))(vite@8.3.0(@types/node@22.20.2)(jiti@2.7.0)(terser@5.51.2)(yaml@2.9.1)):
+    dependencies:
+      estree-walker: 3.0.3
+      magic-string: 0.30.21
+      svelte: 5.57.0(@typescript-eslint/types@8.70.0)
+    optionalDependencies:
+      vite: 8.3.0(@types/node@22.20.2)(jiti@2.7.0)(terser@5.51.2)(yaml@2.9.1)
 
   picocolors@1.1.1: {}
 

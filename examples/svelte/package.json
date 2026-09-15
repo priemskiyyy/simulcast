@@ -1,0 +1,27 @@
+{
+  "name": "example-svelte",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "generate:hooks": "simulcast-codegen generate",
+    "validate:generated": "simulcast-codegen check",
+    "lint:typescript": "svelte-check --tsconfig ./tsconfig.json --fail-on-warnings"
+  },
+  "dependencies": {
+    "clsx": "2.1.1",
+    "example-shared": "workspace:*",
+    "phosphor-svelte": "3.1.0",
+    "simulcast": "workspace:*",
+    "simulcast-svelte": "workspace:*",
+    "svelte": "5.57.0",
+    "ts-pattern": "5.9.0"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "4.3.3",
+    "simulcast-codegen": "workspace:*",
+    "simulcast-devtools": "workspace:*",
+    "tailwindcss": "4.3.3"
+  }
+}
