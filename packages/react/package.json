@@ -1,0 +1,61 @@
+{
+  "name": "simulcast-react",
+  "version": "0.1.0",
+  "description": "React bindings for simulcast: a provider that owns the realtime session and hooks for shared channel subscriptions, typed events, channel status, and connection state.",
+  "type": "module",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/priemskiyyy/simulcast.git",
+    "directory": "packages/react"
+  },
+  "bugs": {
+    "url": "https://github.com/priemskiyyy/simulcast/issues"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "sideEffects": false,
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "scripts": {
+    "build": "tsdown",
+    "lint:typescript": "tsc --noEmit -p .",
+    "lint:eslint": "eslint src",
+    "test:unit": "vitest run --root ../.. --project react"
+  },
+  "peerDependencies": {
+    "react": ">=19.2.0 <20",
+    "simulcast": ">=0.1.0 <0.2"
+  },
+  "devDependencies": {
+    "simulcast": "workspace:*"
+  },
+  "keywords": [
+    "react",
+    "react-hooks",
+    "realtime",
+    "real-time",
+    "websocket",
+    "pubsub",
+    "subscriptions",
+    "typed-events",
+    "typescript",
+    "ssr",
+    "simulcast",
+    "react-native",
+    "expo"
+  ],
+  "homepage": "https://priemskiyyy.github.io/simulcast/"
+}

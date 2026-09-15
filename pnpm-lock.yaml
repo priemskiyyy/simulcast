@@ -140,6 +140,16 @@ importers:
 
   packages/core: {}
 
+  packages/react:
+    dependencies:
+      react:
+        specifier: '>=19.2.0 <20'
+        version: 19.2.8
+    devDependencies:
+      simulcast:
+        specifier: workspace:*
+        version: link:../core
+
 
 packages:
 
