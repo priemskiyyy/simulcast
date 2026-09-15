@@ -1,0 +1,8 @@
+{
+  "extends": "../tsconfig.json",
+  "compilerOptions": {
+    "noEmit": true
+  },
+  "include": [".vitepress/**/*.ts", ".vitepress/**/*.vue"],
+  "exclude": [".vitepress/dist", ".vitepress/cache", "node_modules"]
+}

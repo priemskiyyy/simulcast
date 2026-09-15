@@ -19,12 +19,16 @@
     "check": "pnpm build && pnpm generate:hooks && pnpm lint:typescript && pnpm lint:eslint && pnpm lint:prettier && pnpm test:unit && pnpm test:providers && pnpm validate:generated && pnpm -r --filter './examples/*' build",
     "lint:browser": "tsc --noEmit -p tests/browser && vue-tsc --noEmit -p tests/browser/apps/vue && tsc --noEmit -p tests/browser/apps/solid && svelte-check --tsconfig tests/browser/apps/svelte/tsconfig.json --fail-on-warnings",
     "test:browser": "pnpm build && pnpm lint:browser && playwright test -c tests/browser/playwright.config.ts",
+    "build:docs": "vitepress build docs",
+    "dev:docs": "vitepress dev docs",
     "test:examples": "pnpm build && pnpm generate:hooks && pnpm -r --filter './examples/*' build && playwright test -c examples/playwright.config.ts",
     "test:providers": "pnpm --filter test-providers test",
     "test:partykit": "pnpm --filter test-partykit test",
     "test:pusher": "pnpm --filter test-pusher test",
     "test:services": "pnpm --filter test-services test",
-    "test:integrations": "pnpm test:providers && pnpm test:partykit && pnpm test:pusher && pnpm test:services"
+    "test:integrations": "pnpm test:providers && pnpm test:partykit && pnpm test:pusher && pnpm test:services",
+    "verify:docs": "node scripts/verify-docs.mjs",
+    "lint:docs": "vue-tsc --noEmit -p docs/tsconfig.json"
   },
   "devDependencies": {
     "@eslint/js": "9.39.4",
