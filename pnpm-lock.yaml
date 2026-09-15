@@ -150,6 +150,16 @@ importers:
         specifier: workspace:*
         version: link:../core
 
+  packages/solid:
+    dependencies:
+      solid-js:
+        specifier: '>=1.8.0 <2'
+        version: 1.9.15
+    devDependencies:
+      simulcast:
+        specifier: workspace:*
+        version: link:../core
+
   packages/vue:
     dependencies:
       vue:
