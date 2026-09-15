@@ -1,0 +1,56 @@
+{
+  "name": "simulcast-socketio",
+  "version": "0.1.0",
+  "description": "Socket.IO adapter for simulcast.",
+  "type": "module",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/priemskiyyy/simulcast.git",
+    "directory": "packages/adapters/socketio"
+  },
+  "bugs": {
+    "url": "https://github.com/priemskiyyy/simulcast/issues"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "sideEffects": false,
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "scripts": {
+    "build": "tsdown",
+    "lint:typescript": "tsc --noEmit -p .",
+    "lint:eslint": "eslint src",
+    "test:unit": "vitest run --root ../../.. --project socketio"
+  },
+  "peerDependencies": {
+    "socket.io-client": ">=4.0.0 <5",
+    "simulcast": ">=0.1.0 <0.2"
+  },
+  "devDependencies": {
+    "simulcast": "workspace:*"
+  },
+  "keywords": [
+    "socket.io",
+    "socketio",
+    "realtime",
+    "websocket",
+    "pubsub",
+    "typescript",
+    "simulcast",
+    "subscriptions"
+  ],
+  "homepage": "https://priemskiyyy.github.io/simulcast/"
+}
