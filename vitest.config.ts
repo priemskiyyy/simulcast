@@ -81,6 +81,8 @@ const project = (
 });
 
 export default defineConfig({
+  // Workspace peers must use the same React instance as the renderer under test.
+  resolve: { dedupe: ["react", "react-dom"] },
   test: {
     globals: false,
     environment: "node",
