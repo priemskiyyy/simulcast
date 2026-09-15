@@ -13,7 +13,9 @@
     "lint:typescript": "tsc --noEmit && pnpm -r lint:typescript",
     "lint:eslint": "eslint .",
     "test:unit": "vitest run",
-    "test:unit:watch": "vitest"
+    "test:unit:watch": "vitest",
+    "generate:hooks": "pnpm -r --filter './examples/*' generate:hooks",
+    "validate:generated": "pnpm -r --filter './examples/*' validate:generated"
   },
   "devDependencies": {
     "@eslint/js": "9.39.4",

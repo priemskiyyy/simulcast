@@ -1,0 +1,28 @@
+{
+  "name": "example-react",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "generate:hooks": "simulcast-codegen generate",
+    "validate:generated": "simulcast-codegen check",
+    "lint:typescript": "tsc --noEmit -p ."
+  },
+  "dependencies": {
+    "@phosphor-icons/react": "2.1.10",
+    "clsx": "2.1.1",
+    "example-shared": "workspace:*",
+    "react": "19.2.8",
+    "react-dom": "19.2.8",
+    "simulcast": "workspace:*",
+    "simulcast-react": "workspace:*",
+    "ts-pattern": "5.9.0"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "4.3.3",
+    "simulcast-codegen": "workspace:*",
+    "simulcast-devtools": "workspace:*",
+    "tailwindcss": "4.3.3"
+  }
+}
