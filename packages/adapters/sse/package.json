@@ -1,0 +1,54 @@
+{
+  "name": "simulcast-sse",
+  "version": "0.1.0",
+  "description": "Server-Sent Events adapter for simulcast: one EventSource per channel.",
+  "type": "module",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/priemskiyyy/simulcast.git",
+    "directory": "packages/adapters/sse"
+  },
+  "bugs": {
+    "url": "https://github.com/priemskiyyy/simulcast/issues"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "sideEffects": false,
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "scripts": {
+    "build": "tsdown",
+    "lint:typescript": "tsc --noEmit -p .",
+    "lint:eslint": "eslint src",
+    "test:unit": "vitest run --root ../../.. --project sse"
+  },
+  "peerDependencies": {
+    "simulcast": ">=0.1.0 <0.2"
+  },
+  "devDependencies": {
+    "simulcast": "workspace:*"
+  },
+  "keywords": [
+    "sse",
+    "server-sent-events",
+    "eventsource",
+    "realtime",
+    "typescript",
+    "simulcast",
+    "subscriptions"
+  ],
+  "homepage": "https://priemskiyyy.github.io/simulcast/"
+}
