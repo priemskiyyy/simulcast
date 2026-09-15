@@ -1,0 +1,27 @@
+{
+  "name": "example-vue",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "generate:hooks": "simulcast-codegen generate",
+    "validate:generated": "simulcast-codegen check",
+    "lint:typescript": "vue-tsc --noEmit -p ."
+  },
+  "dependencies": {
+    "@phosphor-icons/vue": "2.2.1",
+    "clsx": "2.1.1",
+    "example-shared": "workspace:*",
+    "simulcast": "workspace:*",
+    "simulcast-vue": "workspace:*",
+    "ts-pattern": "5.9.0",
+    "vue": "3.5.42"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "4.3.3",
+    "simulcast-codegen": "workspace:*",
+    "simulcast-devtools": "workspace:*",
+    "tailwindcss": "4.3.3"
+  }
+}
