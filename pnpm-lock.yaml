@@ -154,6 +154,16 @@ importers:
         specifier: workspace:*
         version: link:../../react
 
+  packages/adapters/pusher:
+    dependencies:
+      pusher-js:
+        specifier: '>=8.0.0 <9'
+        version: 8.6.0
+    devDependencies:
+      simulcast:
+        specifier: workspace:*
+        version: link:../../core
+
   packages/core: {}
 
   packages/react:
