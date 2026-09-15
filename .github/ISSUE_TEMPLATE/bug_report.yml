@@ -1,0 +1,30 @@
+name: Bug report
+description: Report incorrect behavior with a reproducible example.
+labels: [bug]
+body:
+  - type: textarea
+    id: behavior
+    attributes:
+      label: What happened?
+      description: Describe the actual behavior and what you expected.
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Reproduction
+      description: Link a minimal repository or provide steps and a small code example. Include cleanup and reconnect steps if relevant.
+    validations:
+      required: true
+  - type: textarea
+    id: versions
+    attributes:
+      label: Environment
+      description: Include Simulcast packages, provider SDK and server versions, framework, browser or Node version, and operating system.
+    validations:
+      required: true
+  - type: textarea
+    id: diagnostics
+    attributes:
+      label: Logs or devtools output
+      description: Include useful errors and channel states. Remove tokens, credentials, and private payloads before posting.

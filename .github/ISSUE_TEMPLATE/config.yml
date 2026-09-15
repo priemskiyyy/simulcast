@@ -1,0 +1,5 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Usage and troubleshooting
+    url: https://github.com/priemskiyyy/simulcast/blob/main/SUPPORT.md
+    about: Find the relevant guide before opening an issue.

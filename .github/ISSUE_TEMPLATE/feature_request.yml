@@ -1,0 +1,21 @@
+name: Feature request
+description: Describe a use case the current API does not cover.
+labels: [enhancement]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Use case
+      description: What are you trying to build, and where does the current API fall short?
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed behavior
+      description: A short code example is helpful. Include alternatives you considered.
+  - type: textarea
+    id: integration
+    attributes:
+      label: Framework and provider
+      description: Which framework, provider, and runtime should support this behavior?
