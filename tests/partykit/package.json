@@ -1,0 +1,14 @@
+{
+  "name": "test-partykit",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "vitest run --config vitest.config.ts",
+    "lint:typescript": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "partykit": "0.0.115",
+    "simulcast": "workspace:*",
+    "simulcast-partykit": "workspace:*"
+  }
+}

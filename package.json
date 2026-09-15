@@ -18,7 +18,8 @@
     "validate:generated": "pnpm -r --filter './examples/*' validate:generated",
     "check": "pnpm build && pnpm generate:hooks && pnpm lint:typescript && pnpm lint:eslint && pnpm lint:prettier && pnpm test:unit && pnpm test:providers && pnpm validate:generated && pnpm -r --filter './examples/*' build",
     "test:examples": "pnpm build && pnpm generate:hooks && pnpm -r --filter './examples/*' build && playwright test -c examples/playwright.config.ts",
-    "test:providers": "pnpm --filter test-providers test"
+    "test:providers": "pnpm --filter test-providers test",
+    "test:partykit": "pnpm --filter test-partykit test"
   },
   "devDependencies": {
     "@eslint/js": "9.39.4",
