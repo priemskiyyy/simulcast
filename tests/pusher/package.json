@@ -1,0 +1,14 @@
+{
+  "name": "test-pusher",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "vitest run --config vitest.config.ts",
+    "lint:typescript": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "pusher": "5.3.4",
+    "simulcast": "workspace:*",
+    "simulcast-pusher": "workspace:*"
+  }
+}
