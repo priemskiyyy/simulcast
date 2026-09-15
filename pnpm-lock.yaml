@@ -138,6 +138,30 @@ importers:
         specifier: 3.3.11
         version: 3.3.11(typescript@5.8.3)
 
+  examples/shared:
+    dependencies:
+      centrifuge:
+        specifier: 5.7.2
+        version: 5.7.2
+      class-variance-authority:
+        specifier: 0.7.1
+        version: 0.7.1
+      simulcast:
+        specifier: workspace:*
+        version: link:../../packages/core
+      simulcast-broadcast-channel:
+        specifier: workspace:*
+        version: link:../../packages/adapters/broadcast-channel
+      simulcast-centrifugo:
+        specifier: workspace:*
+        version: link:../../packages/adapters/centrifugo
+      ts-pattern:
+        specifier: 5.9.0
+        version: 5.9.0
+      zod:
+        specifier: 4.6.5
+        version: 4.6.5
+
   packages/adapters/ably:
     dependencies:
       ably:
@@ -2028,6 +2052,9 @@ packages:
     resolution: {integrity: sha512-TQMmc3w+5AxjpL8iIiwebF73dRDF4fBIieAqGn9RGCWaEVwQ6Fb2cGe31Yns0RRIzii5goJ1Y7xbMwo1TxMplw==}
     engines: {node: '>= 20.19.0'}
 
+  class-variance-authority@0.7.1:
+    resolution: {integrity: sha512-Ka+9Trutv7G8M6WT6SeiRWz792K5qEqIGEGzXKhAE6xOWAY6pPH8U+9IY3oCMv6kqTmLsv7Xh/2w2RigkePMsg==}
+
   clone-response@1.0.3:
     resolution: {integrity: sha512-ROoL94jJH2dUVML2Y/5PEDNaSHgeOdSDicUyS7izcF63G6sTc/FTjLub4b8Il9S8S0beOfYt0TaA5qvFK+w0wA==}
 
@@ -3288,6 +3315,9 @@ packages:
     engines: {node: '>=18.12'}
     peerDependencies:
       typescript: '>=4.8.4'
+
+  ts-pattern@5.9.0:
+    resolution: {integrity: sha512-6s5V71mX8qBUmlgbrfL33xDUwO0fq48rxAu2LBE11WBeGdpCPOsXksQbZJHvHwhrd3QjUusd3mAOM5Gg0mFBLg==}
 
   tsdown@0.22.14:
     resolution: {integrity: sha512-ule7Y+fsAN2iZbLDoo7C4KYljFJNJJ+fLshyn+9gozeTspVersWHxwdGB+Dm2hzA38s6muFnUTl0jK3vJm9ifQ==}
@@ -5238,6 +5268,10 @@ snapshots:
     dependencies:
       readdirp: 5.1.1
 
+  class-variance-authority@0.7.1:
+    dependencies:
+      clsx: 2.1.1
+
   clone-response@1.0.3:
     dependencies:
       mimic-response: 1.0.1
@@ -6521,6 +6555,8 @@ snapshots:
   ts-api-utils@2.5.0(typescript@5.8.3):
     dependencies:
       typescript: 5.8.3
+
+  ts-pattern@5.9.0: {}
 
   tsdown@0.22.14(@volar/typescript@2.4.28)(publint@0.3.24)(typescript@5.8.3)(vue-tsc@3.3.11(typescript@5.8.3)):
     dependencies:

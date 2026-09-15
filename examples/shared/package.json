@@ -1,0 +1,23 @@
+{
+  "name": "example-shared",
+  "private": true,
+  "type": "module",
+  "description": "The Mission Control domain shared by every example: event map, schemas, reducer, formatting, and the offline simulation.",
+  "exports": {
+    ".": "./src/index.ts",
+    "./styles/*": "./src/styles/*.ts"
+  },
+  "scripts": {
+    "lint:typescript": "tsc --noEmit -p .",
+    "test:unit": "vitest run --root ../.. --project example-shared"
+  },
+  "dependencies": {
+    "centrifuge": "5.7.2",
+    "class-variance-authority": "0.7.1",
+    "simulcast": "workspace:*",
+    "simulcast-broadcast-channel": "workspace:*",
+    "simulcast-centrifugo": "workspace:*",
+    "ts-pattern": "5.9.0",
+    "zod": "4.6.5"
+  }
+}
