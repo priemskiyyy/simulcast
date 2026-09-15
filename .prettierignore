@@ -1,0 +1,12 @@
+pnpm-lock.yaml
+dist
+.svelte-kit
+.expo
+node_modules
+examples/*/src/hooks/generated
+.artifacts
+docs/.vitepress/dist
+.svelte-kit
+.expo
+docs/.vitepress/cache
+examples/expo/src/uniwind-types.d.ts

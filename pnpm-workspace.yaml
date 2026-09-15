@@ -1,0 +1,21 @@
+packages:
+  - packages/*
+  - packages/adapters/*
+  - examples/*
+  - tests/providers
+  - tests/partykit
+  - tests/pusher
+  - tests/services
+
+allowBuilds:
+  "@parcel/watcher": false
+  esbuild: true
+  msgpackr-extract: false
+  protobufjs: false
+
+minimumReleaseAgeExclude:
+  - "@expo/cli@57.0.25"
+  - "@expo/router-server@57.0.10"
+  - babel-preset-expo@57.0.12
+  - expo@57.0.23
+  - aedes@1.1.3

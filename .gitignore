@@ -1,0 +1,20 @@
+node_modules/
+.idea/
+.DS_Store
+.env
+.env.*
+!.env.example
+dist/
+.svelte-kit/
+.expo/
+coverage/
+*.tgz
+.artifacts/
+docs/.vitepress/dist/
+.svelte-kit/
+.expo/
+docs/.vitepress/cache/
+
+# Local provider runtimes
+.partykit/
+.wrangler/
