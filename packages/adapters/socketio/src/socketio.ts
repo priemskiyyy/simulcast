@@ -1,12 +1,12 @@
 import { io } from "socket.io-client";
 import type { Socket } from "socket.io-client";
-import { createRealtimeAdapter } from "simulcast";
+import { createRealtimeAdapter } from "@priemskiyyy/simulcast";
 import type {
   AdapterSubscribeRequest,
   AdapterSubscription,
   ConnectionState,
   RealtimeAdapter,
-} from "simulcast";
+} from "@priemskiyyy/simulcast";
 import type { SocketioAdapterOptions } from "src/types/SocketioAdapterOptions";
 
 // Socket.IO reconnects on its own after most disconnects; `active` says whether it still will.

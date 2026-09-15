@@ -1,5 +1,5 @@
 {
-  "name": "simulcast-partykit",
+  "name": "@priemskiyyy/simulcast-partykit",
   "version": "0.1.0",
   "description": "PartyKit and PartyServer adapter for simulcast, built on partysocket.",
   "type": "module",
@@ -37,10 +37,10 @@
   },
   "peerDependencies": {
     "partysocket": ">=1.0.0 <2",
-    "simulcast": ">=0.1.0 <0.2"
+    "@priemskiyyy/simulcast": ">=0.1.0 <0.2"
   },
   "devDependencies": {
-    "simulcast": "workspace:*"
+    "@priemskiyyy/simulcast": "workspace:*"
   },
   "keywords": [
     "partykit",

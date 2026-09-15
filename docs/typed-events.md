@@ -37,7 +37,7 @@ Phoenix, put the name on `publication.event`. No decoder is needed:
 
 ```ts
 // src/realtime/useChannelEvent.ts
-import { createChannelEventHooks } from "simulcast-react";
+import { createChannelEventHooks } from "@priemskiyyy/simulcast-react";
 import type { Events } from "./Events";
 
 export const { useChannelEvent } = createChannelEventHooks<Events>();

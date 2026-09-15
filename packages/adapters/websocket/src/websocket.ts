@@ -1,5 +1,5 @@
-import { createRealtimeAdapter } from "simulcast";
-import type { AdapterSubscriptionObserver } from "simulcast";
+import { createRealtimeAdapter } from "@priemskiyyy/simulcast";
+import type { AdapterSubscriptionObserver } from "@priemskiyyy/simulcast";
 import type { WebSocketAdapterOptions } from "src/types/WebSocketAdapterOptions";
 import type { WebSocketConnection } from "src/types/WebSocketConnection";
 import type { WebSocketLike } from "src/types/WebSocketLike";

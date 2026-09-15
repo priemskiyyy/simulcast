@@ -1,15 +1,15 @@
-# simulcast-react
+# @priemskiyyy/simulcast-react
 
 React bindings for [simulcast](../core). The provider owns the session; hooks share channel subscriptions and observe state.
 
 ```sh
-pnpm add simulcast simulcast-react
+pnpm add @priemskiyyy/simulcast @priemskiyyy/simulcast-react
 ```
 
 ```tsx
 import type * as React from "react";
-import { RealtimeClient } from "simulcast";
-import { RealtimeProvider, useChannel } from "simulcast-react";
+import { RealtimeClient } from "@priemskiyyy/simulcast";
+import { RealtimeProvider, useChannel } from "@priemskiyyy/simulcast-react";
 
 const realtime = new RealtimeClient({ adapter });
 

@@ -6,9 +6,9 @@ import {
   shallowRef,
   watch,
 } from "vue";
-import { SimulcastDevtools as Devtools } from "simulcast-devtools";
-import type { SimulcastDevtoolsOptions } from "simulcast-devtools";
-import { useRealtimeClient } from "simulcast-vue";
+import { SimulcastDevtools as Devtools } from "@priemskiyyy/simulcast-devtools";
+import type { SimulcastDevtoolsOptions } from "@priemskiyyy/simulcast-devtools";
+import { useRealtimeClient } from "@priemskiyyy/simulcast-vue";
 
 export type SimulcastDevtoolsProps = Omit<SimulcastDevtoolsOptions, "client">;
 

@@ -6,7 +6,7 @@ import {
   untrack,
 } from "solid-js";
 import type { Accessor } from "solid-js";
-import type { RealtimeClient } from "simulcast";
+import type { RealtimeClient } from "@priemskiyyy/simulcast";
 import { z } from "zod";
 import { Launcher } from "src/components/Launcher";
 import { DevtoolsPanel } from "src/components/Panel/DevtoolsPanel";
@@ -40,7 +40,7 @@ export type DevtoolsProps = {
 /** The shadow-root application: records while mounted and renders the launcher or the panel. */
 export const Devtools = (props: DevtoolsProps) => {
   const [preferences, setPreferences] = useStoredValue(
-    "simulcast-devtools",
+    "@priemskiyyy/simulcast-devtools",
     preferencesSchema,
     {},
   );

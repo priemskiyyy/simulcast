@@ -1,5 +1,5 @@
 import { randomUUID } from "node:crypto";
-import { broadcastChannel } from "simulcast-broadcast-channel";
+import { broadcastChannel } from "@priemskiyyy/simulcast-broadcast-channel";
 import { onTestFinished } from "vitest";
 import type { ProviderFixture } from "./ProviderFixture";
 

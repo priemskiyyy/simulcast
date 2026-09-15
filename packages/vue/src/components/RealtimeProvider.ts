@@ -7,7 +7,7 @@ import {
   toRef,
   watch,
 } from "vue";
-import type { RealtimeClient } from "simulcast";
+import type { RealtimeClient } from "@priemskiyyy/simulcast";
 import { REALTIME_CLIENT_KEY } from "src/context/realtimeClientKey";
 
 export type RealtimeProviderProps = {

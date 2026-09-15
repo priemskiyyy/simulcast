@@ -7,14 +7,14 @@ import {
 } from "react";
 import { createRoot } from "react-dom/client";
 import type { ClientEvents, SubscriptionEvents } from "centrifuge";
-import { useCentrifuge } from "simulcast-centrifugo/react";
-import { SimulcastDevtools } from "simulcast-devtools/react";
+import { useCentrifuge } from "@priemskiyyy/simulcast-centrifugo/react";
+import { SimulcastDevtools } from "@priemskiyyy/simulcast-devtools/react";
 import {
   RealtimeProvider,
   useChannel,
   useChannelStatus,
   useConnectionState,
-} from "simulcast-react";
+} from "@priemskiyyy/simulcast-react";
 import { createClient } from "../../shared/createClient";
 import { inspect } from "../../shared/inspection";
 import "../../shared/styles.css";

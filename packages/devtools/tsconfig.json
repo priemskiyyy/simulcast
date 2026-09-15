@@ -6,7 +6,7 @@
     "jsxImportSource": "solid-js",
     "paths": {
       "src/*": ["./src/*"],
-      "simulcast-devtools": ["./src/index.ts"]
+      "@priemskiyyy/simulcast-devtools": ["./src/index.ts"]
     }
   },
   "include": [

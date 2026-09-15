@@ -1,5 +1,5 @@
 {
-  "name": "simulcast-broadcast-channel",
+  "name": "@priemskiyyy/simulcast-broadcast-channel",
   "version": "0.1.0",
   "description": "BroadcastChannel adapter for simulcast: same-origin realtime between tabs, workers, and tests.",
   "type": "module",
@@ -36,10 +36,10 @@
     "test:unit": "vitest run --root ../../.. --project broadcast-channel"
   },
   "peerDependencies": {
-    "simulcast": ">=0.1.0 <0.2"
+    "@priemskiyyy/simulcast": ">=0.1.0 <0.2"
   },
   "devDependencies": {
-    "simulcast": "workspace:*"
+    "@priemskiyyy/simulcast": "workspace:*"
   },
   "keywords": [
     "broadcastchannel",

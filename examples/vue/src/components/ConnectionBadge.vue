@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { PhCircleNotch, PhPlugs, PhPlugsConnected } from "@phosphor-icons/vue";
 import { formatConnectionState, getConnectionTone } from "example-shared";
-import { useConnectionState } from "simulcast-vue";
+import { useConnectionState } from "@priemskiyyy/simulcast-vue";
 import { match } from "ts-pattern";
 import { computed } from "vue";
 import Badge from "src/components/Badge.vue";

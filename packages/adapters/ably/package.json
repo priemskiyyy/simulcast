@@ -1,5 +1,5 @@
 {
-  "name": "simulcast-ably",
+  "name": "@priemskiyyy/simulcast-ably",
   "version": "0.1.0",
   "description": "Ably adapter for simulcast.",
   "type": "module",
@@ -37,10 +37,10 @@
   },
   "peerDependencies": {
     "ably": ">=2.0.0 <3",
-    "simulcast": ">=0.1.0 <0.2"
+    "@priemskiyyy/simulcast": ">=0.1.0 <0.2"
   },
   "devDependencies": {
-    "simulcast": "workspace:*"
+    "@priemskiyyy/simulcast": "workspace:*"
   },
   "keywords": [
     "ably",

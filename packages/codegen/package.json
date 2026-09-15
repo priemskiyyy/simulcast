@@ -1,5 +1,5 @@
 {
-  "name": "simulcast-codegen",
+  "name": "@priemskiyyy/simulcast-codegen",
   "version": "0.1.0",
   "description": "Generate typed React hooks for simulcast-react from your TypeScript event map.",
   "type": "module",

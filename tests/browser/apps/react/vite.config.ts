@@ -5,9 +5,10 @@ export default createFixtureConfig({
   root: fileURLToPath(new URL(".", import.meta.url)),
   port: 4173,
   aliases: {
-    "simulcast-centrifugo/react": "packages/adapters/centrifugo/dist/react.js",
-    "simulcast-devtools/react": "packages/devtools/dist/react.js",
-    "simulcast-devtools": "packages/devtools/dist/index.js",
-    "simulcast-react": "packages/react/dist/index.js",
+    "@priemskiyyy/simulcast-centrifugo/react":
+      "packages/adapters/centrifugo/dist/react.js",
+    "@priemskiyyy/simulcast-devtools/react": "packages/devtools/dist/react.js",
+    "@priemskiyyy/simulcast-devtools": "packages/devtools/dist/index.js",
+    "@priemskiyyy/simulcast-react": "packages/react/dist/index.js",
   },
 });

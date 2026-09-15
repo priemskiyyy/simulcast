@@ -1,18 +1,18 @@
-# simulcast-partykit
+# @priemskiyyy/simulcast-partykit
 
 [PartyKit](https://www.partykit.io/) and [PartyServer](https://github.com/cloudflare/partykit) adapter for [simulcast](../../core), built on `partysocket`. Requires `partysocket` 1.
 
 ## Installation
 
 ```sh
-pnpm add simulcast simulcast-partykit partysocket
+pnpm add @priemskiyyy/simulcast @priemskiyyy/simulcast-partykit partysocket
 ```
 
 ## Create a client
 
 ```ts
-import { RealtimeClient } from "simulcast";
-import { partykit } from "simulcast-partykit";
+import { RealtimeClient } from "@priemskiyyy/simulcast";
+import { partykit } from "@priemskiyyy/simulcast-partykit";
 
 const realtime = new RealtimeClient({
   adapter: partykit({

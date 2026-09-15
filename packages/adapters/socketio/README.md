@@ -1,18 +1,18 @@
-# simulcast-socketio
+# @priemskiyyy/simulcast-socketio
 
 [Socket.IO](https://socket.io/) adapter for [simulcast](../../core). Requires `socket.io-client` 4.
 
 ## Installation
 
 ```sh
-pnpm add simulcast simulcast-socketio socket.io-client
+pnpm add @priemskiyyy/simulcast @priemskiyyy/simulcast-socketio socket.io-client
 ```
 
 ## Create a client
 
 ```ts
-import { RealtimeClient } from "simulcast";
-import { socketio } from "simulcast-socketio";
+import { RealtimeClient } from "@priemskiyyy/simulcast";
+import { socketio } from "@priemskiyyy/simulcast-socketio";
 
 const realtime = new RealtimeClient({
   adapter: socketio({

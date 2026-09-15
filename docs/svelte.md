@@ -4,20 +4,20 @@ description: "Use Simulcast providers, reactive channel inputs, typed event util
 
 # Svelte
 
-`simulcast-svelte` mirrors the React bindings with Svelte 5 idioms: a provider
+`@priemskiyyy/simulcast-svelte` mirrors the React bindings with Svelte 5 idioms: a provider
 component owns the session, utilities return reactive values read through
 `current`, and channels accept values or getters. Everything is built on runes,
 so the package needs Svelte 5.
 
 ```sh
-pnpm add simulcast simulcast-svelte
+pnpm add @priemskiyyy/simulcast @priemskiyyy/simulcast-svelte
 ```
 
 ## Provider
 
 ```svelte
 <script lang="ts">
-  import { RealtimeProvider } from "simulcast-svelte";
+  import { RealtimeProvider } from "@priemskiyyy/simulcast-svelte";
   import { realtime } from "./realtime/client";
   import Room from "./Room.svelte";
 
@@ -42,7 +42,7 @@ server rendering opens nothing.
     useChannel,
     useChannelStatus,
     useConnectionState,
-  } from "simulcast-svelte";
+  } from "@priemskiyyy/simulcast-svelte";
 
   let { roomId }: { roomId: string } = $props();
 
@@ -87,7 +87,7 @@ $effect(() => {
 
 ```ts
 // src/realtime/useChannelEvent.ts
-import { createChannelEventHooks } from "simulcast-svelte";
+import { createChannelEventHooks } from "@priemskiyyy/simulcast-svelte";
 import type { Events } from "./Events";
 
 export const { useChannelEvent } = createChannelEventHooks<Events>();
@@ -99,19 +99,19 @@ lives in core, so React, Vue, Solid, and Svelte behave identically. See
 
 ## Code generation
 
-Set `"runtime": "simulcast-svelte"` in `realtime.config.json` and generated hooks
+Set `"runtime": "@priemskiyyy/simulcast-svelte"` in `realtime.config.json` and generated hooks
 import their types from the Svelte package. Their channel parameter accepts a
 getter through `ChannelInput`.
 
 ## Devtools
 
-`simulcast-devtools/svelte` exports `createDevtools`, an attachment for an element
+`@priemskiyyy/simulcast-devtools/svelte` exports `createDevtools`, an attachment for an element
 inside a child of the provider. Call it during that child's initialization so the
 provider context already exists.
 
 ```svelte [Inspector.svelte]
 <script lang="ts">
-  import { createDevtools } from "simulcast-devtools/svelte";
+  import { createDevtools } from "@priemskiyyy/simulcast-devtools/svelte";
 
   const devtools = createDevtools();
 </script>

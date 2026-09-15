@@ -1,4 +1,4 @@
-import type { RealtimePublication } from "simulcast";
+import type { RealtimePublication } from "@priemskiyyy/simulcast";
 
 export type PublicationHandler<TData> = (
   data: TData,

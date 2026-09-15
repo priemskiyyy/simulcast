@@ -1,6 +1,6 @@
 import { createServer } from "node:http";
 import { Server } from "socket.io";
-import { socketio } from "simulcast-socketio";
+import { socketio } from "@priemskiyyy/simulcast-socketio";
 import { expect, onTestFinished } from "vitest";
 import { listen } from "./listen";
 import type { NetworkProviderFixture } from "./ProviderFixture";

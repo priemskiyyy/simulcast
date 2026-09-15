@@ -4,19 +4,19 @@ description: "Use Simulcast providers, accessors, and typed realtime subscriptio
 
 # Solid
 
-`simulcast-solid` mirrors the React bindings with Solid idioms: a provider
+`@priemskiyyy/simulcast-solid` mirrors the React bindings with Solid idioms: a provider
 component owns the session, primitives return accessors, and channels accept
 values or accessors. The package ships plain modules without JSX, so it needs no
 Solid compiler step.
 
 ```sh
-pnpm add simulcast simulcast-solid
+pnpm add @priemskiyyy/simulcast @priemskiyyy/simulcast-solid
 ```
 
 ## Provider
 
 ```tsx
-import { RealtimeProvider } from "simulcast-solid";
+import { RealtimeProvider } from "@priemskiyyy/simulcast-solid";
 import { realtime } from "./realtime/client";
 
 const Application = () => (
@@ -38,7 +38,7 @@ import {
   useChannel,
   useChannelStatus,
   useConnectionState,
-} from "simulcast-solid";
+} from "@priemskiyyy/simulcast-solid";
 
 const Room = (props: { roomId: string }) => {
   const channel = () => `rooms:${props.roomId}`;
@@ -83,7 +83,7 @@ createEffect(() => {
 
 ```ts
 // src/realtime/useChannelEvent.ts
-import { createChannelEventHooks } from "simulcast-solid";
+import { createChannelEventHooks } from "@priemskiyyy/simulcast-solid";
 import type { Events } from "./Events";
 
 export const { useChannelEvent } = createChannelEventHooks<Events>();
@@ -95,17 +95,17 @@ lives in core, so React, Vue, Solid, and Svelte behave identically. See
 
 ## Code generation
 
-Set `"runtime": "simulcast-solid"` in `realtime.config.json` and generated hooks
+Set `"runtime": "@priemskiyyy/simulcast-solid"` in `realtime.config.json` and generated hooks
 import their types from the Solid package. Their channel parameter accepts an
 accessor through `ChannelInput`.
 
 ## Devtools
 
-`simulcast-devtools/solid` exports the same inspector as the React package.
+`@priemskiyyy/simulcast-devtools/solid` exports the same inspector as the React package.
 Render it inside the provider; see [Devtools](devtools.md).
 
 ```tsx
-import { SimulcastDevtools } from "simulcast-devtools/solid";
+import { SimulcastDevtools } from "@priemskiyyy/simulcast-devtools/solid";
 
 <RealtimeProvider client={realtime}>
   <App />

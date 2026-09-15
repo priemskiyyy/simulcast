@@ -5,12 +5,12 @@ description: "Test realtime consumers deterministically with the mock adapter, i
 # Testing
 
 Application code that uses simulcast can be tested without any provider SDK.
-`simulcast/mock` exports a deterministic adapter that records every connection
+`@priemskiyyy/simulcast/mock` exports a deterministic adapter that records every connection
 and subscription and exposes their observers, so a test can publish, change
 state, or fail exactly when it wants to.
 
 ```sh
-pnpm add -D simulcast
+pnpm add -D @priemskiyyy/simulcast
 ```
 
 ## A component test
@@ -20,9 +20,9 @@ import type * as React from "react";
 import { useState } from "react";
 import { act, render, screen } from "@testing-library/react";
 import { expect, test } from "vitest";
-import { RealtimeClient } from "simulcast";
-import { createMockAdapter } from "simulcast/mock";
-import { RealtimeProvider, useChannel } from "simulcast-react";
+import { RealtimeClient } from "@priemskiyyy/simulcast";
+import { createMockAdapter } from "@priemskiyyy/simulcast/mock";
+import { RealtimeProvider, useChannel } from "@priemskiyyy/simulcast-react";
 
 const Room: React.FunctionComponent = () => {
   const [text, setText] = useState("Waiting");

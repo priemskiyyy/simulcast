@@ -1,7 +1,7 @@
 import { createHmac, randomUUID } from "node:crypto";
 import { request } from "node:http";
-import { phoenix } from "simulcast-phoenix";
-import { supabase } from "simulcast-supabase";
+import { phoenix } from "@priemskiyyy/simulcast-phoenix";
+import { supabase } from "@priemskiyyy/simulcast-supabase";
 import { webSocketTransport } from "./webSocketTransport";
 
 const phoenixUrl = "http://127.0.0.1:54331";

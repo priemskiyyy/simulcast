@@ -2,7 +2,7 @@ import { Buffer } from "node:buffer";
 import { createServer } from "node:net";
 import { Aedes } from "aedes";
 import type { Client } from "aedes";
-import { mqtt } from "simulcast-mqtt";
+import { mqtt } from "@priemskiyyy/simulcast-mqtt";
 import { expect, onTestFinished } from "vitest";
 import { listen } from "./listen";
 import type { NetworkProviderFixture } from "./ProviderFixture";

@@ -1,7 +1,7 @@
 import { createElement, useEffect, useState } from "react";
-import { SimulcastDevtools as Devtools } from "simulcast-devtools";
-import type { SimulcastDevtoolsOptions } from "simulcast-devtools";
-import { useRealtimeClient } from "simulcast-react";
+import { SimulcastDevtools as Devtools } from "@priemskiyyy/simulcast-devtools";
+import type { SimulcastDevtoolsOptions } from "@priemskiyyy/simulcast-devtools";
+import { useRealtimeClient } from "@priemskiyyy/simulcast-react";
 
 export type SimulcastDevtoolsProps = Omit<SimulcastDevtoolsOptions, "client">;
 

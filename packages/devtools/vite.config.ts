@@ -13,7 +13,7 @@ export default defineConfig({
       formats: ["es"],
       fileName: "index",
     },
-    rollupOptions: { external: ["simulcast", "zod"] },
+    rollupOptions: { external: ["@priemskiyyy/simulcast", "zod"] },
     target: "es2022",
     sourcemap: true,
     minify: false,

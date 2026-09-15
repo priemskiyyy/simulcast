@@ -8,7 +8,7 @@
   },
   "devDependencies": {
     "partykit": "0.0.115",
-    "simulcast": "workspace:*",
-    "simulcast-partykit": "workspace:*"
+    "@priemskiyyy/simulcast": "workspace:*",
+    "@priemskiyyy/simulcast-partykit": "workspace:*"
   }
 }

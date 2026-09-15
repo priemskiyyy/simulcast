@@ -1,5 +1,5 @@
 {
-  "name": "simulcast-websocket",
+  "name": "@priemskiyyy/simulcast-websocket",
   "version": "0.1.0",
   "description": "Generic WebSocket adapter for simulcast: bring your own subscribe, unsubscribe, and decode protocol, with reconnection.",
   "type": "module",
@@ -36,10 +36,10 @@
     "test:unit": "vitest run --root ../../.. --project websocket"
   },
   "peerDependencies": {
-    "simulcast": ">=0.1.0 <0.2"
+    "@priemskiyyy/simulcast": ">=0.1.0 <0.2"
   },
   "devDependencies": {
-    "simulcast": "workspace:*"
+    "@priemskiyyy/simulcast": "workspace:*"
   },
   "keywords": [
     "websocket",

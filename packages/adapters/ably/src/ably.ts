@@ -6,12 +6,12 @@ import type {
   InboundMessage,
   RealtimeChannel,
 } from "ably";
-import { createRealtimeAdapter } from "simulcast";
+import { createRealtimeAdapter } from "@priemskiyyy/simulcast";
 import type {
   AdapterSubscribeRequest,
   AdapterSubscription,
   RealtimePublication,
-} from "simulcast";
+} from "@priemskiyyy/simulcast";
 import type { AblyAdapterOptions } from "src/types/AblyAdapterOptions";
 import { CONNECTION_STATES } from "src/utils/constants/connectionStates";
 import { SUBSCRIPTION_STATES } from "src/utils/constants/subscriptionStates";

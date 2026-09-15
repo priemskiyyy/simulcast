@@ -2,9 +2,9 @@
 
 All packages share one version line. Each has its own GitHub release tag; one publishing workflow serves them all. Pushes and verification runs do not publish npm packages.
 
-The release tag is `<package>-v<version>`, for example `simulcast-react-v0.1.0`. The publish workflow resolves the package from the tag, verifies its metadata and changelog entry, runs the test workflows, and publishes the verified tarball from `.artifacts/release/<package>/` with provenance after checking its checksum. Prereleases use the `next` dist-tag; stable releases use `latest`.
+The release tag uses the package name without its scope: `<name>-v<version>`, for example `simulcast-react-v0.1.0` for `@priemskiyyy/simulcast-react`. The publish workflow resolves the package from the tag, verifies its metadata and changelog entry, runs the test workflows, and publishes the verified tarball from `.artifacts/release/<package>/` with provenance after checking its checksum. Prereleases use the `next` dist-tag; stable releases use `latest`.
 
-Publish `simulcast` first, then the framework bindings, then adapters, devtools, and codegen. Dependents declare the matching minor as a peer dependency.
+Publish `@priemskiyyy/simulcast` first, then the framework bindings, then adapters, devtools, and codegen. Dependents declare the matching minor as a peer dependency.
 
 ## Prepare a release
 
@@ -24,7 +24,7 @@ The first publication of a new package requires an authenticated npm maintainer,
 
 ```sh
 npm login
-cd .artifacts/release/simulcast
+cd .artifacts/release/@priemskiyyy/simulcast
 shasum -a 256 -c SHA256SUMS
-npm publish simulcast-<version>.tgz --access public --tag latest
+npm publish priemskiyyy-simulcast-<version>.tgz --access public --tag latest
 ```

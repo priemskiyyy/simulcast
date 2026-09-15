@@ -2,8 +2,8 @@ import { randomUUID } from "node:crypto";
 import { connect, createServer } from "node:net";
 import type { Socket } from "node:net";
 import Pusher from "pusher";
-import { pusher } from "simulcast-pusher";
-import type { PusherAdapterOptions } from "simulcast-pusher";
+import { pusher } from "@priemskiyyy/simulcast-pusher";
+import type { PusherAdapterOptions } from "@priemskiyyy/simulcast-pusher";
 import { inject, onTestFinished } from "vitest";
 import { listen } from "../../providers/src/listen";
 

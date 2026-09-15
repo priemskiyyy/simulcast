@@ -9,7 +9,7 @@ const wrapper: UserConfig = {
   dts: true,
   clean: false,
   sourcemap: true,
-  external: ["simulcast-devtools"],
+  external: ["@priemskiyyy/simulcast-devtools"],
 };
 
 export default defineConfig([

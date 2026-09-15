@@ -1,18 +1,18 @@
-# simulcast-websocket
+# @priemskiyyy/simulcast-websocket
 
 Generic WebSocket adapter for [simulcast](../../core). Bring your own protocol and use it with a Cloudflare Durable Object, a Hono or Bun route, or any server that multiplexes channels over one socket.
 
 ## Installation
 
 ```sh
-pnpm add simulcast simulcast-websocket
+pnpm add @priemskiyyy/simulcast @priemskiyyy/simulcast-websocket
 ```
 
 ## Create a client
 
 ```ts
-import { RealtimeClient } from "simulcast";
-import { websocket } from "simulcast-websocket";
+import { RealtimeClient } from "@priemskiyyy/simulcast";
+import { websocket } from "@priemskiyyy/simulcast-websocket";
 
 const realtime = new RealtimeClient({
   adapter: websocket({

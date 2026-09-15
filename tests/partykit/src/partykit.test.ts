@@ -1,7 +1,7 @@
 import { randomUUID } from "node:crypto";
 import { setTimeout } from "node:timers/promises";
-import { RealtimeClient } from "simulcast";
-import { partykit } from "simulcast-partykit";
+import { RealtimeClient } from "@priemskiyyy/simulcast";
+import { partykit } from "@priemskiyyy/simulcast-partykit";
 import { expect, inject, onTestFinished, test, vi } from "vitest";
 
 const fixture = () => {

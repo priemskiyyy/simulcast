@@ -1,5 +1,8 @@
 import { Show, createSignal } from "solid-js";
-import { useChannelStatus, useConnectionState } from "simulcast-solid";
+import {
+  useChannelStatus,
+  useConnectionState,
+} from "@priemskiyyy/simulcast-solid";
 import { Consumer } from "./Consumer";
 
 export const Session = (props: { user: string }) => {

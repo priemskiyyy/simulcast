@@ -1,6 +1,6 @@
 import { createEffect, createSignal, onCleanup } from "solid-js";
 import type { Accessor } from "solid-js";
-import type { ObservableValue } from "simulcast";
+import type { ObservableValue } from "@priemskiyyy/simulcast";
 
 /**
  * Mirrors an observable into a signal. The accessor is tracked, so a new

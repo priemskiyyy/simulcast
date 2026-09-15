@@ -5,7 +5,7 @@ import {
   shallowRef,
   watch,
 } from "vue";
-import type { ObservableValue } from "simulcast";
+import type { ObservableValue } from "@priemskiyyy/simulcast";
 
 /**
  * Mirrors an observable into a shallow ref. The getter is tracked, so a new

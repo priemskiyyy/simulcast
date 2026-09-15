@@ -31,15 +31,15 @@
     "react-native-safe-area-context": "5.7.0",
     "react-native-svg": "15.15.4",
     "react-native-web": "0.21.2",
-    "simulcast": "workspace:*",
-    "simulcast-centrifugo": "workspace:*",
-    "simulcast-react": "workspace:*",
+    "@priemskiyyy/simulcast": "workspace:*",
+    "@priemskiyyy/simulcast-centrifugo": "workspace:*",
+    "@priemskiyyy/simulcast-react": "workspace:*",
     "ts-pattern": "5.9.0",
     "uniwind": "1.12.0"
   },
   "devDependencies": {
     "@types/react": "19.2.17",
-    "simulcast-codegen": "workspace:*",
+    "@priemskiyyy/simulcast-codegen": "workspace:*",
     "tailwindcss": "4.3.3",
     "typescript": "5.8.3"
   }

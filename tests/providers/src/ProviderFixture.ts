@@ -1,4 +1,4 @@
-import type { RealtimeAdapter } from "simulcast";
+import type { RealtimeAdapter } from "@priemskiyyy/simulcast";
 
 export type ProviderFixture = {
   adapter: RealtimeAdapter;

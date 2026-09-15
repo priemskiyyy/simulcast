@@ -27,12 +27,12 @@ the runtime to hosted providers, self-hosted servers, and browser transports.
 ## Try it without a server
 
 ```sh
-pnpm add simulcast simulcast-broadcast-channel
+pnpm add @priemskiyyy/simulcast @priemskiyyy/simulcast-broadcast-channel
 ```
 
 ```ts
-import { RealtimeClient } from "simulcast";
-import { broadcastChannel } from "simulcast-broadcast-channel";
+import { RealtimeClient } from "@priemskiyyy/simulcast";
+import { broadcastChannel } from "@priemskiyyy/simulcast-broadcast-channel";
 
 const realtime = new RealtimeClient({
   adapter: broadcastChannel({ prefix: "app:" }),
@@ -58,31 +58,31 @@ send button. Simulcast manages subscriptions; publishing uses your transport's A
 
 ## Packages
 
-| Package                                   | Purpose                                          |
-| ----------------------------------------- | ------------------------------------------------ |
-| [`simulcast`](packages/core)              | Framework-independent runtime and mock adapter   |
-| [`simulcast-react`](packages/react)       | React and React Native bindings                  |
-| [`simulcast-vue`](packages/vue)           | Vue composables                                  |
-| [`simulcast-solid`](packages/solid)       | Solid primitives                                 |
-| [`simulcast-svelte`](packages/svelte)     | Svelte utilities                                 |
-| [`simulcast-devtools`](packages/devtools) | Browser inspector and framework wrappers         |
-| [`simulcast-codegen`](packages/codegen)   | Event-hook generation from TypeScript event maps |
+| Package                                                | Purpose                                          |
+| ------------------------------------------------------ | ------------------------------------------------ |
+| [`@priemskiyyy/simulcast`](packages/core)              | Framework-independent runtime and mock adapter   |
+| [`@priemskiyyy/simulcast-react`](packages/react)       | React and React Native bindings                  |
+| [`@priemskiyyy/simulcast-vue`](packages/vue)           | Vue composables                                  |
+| [`@priemskiyyy/simulcast-solid`](packages/solid)       | Solid primitives                                 |
+| [`@priemskiyyy/simulcast-svelte`](packages/svelte)     | Svelte utilities                                 |
+| [`@priemskiyyy/simulcast-devtools`](packages/devtools) | Browser inspector and framework wrappers         |
+| [`@priemskiyyy/simulcast-codegen`](packages/codegen)   | Event-hook generation from TypeScript event maps |
 
 ### Adapters
 
-| Provider           | Package                                                              | Channel semantics                    |
-| ------------------ | -------------------------------------------------------------------- | ------------------------------------ |
-| Centrifugo         | [`simulcast-centrifugo`](packages/adapters/centrifugo)               | Subscription channel                 |
-| Pusher Channels    | [`simulcast-pusher`](packages/adapters/pusher)                       | Public, private, or presence channel |
-| Ably               | [`simulcast-ably`](packages/adapters/ably)                           | Realtime channel                     |
-| Supabase Realtime  | [`simulcast-supabase`](packages/adapters/supabase)                   | Broadcast topic                      |
-| Socket.IO          | [`simulcast-socketio`](packages/adapters/socketio)                   | Event name                           |
-| Phoenix Channels   | [`simulcast-phoenix`](packages/adapters/phoenix)                     | Channel topic                        |
-| MQTT               | [`simulcast-mqtt`](packages/adapters/mqtt)                           | Topic filter                         |
-| PartyKit           | [`simulcast-partykit`](packages/adapters/partykit)                   | Room                                 |
-| WebSocket          | [`simulcast-websocket`](packages/adapters/websocket)                 | Your protocol's channel identifier   |
-| Server-Sent Events | [`simulcast-sse`](packages/adapters/sse)                             | One EventSource URL                  |
-| BroadcastChannel   | [`simulcast-broadcast-channel`](packages/adapters/broadcast-channel) | Same-origin channel name             |
+| Provider           | Package                                                                           | Channel semantics                    |
+| ------------------ | --------------------------------------------------------------------------------- | ------------------------------------ |
+| Centrifugo         | [`@priemskiyyy/simulcast-centrifugo`](packages/adapters/centrifugo)               | Subscription channel                 |
+| Pusher Channels    | [`@priemskiyyy/simulcast-pusher`](packages/adapters/pusher)                       | Public, private, or presence channel |
+| Ably               | [`@priemskiyyy/simulcast-ably`](packages/adapters/ably)                           | Realtime channel                     |
+| Supabase Realtime  | [`@priemskiyyy/simulcast-supabase`](packages/adapters/supabase)                   | Broadcast topic                      |
+| Socket.IO          | [`@priemskiyyy/simulcast-socketio`](packages/adapters/socketio)                   | Event name                           |
+| Phoenix Channels   | [`@priemskiyyy/simulcast-phoenix`](packages/adapters/phoenix)                     | Channel topic                        |
+| MQTT               | [`@priemskiyyy/simulcast-mqtt`](packages/adapters/mqtt)                           | Topic filter                         |
+| PartyKit           | [`@priemskiyyy/simulcast-partykit`](packages/adapters/partykit)                   | Room                                 |
+| WebSocket          | [`@priemskiyyy/simulcast-websocket`](packages/adapters/websocket)                 | Your protocol's channel identifier   |
+| Server-Sent Events | [`@priemskiyyy/simulcast-sse`](packages/adapters/sse)                             | One EventSource URL                  |
+| BroadcastChannel   | [`@priemskiyyy/simulcast-broadcast-channel`](packages/adapters/broadcast-channel) | Same-origin channel name             |
 
 Adapters preserve provider-specific authentication, payload formats, and recovery
 behavior. See [installation](docs/installation.md) for SDK dependencies and

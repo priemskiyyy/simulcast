@@ -1,5 +1,5 @@
 {
-  "name": "simulcast-centrifugo",
+  "name": "@priemskiyyy/simulcast-centrifugo",
   "version": "0.1.0",
   "description": "Centrifugo adapter for simulcast, with an optional React hook for the native Centrifuge client.",
   "type": "module",
@@ -42,20 +42,20 @@
   "peerDependencies": {
     "centrifuge": ">=5.7.2 <6",
     "react": ">=19.2.0 <20",
-    "simulcast": ">=0.1.0 <0.2",
-    "simulcast-react": ">=0.1.0 <0.2"
+    "@priemskiyyy/simulcast": ">=0.1.0 <0.2",
+    "@priemskiyyy/simulcast-react": ">=0.1.0 <0.2"
   },
   "peerDependenciesMeta": {
     "react": {
       "optional": true
     },
-    "simulcast-react": {
+    "@priemskiyyy/simulcast-react": {
       "optional": true
     }
   },
   "devDependencies": {
-    "simulcast": "workspace:*",
-    "simulcast-react": "workspace:*"
+    "@priemskiyyy/simulcast": "workspace:*",
+    "@priemskiyyy/simulcast-react": "workspace:*"
   },
   "keywords": [
     "centrifugo",

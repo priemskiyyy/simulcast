@@ -1,18 +1,18 @@
-# simulcast-phoenix
+# @priemskiyyy/simulcast-phoenix
 
 [Phoenix Channels](https://hexdocs.pm/phoenix/channels.html) adapter for [simulcast](../../core). Requires `phoenix` 1.7 or newer.
 
 ## Installation
 
 ```sh
-pnpm add simulcast simulcast-phoenix phoenix
+pnpm add @priemskiyyy/simulcast @priemskiyyy/simulcast-phoenix phoenix
 ```
 
 ## Create a client
 
 ```ts
-import { RealtimeClient } from "simulcast";
-import { phoenix } from "simulcast-phoenix";
+import { RealtimeClient } from "@priemskiyyy/simulcast";
+import { phoenix } from "@priemskiyyy/simulcast-phoenix";
 
 const realtime = new RealtimeClient({
   adapter: phoenix({

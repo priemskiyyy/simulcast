@@ -4,7 +4,7 @@ Use Node 22.18 or newer and the pnpm version in `package.json`. Run `pnpm instal
 
 ## Layout
 
-- `packages/core`: the runtime, adapter contract, and mock adapter, published as `simulcast`.
+- `packages/core`: the runtime, adapter contract, and mock adapter, published as `@priemskiyyy/simulcast`.
 - `packages/react`: the provider and hooks.
 - `packages/vue`, `packages/solid`, `packages/svelte`: the same API as composables, primitives, and rune-based utilities.
 - `packages/adapters/*`: one package per provider, from `packages/adapters/centrifugo` to `packages/adapters/broadcast-channel`.

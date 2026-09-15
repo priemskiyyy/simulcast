@@ -2,9 +2,9 @@
 import { cleanup, renderHook } from "@testing-library/react";
 import { Centrifuge } from "centrifuge";
 import type { PropsWithChildren } from "react";
-import { RealtimeClient } from "simulcast";
-import { createMockAdapter } from "simulcast/mock";
-import { RealtimeProvider } from "simulcast-react";
+import { RealtimeClient } from "@priemskiyyy/simulcast";
+import { createMockAdapter } from "@priemskiyyy/simulcast/mock";
+import { RealtimeProvider } from "@priemskiyyy/simulcast-react";
 import { afterEach, beforeEach, expect, test, vi } from "vitest";
 import { centrifugo } from "src/centrifugo";
 import { useCentrifuge } from "src/hooks/useCentrifuge";

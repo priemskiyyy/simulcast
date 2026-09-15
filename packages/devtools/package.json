@@ -1,5 +1,5 @@
 {
-  "name": "simulcast-devtools",
+  "name": "@priemskiyyy/simulcast-devtools",
   "version": "0.1.0",
   "description": "Devtools for simulcast: a framework-independent inspector for the realtime connection, channel subscriptions, and events of any adapter, with React, Vue, Solid, and Svelte wrappers.",
   "type": "module",
@@ -53,11 +53,11 @@
   },
   "peerDependencies": {
     "react": ">=19.2.0 <20",
-    "simulcast": ">=0.1.0 <0.2",
-    "simulcast-react": ">=0.1.0 <0.2",
-    "simulcast-solid": ">=0.1.0 <0.2",
-    "simulcast-svelte": ">=0.1.0 <0.2",
-    "simulcast-vue": ">=0.1.0 <0.2",
+    "@priemskiyyy/simulcast": ">=0.1.0 <0.2",
+    "@priemskiyyy/simulcast-react": ">=0.1.0 <0.2",
+    "@priemskiyyy/simulcast-solid": ">=0.1.0 <0.2",
+    "@priemskiyyy/simulcast-svelte": ">=0.1.0 <0.2",
+    "@priemskiyyy/simulcast-vue": ">=0.1.0 <0.2",
     "solid-js": ">=1.8.0 <2",
     "svelte": ">=5.29.0 <6",
     "vue": ">=3.5.0 <4"
@@ -66,11 +66,11 @@
     "zod": "^4.6.2"
   },
   "devDependencies": {
-    "simulcast": "workspace:*",
-    "simulcast-react": "workspace:*",
-    "simulcast-solid": "workspace:*",
-    "simulcast-svelte": "workspace:*",
-    "simulcast-vue": "workspace:*"
+    "@priemskiyyy/simulcast": "workspace:*",
+    "@priemskiyyy/simulcast-react": "workspace:*",
+    "@priemskiyyy/simulcast-solid": "workspace:*",
+    "@priemskiyyy/simulcast-svelte": "workspace:*",
+    "@priemskiyyy/simulcast-vue": "workspace:*"
   },
   "keywords": [
     "realtime",
@@ -90,16 +90,16 @@
     "react": {
       "optional": true
     },
-    "simulcast-react": {
+    "@priemskiyyy/simulcast-react": {
       "optional": true
     },
-    "simulcast-solid": {
+    "@priemskiyyy/simulcast-solid": {
       "optional": true
     },
-    "simulcast-svelte": {
+    "@priemskiyyy/simulcast-svelte": {
       "optional": true
     },
-    "simulcast-vue": {
+    "@priemskiyyy/simulcast-vue": {
       "optional": true
     },
     "solid-js": {

@@ -1,7 +1,7 @@
 import { createServer } from "node:http";
 import type { ServerResponse } from "node:http";
 import { EventSource } from "eventsource";
-import { sse } from "simulcast-sse";
+import { sse } from "@priemskiyyy/simulcast-sse";
 import { expect, onTestFinished } from "vitest";
 import { listen } from "./listen";
 import type { NetworkProviderFixture } from "./ProviderFixture";

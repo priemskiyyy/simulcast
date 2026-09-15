@@ -1,7 +1,7 @@
 import { createComponent, createSignal } from "solid-js";
 import type { Accessor, Setter } from "solid-js";
 import { render } from "solid-js/web";
-import type { RealtimeClient } from "simulcast";
+import type { RealtimeClient } from "@priemskiyyy/simulcast";
 import { Devtools } from "src/components/Devtools";
 import { EventLog } from "src/utils/EventLog";
 
@@ -17,7 +17,7 @@ export type SimulcastDevtoolsOptions = {
  * Framework-independent inspector for one client. Mount it into any element:
  * the panel renders in a shadow root, so host styles never leak in or out.
  * Recording runs while mounted, also when collapsed, and never creates
- * subscriptions. The framework wrappers under `simulcast-devtools/react`,
+ * subscriptions. The framework wrappers under `@priemskiyyy/simulcast-devtools/react`,
  * `/vue`, `/solid`, and `/svelte` read the client from their provider.
  *
  * @example

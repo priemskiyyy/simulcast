@@ -15,7 +15,7 @@ pnpm --filter example-react dev
 ```
 
 Use `example-vue`, `example-solid`, or `example-svelte` for the other web bindings.
-[Expo](expo/README.md) covers iOS, Android, and web with `simulcast-react`.
+[Expo](expo/README.md) covers iOS, Android, and web with `@priemskiyyy/simulcast-react`.
 
 Simulation runs without a backend. Web examples publish through BroadcastChannel
 between tabs on the same origin. Expo uses a local in-memory adapter. Switch to

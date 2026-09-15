@@ -1,18 +1,18 @@
-# simulcast-mqtt
+# @priemskiyyy/simulcast-mqtt
 
 MQTT adapter for [simulcast](../../core), built on [mqtt.js](https://github.com/mqttjs/MQTT.js). Requires `mqtt` 5.
 
 ## Installation
 
 ```sh
-pnpm add simulcast simulcast-mqtt mqtt
+pnpm add @priemskiyyy/simulcast @priemskiyyy/simulcast-mqtt mqtt
 ```
 
 ## Create a client
 
 ```ts
-import { RealtimeClient } from "simulcast";
-import { mqtt } from "simulcast-mqtt";
+import { RealtimeClient } from "@priemskiyyy/simulcast";
+import { mqtt } from "@priemskiyyy/simulcast-mqtt";
 
 const realtime = new RealtimeClient({
   adapter: mqtt({

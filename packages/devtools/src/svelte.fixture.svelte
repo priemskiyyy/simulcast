@@ -1,6 +1,6 @@
 <script lang="ts">
-  import type { RealtimeClient } from "simulcast";
-  import { RealtimeProvider } from "simulcast-svelte";
+  import type { RealtimeClient } from "@priemskiyyy/simulcast";
+  import { RealtimeProvider } from "@priemskiyyy/simulcast-svelte";
   import Host from "src/svelteHost.fixture.svelte";
 
   let { client }: { client: RealtimeClient } = $props();

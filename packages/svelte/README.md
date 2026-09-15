@@ -1,14 +1,14 @@
-# simulcast-svelte
+# @priemskiyyy/simulcast-svelte
 
 Svelte 5 bindings for [simulcast](../core). The provider component owns the session; rune-based utilities share channel subscriptions and expose state through `current`.
 
 ```sh
-pnpm add simulcast simulcast-svelte
+pnpm add @priemskiyyy/simulcast @priemskiyyy/simulcast-svelte
 ```
 
 ```svelte
 <script lang="ts">
-  import { useChannel, useChannelStatus } from "simulcast-svelte";
+  import { useChannel, useChannelStatus } from "@priemskiyyy/simulcast-svelte";
 
   let { roomId }: { roomId: string } = $props();
 

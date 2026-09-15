@@ -9,7 +9,7 @@ time, one logical channel per name, and the native subscription each channel
 demands.
 
 ```ts
-import { RealtimeClient } from "simulcast";
+import { RealtimeClient } from "@priemskiyyy/simulcast";
 
 const realtime = new RealtimeClient({ adapter });
 ```

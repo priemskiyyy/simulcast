@@ -20,19 +20,19 @@ In an existing React 19.2 application:
 ::: code-group
 
 ```sh [npm]
-npm install simulcast simulcast-react simulcast-broadcast-channel
+npm install @priemskiyyy/simulcast @priemskiyyy/simulcast-react @priemskiyyy/simulcast-broadcast-channel
 ```
 
 ```sh [pnpm]
-pnpm add simulcast simulcast-react simulcast-broadcast-channel
+pnpm add @priemskiyyy/simulcast @priemskiyyy/simulcast-react @priemskiyyy/simulcast-broadcast-channel
 ```
 
 ```sh [yarn]
-yarn add simulcast simulcast-react simulcast-broadcast-channel
+yarn add @priemskiyyy/simulcast @priemskiyyy/simulcast-react @priemskiyyy/simulcast-broadcast-channel
 ```
 
 ```sh [bun]
-bun add simulcast simulcast-react simulcast-broadcast-channel
+bun add @priemskiyyy/simulcast @priemskiyyy/simulcast-react @priemskiyyy/simulcast-broadcast-channel
 ```
 
 :::
@@ -42,8 +42,8 @@ See [Installation](installation.md) for framework requirements and every adapter
 ## 2. Create the client
 
 ```ts [src/realtime.ts]
-import { RealtimeClient } from "simulcast";
-import { broadcastChannel } from "simulcast-broadcast-channel";
+import { RealtimeClient } from "@priemskiyyy/simulcast";
+import { broadcastChannel } from "@priemskiyyy/simulcast-broadcast-channel";
 
 export const realtime = new RealtimeClient({
   adapter: broadcastChannel({ prefix: "demo:" }),
@@ -65,7 +65,7 @@ import {
   RealtimeProvider,
   useChannel,
   useChannelStatus,
-} from "simulcast-react";
+} from "@priemskiyyy/simulcast-react";
 import { realtime } from "./realtime";
 
 type Message = { text: string };
@@ -143,7 +143,7 @@ pnpm add zod
 ```tsx
 import type * as React from "react";
 import { z } from "zod";
-import { useChannel } from "simulcast-react";
+import { useChannel } from "@priemskiyyy/simulcast-react";
 
 const MessageSchema = z.object({ text: z.string() });
 

@@ -6,5 +6,5 @@ export default createFixtureConfig({
   root: fileURLToPath(new URL(".", import.meta.url)),
   port: 4177,
   plugins: [solid()],
-  aliases: { "simulcast-solid": "packages/solid/dist/index.js" },
+  aliases: { "@priemskiyyy/simulcast-solid": "packages/solid/dist/index.js" },
 });

@@ -1,6 +1,6 @@
 import { expectTypeOf } from "vitest";
 import type { Accessor } from "solid-js";
-import type { RealtimeClient } from "simulcast";
+import type { RealtimeClient } from "@priemskiyyy/simulcast";
 import type { RealtimeProviderProps } from "src/components/RealtimeProvider";
 import { createChannelEventHooks } from "src/primitives/createChannelEventHooks";
 import { useChannel } from "src/primitives/useChannel";

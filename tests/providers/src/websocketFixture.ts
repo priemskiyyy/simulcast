@@ -1,8 +1,8 @@
 import { createServer } from "node:http";
 import { WebSocketServer } from "ws";
 import type { WebSocket } from "ws";
-import { websocket } from "simulcast-websocket";
-import type { WebSocketPublication } from "simulcast-websocket";
+import { websocket } from "@priemskiyyy/simulcast-websocket";
+import type { WebSocketPublication } from "@priemskiyyy/simulcast-websocket";
 import { expect, onTestFinished } from "vitest";
 import { listen } from "./listen";
 import type { NetworkProviderFixture } from "./ProviderFixture";

@@ -1,5 +1,5 @@
 import { expectTypeOf } from "vitest";
-import type { RealtimeClient } from "simulcast";
+import type { RealtimeClient } from "@priemskiyyy/simulcast";
 import type {
   PublicationHandler,
   ReadableBox,

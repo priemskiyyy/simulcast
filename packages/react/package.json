@@ -1,5 +1,5 @@
 {
-  "name": "simulcast-react",
+  "name": "@priemskiyyy/simulcast-react",
   "version": "0.1.0",
   "description": "React bindings for simulcast: a provider that owns the realtime session and hooks for shared channel subscriptions, typed events, channel status, and connection state.",
   "type": "module",
@@ -37,10 +37,10 @@
   },
   "peerDependencies": {
     "react": ">=19.2.0 <20",
-    "simulcast": ">=0.1.0 <0.2"
+    "@priemskiyyy/simulcast": ">=0.1.0 <0.2"
   },
   "devDependencies": {
-    "simulcast": "workspace:*"
+    "@priemskiyyy/simulcast": "workspace:*"
   },
   "keywords": [
     "react",

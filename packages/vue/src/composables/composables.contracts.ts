@@ -1,6 +1,6 @@
 import { expectTypeOf } from "vitest";
 import type { Ref } from "vue";
-import type { RealtimeClient } from "simulcast";
+import type { RealtimeClient } from "@priemskiyyy/simulcast";
 import type { RealtimeProviderProps } from "src/components/RealtimeProvider";
 import { createChannelEventHooks } from "src/composables/createChannelEventHooks";
 import { useChannel } from "src/composables/useChannel";

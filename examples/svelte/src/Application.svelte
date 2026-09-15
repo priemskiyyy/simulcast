@@ -5,7 +5,7 @@
     resolveSource,
   } from "example-shared";
   import type { RealtimeSource } from "example-shared";
-  import { RealtimeProvider } from "simulcast-svelte";
+  import { RealtimeProvider } from "@priemskiyyy/simulcast-svelte";
   import Dashboard from "src/components/Dashboard.svelte";
   import Devtools from "src/components/Devtools.svelte";
   import Header from "src/components/Header.svelte";

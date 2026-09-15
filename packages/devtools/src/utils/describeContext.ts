@@ -1,4 +1,4 @@
-import type { RealtimeDiagnosticEvent } from "simulcast";
+import type { RealtimeDiagnosticEvent } from "@priemskiyyy/simulcast";
 import { formatContextSummary } from "src/formatting/formatContextSummary";
 import { formatContextText } from "src/formatting/formatContextText";
 import { getEventKind } from "src/utils/getEventKind";

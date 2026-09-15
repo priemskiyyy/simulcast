@@ -1,4 +1,4 @@
-import type { RealtimePublication } from "simulcast";
+import type { RealtimePublication } from "@priemskiyyy/simulcast";
 import type { ChannelInput } from "../types/ChannelInput.js";
 import type { PublicationHandler } from "../types/PublicationHandler.js";
 import { extract } from "./internal/extract.js";

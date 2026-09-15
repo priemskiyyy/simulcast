@@ -1,5 +1,5 @@
 import { createSignal } from "solid-js";
-import { useChannel } from "simulcast-solid";
+import { useChannel } from "@priemskiyyy/simulcast-solid";
 
 export const Consumer = (props: { channel: string; name: string }) => {
   const [messages, setMessages] = createSignal<string[]>([]);

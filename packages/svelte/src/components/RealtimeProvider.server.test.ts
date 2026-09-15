@@ -1,5 +1,5 @@
-import { RealtimeClient } from "simulcast";
-import { createMockAdapter } from "simulcast/mock";
+import { RealtimeClient } from "@priemskiyyy/simulcast";
+import { createMockAdapter } from "@priemskiyyy/simulcast/mock";
 import { render } from "svelte/server";
 import { expect, test } from "vitest";
 import Harness from "../utilities/Harness.fixture.svelte";

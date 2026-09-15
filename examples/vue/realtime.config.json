@@ -9,5 +9,5 @@
     "export": "useChannelEvent"
   },
   "output": "src/hooks/generated",
-  "runtime": "simulcast-vue"
+  "runtime": "@priemskiyyy/simulcast-vue"
 }

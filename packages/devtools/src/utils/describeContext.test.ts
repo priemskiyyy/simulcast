@@ -1,4 +1,4 @@
-import type { RealtimeDiagnosticEvent } from "simulcast";
+import type { RealtimeDiagnosticEvent } from "@priemskiyyy/simulcast";
 import { expect, test, vi } from "vitest";
 import { describeContext } from "src/utils/describeContext";
 

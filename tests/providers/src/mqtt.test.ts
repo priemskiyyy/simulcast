@@ -1,5 +1,5 @@
-import { RealtimeClient } from "simulcast";
-import { mqtt } from "simulcast-mqtt";
+import { RealtimeClient } from "@priemskiyyy/simulcast";
+import { mqtt } from "@priemskiyyy/simulcast-mqtt";
 import { expect, onTestFinished, test } from "vitest";
 import { mqttFixture } from "./mqttFixture";
 

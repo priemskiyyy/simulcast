@@ -6,7 +6,7 @@ import {
   onCleanup,
 } from "solid-js";
 import type { Component, ParentProps } from "solid-js";
-import type { RealtimeClient } from "simulcast";
+import type { RealtimeClient } from "@priemskiyyy/simulcast";
 import { RealtimeClientContext } from "src/context/RealtimeClientContext";
 
 export type RealtimeProviderProps = ParentProps<{

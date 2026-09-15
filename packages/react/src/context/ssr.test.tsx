@@ -2,8 +2,8 @@
 import { act } from "@testing-library/react";
 import { hydrateRoot } from "react-dom/client";
 import { renderToString } from "react-dom/server";
-import { RealtimeClient } from "simulcast";
-import { createMockAdapter } from "simulcast/mock";
+import { RealtimeClient } from "@priemskiyyy/simulcast";
+import { createMockAdapter } from "@priemskiyyy/simulcast/mock";
 import { expect, test, vi } from "vitest";
 import { RealtimeProvider } from "src/context/RealtimeProvider";
 import { useChannel } from "src/hooks/useChannel";

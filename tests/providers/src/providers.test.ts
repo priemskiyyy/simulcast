@@ -1,6 +1,6 @@
 import { setTimeout } from "node:timers/promises";
-import { RealtimeClient } from "simulcast";
-import type { RealtimePublication } from "simulcast";
+import { RealtimeClient } from "@priemskiyyy/simulcast";
+import type { RealtimePublication } from "@priemskiyyy/simulcast";
 import { describe, expect, onTestFinished, test, vi } from "vitest";
 import { broadcastChannelFixture } from "./broadcastChannelFixture";
 import { mqttFixture } from "./mqttFixture";

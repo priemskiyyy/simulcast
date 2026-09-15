@@ -1,4 +1,4 @@
-import type { ConnectionState } from "simulcast";
+import type { ConnectionState } from "@priemskiyyy/simulcast";
 import type { SupabaseConnectionState } from "src/types/SupabaseConnectionState";
 
 // realtime-js retries after every close until `disconnect()`, which only dispose calls.

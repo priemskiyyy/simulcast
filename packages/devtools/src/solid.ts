@@ -1,8 +1,8 @@
 import { createEffect, onCleanup, onMount } from "solid-js";
 import { isServer } from "solid-js/web";
-import { SimulcastDevtools as Devtools } from "simulcast-devtools";
-import type { SimulcastDevtoolsOptions } from "simulcast-devtools";
-import { useRealtimeClient } from "simulcast-solid";
+import { SimulcastDevtools as Devtools } from "@priemskiyyy/simulcast-devtools";
+import type { SimulcastDevtoolsOptions } from "@priemskiyyy/simulcast-devtools";
+import { useRealtimeClient } from "@priemskiyyy/simulcast-solid";
 
 export type SimulcastDevtoolsProps = Omit<SimulcastDevtoolsOptions, "client">;
 

@@ -1,6 +1,9 @@
 <script setup lang="ts">
 import { computed, shallowRef } from "vue";
-import { useChannelStatus, useConnectionState } from "simulcast-vue";
+import {
+  useChannelStatus,
+  useConnectionState,
+} from "@priemskiyyy/simulcast-vue";
 import Consumer from "./Consumer.vue";
 
 const props = defineProps<{ user: string }>();

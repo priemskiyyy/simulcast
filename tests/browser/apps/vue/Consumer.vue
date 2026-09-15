@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { shallowRef } from "vue";
-import { useChannel } from "simulcast-vue";
+import { useChannel } from "@priemskiyyy/simulcast-vue";
 
 const props = defineProps<{ channel: string; name: string }>();
 const messages = shallowRef<string[]>([]);

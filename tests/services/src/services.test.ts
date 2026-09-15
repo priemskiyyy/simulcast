@@ -1,7 +1,10 @@
 import { randomUUID } from "node:crypto";
 import { setTimeout } from "node:timers/promises";
-import { RealtimeClient } from "simulcast";
-import type { RealtimeAdapter, RealtimePublication } from "simulcast";
+import { RealtimeClient } from "@priemskiyyy/simulcast";
+import type {
+  RealtimeAdapter,
+  RealtimePublication,
+} from "@priemskiyyy/simulcast";
 import { describe, expect, onTestFinished, test, vi } from "vitest";
 import { phoenixFixture, supabaseFixture } from "./serviceFixtures";
 

@@ -1,4 +1,4 @@
-import type { DecodedEvent, RealtimePublication } from "simulcast";
+import type { DecodedEvent, RealtimePublication } from "@priemskiyyy/simulcast";
 import { z } from "zod";
 
 const envelopeSchema = z.object({ name: z.string(), body: z.unknown() });

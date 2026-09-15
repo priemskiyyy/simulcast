@@ -1,4 +1,4 @@
-import type { ConnectionState } from "simulcast";
+import type { ConnectionState } from "@priemskiyyy/simulcast";
 import type { PusherConnectionState } from "src/types/PusherConnectionState";
 
 // `unavailable` keeps retrying; `failed` means no usable transport, so it never will.

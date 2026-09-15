@@ -11,7 +11,7 @@ on publication and let TanStack Query refetch:
 
 ```tsx
 import { useQueryClient } from "@tanstack/react-query";
-import { useChannel } from "simulcast-react";
+import { useChannel } from "@priemskiyyy/simulcast-react";
 
 const useRoomInvalidation = (roomId: string) => {
   const queryClient = useQueryClient();

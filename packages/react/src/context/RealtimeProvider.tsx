@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import type { PropsWithChildren } from "react";
-import type { RealtimeClient } from "simulcast";
+import type { RealtimeClient } from "@priemskiyyy/simulcast";
 import { RealtimeClientContext } from "src/context/RealtimeClientContext";
 
 export type RealtimeProviderProps = PropsWithChildren<{

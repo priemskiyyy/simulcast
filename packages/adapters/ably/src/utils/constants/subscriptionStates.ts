@@ -1,5 +1,5 @@
 import type { ChannelState } from "ably";
-import type { AdapterSubscriptionState } from "simulcast";
+import type { AdapterSubscriptionState } from "@priemskiyyy/simulcast";
 
 // `suspended` reattaches once the connection returns; `detached` and `failed` stay put.
 export const SUBSCRIPTION_STATES: Record<

@@ -1,5 +1,5 @@
 {
-  "name": "simulcast-socketio",
+  "name": "@priemskiyyy/simulcast-socketio",
   "version": "0.1.0",
   "description": "Socket.IO adapter for simulcast.",
   "type": "module",
@@ -37,10 +37,10 @@
   },
   "peerDependencies": {
     "socket.io-client": ">=4.0.0 <5",
-    "simulcast": ">=0.1.0 <0.2"
+    "@priemskiyyy/simulcast": ">=0.1.0 <0.2"
   },
   "devDependencies": {
-    "simulcast": "workspace:*"
+    "@priemskiyyy/simulcast": "workspace:*"
   },
   "keywords": [
     "socket.io",

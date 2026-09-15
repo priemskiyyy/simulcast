@@ -1,6 +1,6 @@
 import { Centrifuge } from "centrifuge";
 import { useSyncExternalStore } from "react";
-import { useRealtimeClient } from "simulcast-react";
+import { useRealtimeClient } from "@priemskiyyy/simulcast-react";
 
 const getServerClient = () => null;
 

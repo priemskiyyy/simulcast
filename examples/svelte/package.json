@@ -13,15 +13,15 @@
     "clsx": "2.1.1",
     "example-shared": "workspace:*",
     "phosphor-svelte": "3.1.0",
-    "simulcast": "workspace:*",
-    "simulcast-svelte": "workspace:*",
+    "@priemskiyyy/simulcast": "workspace:*",
+    "@priemskiyyy/simulcast-svelte": "workspace:*",
     "svelte": "5.57.0",
     "ts-pattern": "5.9.0"
   },
   "devDependencies": {
     "@tailwindcss/vite": "4.3.3",
-    "simulcast-codegen": "workspace:*",
-    "simulcast-devtools": "workspace:*",
+    "@priemskiyyy/simulcast-codegen": "workspace:*",
+    "@priemskiyyy/simulcast-devtools": "workspace:*",
     "tailwindcss": "4.3.3"
   }
 }

@@ -1,4 +1,4 @@
-import type { ConnectionState } from "simulcast";
+import type { ConnectionState } from "@priemskiyyy/simulcast";
 import { match } from "ts-pattern";
 import type { Tone } from "./Tone";
 

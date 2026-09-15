@@ -1,4 +1,4 @@
-import type { RealtimeDiagnosticEvent } from "simulcast";
+import type { RealtimeDiagnosticEvent } from "@priemskiyyy/simulcast";
 import { describeContext } from "src/utils/describeContext";
 import type { RecordedEventKind } from "src/utils/getEventKind";
 

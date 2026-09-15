@@ -187,10 +187,10 @@ try {
   ]);
 
   const bundles = [
-    { file: "simulcast/dist/index.js", client: false },
-    { file: "simulcast-react/dist/index.js", client: true },
-    { file: "simulcast-devtools/dist/index.js", client: false },
-    { file: "simulcast-devtools/dist/react.js", client: true },
+    { file: "@priemskiyyy/simulcast/dist/index.js", client: false },
+    { file: "@priemskiyyy/simulcast-react/dist/index.js", client: true },
+    { file: "@priemskiyyy/simulcast-devtools/dist/index.js", client: false },
+    { file: "@priemskiyyy/simulcast-devtools/dist/react.js", client: true },
   ];
   for (const { file, client } of bundles) {
     const bundle = readFileSync(
@@ -204,13 +204,16 @@ try {
   // The core bundles its own Solid runtime, so a host without Solid still works.
   assert.doesNotMatch(
     readFileSync(
-      path.join(consumer, "node_modules/simulcast-devtools/dist/index.js"),
+      path.join(
+        consumer,
+        "node_modules/@priemskiyyy/simulcast-devtools/dist/index.js",
+      ),
       "utf8",
     ),
     /from ["']solid-js/,
   );
   const declarations = readFileSync(
-    path.join(consumer, "node_modules/simulcast/dist/index.d.ts"),
+    path.join(consumer, "node_modules/@priemskiyyy/simulcast/dist/index.d.ts"),
     "utf8",
   );
   assert.match(declarations, /@example/);
@@ -244,25 +247,25 @@ try {
   );
   write(
     "runtime.ts",
-    'import { createChannelEventHooks } from "simulcast-react"; import type { Events } from "./events.js"; export const { useChannelEvent } = createChannelEventHooks<Events>({ decode: () => null });\n',
+    'import { createChannelEventHooks } from "@priemskiyyy/simulcast-react"; import type { Events } from "./events.js"; export const { useChannelEvent } = createChannelEventHooks<Events>({ decode: () => null });\n',
   );
   write(
     "contracts.ts",
     `import type { Centrifuge } from "centrifuge";
-import { RealtimeClient } from "simulcast";
-import { ably } from "simulcast-ably";
-import { broadcastChannel } from "simulcast-broadcast-channel";
-import { centrifugo } from "simulcast-centrifugo";
-import { useCentrifuge } from "simulcast-centrifugo/react";
-import { mqtt } from "simulcast-mqtt";
-import { phoenix } from "simulcast-phoenix";
-import { pusher } from "simulcast-pusher";
-import { useChannel, useRealtimeClient } from "simulcast-react";
-import { partykit } from "simulcast-partykit";
-import { socketio } from "simulcast-socketio";
-import { sse } from "simulcast-sse";
-import { supabase } from "simulcast-supabase";
-import { websocket } from "simulcast-websocket";
+import { RealtimeClient } from "@priemskiyyy/simulcast";
+import { ably } from "@priemskiyyy/simulcast-ably";
+import { broadcastChannel } from "@priemskiyyy/simulcast-broadcast-channel";
+import { centrifugo } from "@priemskiyyy/simulcast-centrifugo";
+import { useCentrifuge } from "@priemskiyyy/simulcast-centrifugo/react";
+import { mqtt } from "@priemskiyyy/simulcast-mqtt";
+import { phoenix } from "@priemskiyyy/simulcast-phoenix";
+import { pusher } from "@priemskiyyy/simulcast-pusher";
+import { useChannel, useRealtimeClient } from "@priemskiyyy/simulcast-react";
+import { partykit } from "@priemskiyyy/simulcast-partykit";
+import { socketio } from "@priemskiyyy/simulcast-socketio";
+import { sse } from "@priemskiyyy/simulcast-sse";
+import { supabase } from "@priemskiyyy/simulcast-supabase";
+import { websocket } from "@priemskiyyy/simulcast-websocket";
 import { useMessageCreated } from "./generated/index.js";
 type Equal<A, B> = (<T>() => T extends A ? 1 : 2) extends (<T>() => T extends B ? 1 : 2) ? true : false;
 export const clients = [
@@ -300,10 +303,10 @@ export const useContracts = () => {
   write(
     "vue-contracts.ts",
     `import { defineComponent, h, ref } from "vue";
-import { RealtimeClient } from "simulcast";
-import { createMockAdapter } from "simulcast/mock";
-import { SimulcastDevtools } from "simulcast-devtools/vue";
-import { RealtimeProvider, useChannel, useChannelStatus } from "simulcast-vue";
+import { RealtimeClient } from "@priemskiyyy/simulcast";
+import { createMockAdapter } from "@priemskiyyy/simulcast/mock";
+import { SimulcastDevtools } from "@priemskiyyy/simulcast-devtools/vue";
+import { RealtimeProvider, useChannel, useChannelStatus } from "@priemskiyyy/simulcast-vue";
 const realtime = new RealtimeClient({ adapter: createMockAdapter().adapter });
 const Room = defineComponent(() => {
   const room = ref("demo");
@@ -316,10 +319,10 @@ export const Application = defineComponent(() => () => h(RealtimeProvider, { cli
   write(
     "solid-contracts.ts",
     `import { createSignal } from "solid-js";
-import { RealtimeClient } from "simulcast";
-import { createMockAdapter } from "simulcast/mock";
-import { SimulcastDevtools } from "simulcast-devtools/solid";
-import { useChannel, useChannelStatus, useRealtimeClient } from "simulcast-solid";
+import { RealtimeClient } from "@priemskiyyy/simulcast";
+import { createMockAdapter } from "@priemskiyyy/simulcast/mock";
+import { SimulcastDevtools } from "@priemskiyyy/simulcast-devtools/solid";
+import { useChannel, useChannelStatus, useRealtimeClient } from "@priemskiyyy/simulcast-solid";
 export const devtools = () => SimulcastDevtools({ initialIsOpen: true });
 export const realtime = new RealtimeClient({ adapter: createMockAdapter().adapter });
 export const useRoom = () => {
@@ -331,10 +334,10 @@ export const useRoom = () => {
   );
   write(
     "svelte-contracts.ts",
-    `import { RealtimeClient } from "simulcast";
-import { createMockAdapter } from "simulcast/mock";
-import { createDevtools } from "simulcast-devtools/svelte";
-import { useChannel, useChannelStatus, useRealtimeClient } from "simulcast-svelte";
+    `import { RealtimeClient } from "@priemskiyyy/simulcast";
+import { createMockAdapter } from "@priemskiyyy/simulcast/mock";
+import { createDevtools } from "@priemskiyyy/simulcast-devtools/svelte";
+import { useChannel, useChannelStatus, useRealtimeClient } from "@priemskiyyy/simulcast-svelte";
 export const devtools = () => createDevtools({ maxEvents: 50 });
 export const realtime = new RealtimeClient({ adapter: createMockAdapter().adapter });
 export const useRoom = (room: () => string) => {
@@ -346,10 +349,10 @@ export const useRoom = (room: () => string) => {
   write(
     "main.tsx",
     `import { createRoot } from "react-dom/client";
-import { RealtimeClient } from "simulcast";
-import { centrifugo } from "simulcast-centrifugo";
-import { SimulcastDevtools } from "simulcast-devtools/react";
-import { RealtimeProvider } from "simulcast-react";
+import { RealtimeClient } from "@priemskiyyy/simulcast";
+import { centrifugo } from "@priemskiyyy/simulcast-centrifugo";
+import { SimulcastDevtools } from "@priemskiyyy/simulcast-devtools/react";
+import { RealtimeProvider } from "@priemskiyyy/simulcast-react";
 import { useMessageCreated } from "./generated/index.js";
 const realtime = new RealtimeClient({ adapter: centrifugo({ transport: "ws://localhost" }) });
 const Messages = () => { useMessageCreated("rooms:one", () => {}); return <p>Connected</p>; };
@@ -364,10 +367,10 @@ createRoot(document.body).render(<RealtimeProvider client={realtime} session={{ 
     `import assert from "node:assert/strict";
 import { createElement } from "react";
 import { renderToString } from "react-dom/server";
-import { RealtimeClient } from "simulcast";
-import { createMockAdapter } from "simulcast/mock";
-import { SimulcastDevtools } from "simulcast-devtools/react";
-import { RealtimeProvider, useChannel, useConnectionState, useRealtimeClient } from "simulcast-react";
+import { RealtimeClient } from "@priemskiyyy/simulcast";
+import { createMockAdapter } from "@priemskiyyy/simulcast/mock";
+import { SimulcastDevtools } from "@priemskiyyy/simulcast-devtools/react";
+import { RealtimeProvider, useChannel, useConnectionState, useRealtimeClient } from "@priemskiyyy/simulcast-react";
 const { adapter, connections } = createMockAdapter();
 const realtime = new RealtimeClient({ adapter });
 const Child = () => { useChannel("rooms:one", () => {}); return createElement("span", null, useConnectionState()); };
@@ -377,7 +380,10 @@ assert.match(renderToString(createElement(RealtimeProvider, { client: realtime }
 assert.deepEqual(connections, []);\n`,
   );
 
-  const codegen = path.join(consumer, "node_modules/simulcast-codegen");
+  const codegen = path.join(
+    consumer,
+    "node_modules/@priemskiyyy/simulcast-codegen",
+  );
   const metadata = JSON.parse(
     readFileSync(path.join(codegen, "package.json"), "utf8"),
   );

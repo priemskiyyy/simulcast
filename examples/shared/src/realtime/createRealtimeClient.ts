@@ -1,6 +1,6 @@
-import { RealtimeClient } from "simulcast";
-import { broadcastChannel } from "simulcast-broadcast-channel";
-import { centrifugo } from "simulcast-centrifugo";
+import { RealtimeClient } from "@priemskiyyy/simulcast";
+import { broadcastChannel } from "@priemskiyyy/simulcast-broadcast-channel";
+import { centrifugo } from "@priemskiyyy/simulcast-centrifugo";
 import { match } from "ts-pattern";
 import { SIMULATION_PREFIX } from "./RealtimeSource";
 import type { RealtimeSource } from "./RealtimeSource";

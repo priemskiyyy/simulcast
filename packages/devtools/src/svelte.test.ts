@@ -1,6 +1,6 @@
 import { cleanup, render } from "@testing-library/svelte";
-import { RealtimeClient } from "simulcast";
-import { createMockAdapter } from "simulcast/mock";
+import { RealtimeClient } from "@priemskiyyy/simulcast";
+import { createMockAdapter } from "@priemskiyyy/simulcast/mock";
 import { afterEach, expect, test } from "vitest";
 import Fixture from "src/svelte.fixture.svelte";
 

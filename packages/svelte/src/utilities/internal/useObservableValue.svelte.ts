@@ -1,4 +1,4 @@
-import type { ObservableValue } from "simulcast";
+import type { ObservableValue } from "@priemskiyyy/simulcast";
 import type { ReadableBox } from "../../types/ReadableBox.js";
 
 /**

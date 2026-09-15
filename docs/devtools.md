@@ -4,19 +4,19 @@ description: "Install the Simulcast browser inspector to view connection state, 
 
 # Devtools
 
-`simulcast-devtools` shows connection state, channel registrations, and an event
+`@priemskiyyy/simulcast-devtools` shows connection state, channel registrations, and an event
 timeline for whichever adapter the provider uses. The inspector is
 framework-independent and renders inside a shadow root, so it looks and behaves
 the same in React, Vue, Solid, Svelte, or plain TypeScript.
 
 ```sh
-pnpm add -D simulcast-devtools
+pnpm add -D @priemskiyyy/simulcast-devtools
 ```
 
 ![Simulcast devtools showing an active connection, shared channel listener counts, and the publication timeline.](/images/devtools.png)
 
 The Svelte wrapper uses attachments and requires Svelte `>=5.29 <6`. The core
-`simulcast-svelte` binding supports Svelte `>=5 <6`.
+`@priemskiyyy/simulcast-svelte` binding supports Svelte `>=5 <6`.
 
 ## Mount it
 
@@ -27,7 +27,7 @@ development flag; the examples use Vite.
 ::: code-group
 
 ```tsx [React]
-import { SimulcastDevtools } from "simulcast-devtools/react";
+import { SimulcastDevtools } from "@priemskiyyy/simulcast-devtools/react";
 
 <RealtimeProvider client={realtime}>
   <App />
@@ -37,7 +37,7 @@ import { SimulcastDevtools } from "simulcast-devtools/react";
 
 ```vue [Vue]
 <script setup lang="ts">
-import { SimulcastDevtools } from "simulcast-devtools/vue";
+import { SimulcastDevtools } from "@priemskiyyy/simulcast-devtools/vue";
 
 const isDevelopment = import.meta.env.DEV;
 </script>
@@ -51,7 +51,7 @@ const isDevelopment = import.meta.env.DEV;
 ```
 
 ```tsx [Solid]
-import { SimulcastDevtools } from "simulcast-devtools/solid";
+import { SimulcastDevtools } from "@priemskiyyy/simulcast-devtools/solid";
 
 <RealtimeProvider client={realtime}>
   <App />
@@ -61,7 +61,7 @@ import { SimulcastDevtools } from "simulcast-devtools/solid";
 
 ```svelte [Svelte: Inspector.svelte]
 <script lang="ts">
-  import { createDevtools } from "simulcast-devtools/svelte";
+  import { createDevtools } from "@priemskiyyy/simulcast-devtools/svelte";
 
   const devtools = createDevtools();
 </script>
@@ -70,7 +70,7 @@ import { SimulcastDevtools } from "simulcast-devtools/solid";
 ```
 
 ```ts [Anywhere]
-import { SimulcastDevtools } from "simulcast-devtools";
+import { SimulcastDevtools } from "@priemskiyyy/simulcast-devtools";
 
 const devtools = new SimulcastDevtools({ client: realtime });
 devtools.mount(document.body.appendChild(document.createElement("div")));
@@ -83,7 +83,7 @@ exist when `createDevtools()` runs during component initialization:
 
 ```svelte
 <script lang="ts">
-  import { RealtimeProvider } from "simulcast-svelte";
+  import { RealtimeProvider } from "@priemskiyyy/simulcast-svelte";
   import Inspector from "./Inspector.svelte";
   import App from "./App.svelte";
   import { realtime } from "./realtime";
@@ -143,7 +143,7 @@ The panel docks to the bottom edge by default. The dock button in the header
 moves it to the right edge, where it becomes a column. Drag the free edge to
 resize it, or focus the edge and use the arrow keys. Escape closes the panel and
 returns focus to the launcher. The open state, dock position, and size are
-stored in `localStorage` under `simulcast-devtools`, so a reload restores them;
+stored in `localStorage` under `@priemskiyyy/simulcast-devtools`, so a reload restores them;
 `initialIsOpen` only applies on the first visit.
 
 ## Custom integrations

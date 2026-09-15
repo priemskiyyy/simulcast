@@ -1,18 +1,18 @@
-# simulcast-ably
+# @priemskiyyy/simulcast-ably
 
 [Ably](https://ably.com/) adapter for [simulcast](../../core). Requires `ably` 2.
 
 ## Installation
 
 ```sh
-pnpm add simulcast simulcast-ably ably
+pnpm add @priemskiyyy/simulcast @priemskiyyy/simulcast-ably ably
 ```
 
 ## Create a client
 
 ```ts
-import { RealtimeClient } from "simulcast";
-import { ably } from "simulcast-ably";
+import { RealtimeClient } from "@priemskiyyy/simulcast";
+import { ably } from "@priemskiyyy/simulcast-ably";
 
 const realtime = new RealtimeClient({
   adapter: ably({

@@ -1,5 +1,5 @@
 import { getContext, setContext } from "svelte";
-import type { RealtimeClient } from "simulcast";
+import type { RealtimeClient } from "@priemskiyyy/simulcast";
 import type { ReadableBox } from "../types/ReadableBox.js";
 
 const REALTIME_CLIENT_KEY = Symbol("simulcast client");

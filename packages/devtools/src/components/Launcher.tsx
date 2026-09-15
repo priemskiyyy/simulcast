@@ -1,4 +1,4 @@
-import type { RealtimeSnapshot } from "simulcast";
+import type { RealtimeSnapshot } from "@priemskiyyy/simulcast";
 import { SimulcastIcon } from "src/components/SimulcastIcon";
 import { useAutoFocus } from "src/hooks/useAutoFocus";
 

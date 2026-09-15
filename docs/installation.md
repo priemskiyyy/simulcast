@@ -10,54 +10,54 @@ Packages are ESM and include TypeScript declarations.
 
 ## Frameworks
 
-| Application                    | Packages                     | Supported peer version                   |
-| ------------------------------ | ---------------------------- | ---------------------------------------- |
-| Plain JavaScript or TypeScript | `simulcast`                  | No framework dependency                  |
-| React                          | `simulcast simulcast-react`  | React `>=19.2 <20`                       |
-| Vue                            | `simulcast simulcast-vue`    | Vue `>=3.5 <4`                           |
-| Solid                          | `simulcast simulcast-solid`  | Solid `>=1.8 <2`                         |
-| Svelte                         | `simulcast simulcast-svelte` | Svelte `>=5 <6`                          |
-| Expo / React Native            | `simulcast simulcast-react`  | Compatible React and native provider SDK |
+| Application                    | Packages                                               | Supported peer version                   |
+| ------------------------------ | ------------------------------------------------------ | ---------------------------------------- |
+| Plain JavaScript or TypeScript | `@priemskiyyy/simulcast`                               | No framework dependency                  |
+| React                          | `@priemskiyyy/simulcast @priemskiyyy/simulcast-react`  | React `>=19.2 <20`                       |
+| Vue                            | `@priemskiyyy/simulcast @priemskiyyy/simulcast-vue`    | Vue `>=3.5 <4`                           |
+| Solid                          | `@priemskiyyy/simulcast @priemskiyyy/simulcast-solid`  | Solid `>=1.8 <2`                         |
+| Svelte                         | `@priemskiyyy/simulcast @priemskiyyy/simulcast-svelte` | Svelte `>=5 <6`                          |
+| Expo / React Native            | `@priemskiyyy/simulcast @priemskiyyy/simulcast-react`  | Compatible React and native provider SDK |
 
 Use one framework binding for your application. The core does not depend on React.
 For native setup, see [React Native and Expo](react-native.md).
 
 ## Adapters
 
-Add `simulcast` alongside the packages below if it is not installed already.
+Add `@priemskiyyy/simulcast` alongside the packages below if it is not installed already.
 
-| Provider           | Packages to install                        | Channel means                        |
-| ------------------ | ------------------------------------------ | ------------------------------------ |
-| Centrifugo         | `simulcast-centrifugo centrifuge`          | Subscription channel                 |
-| Pusher Channels    | `simulcast-pusher pusher-js`               | Public, private, or presence channel |
-| Ably               | `simulcast-ably ably`                      | Realtime channel                     |
-| Supabase           | `simulcast-supabase @supabase/realtime-js` | Broadcast topic                      |
-| Socket.IO          | `simulcast-socketio socket.io-client`      | Event name                           |
-| Phoenix            | `simulcast-phoenix phoenix`                | Channel topic                        |
-| MQTT               | `simulcast-mqtt mqtt`                      | Topic filter, including wildcards    |
-| PartyKit           | `simulcast-partykit partysocket`           | Room                                 |
-| WebSocket          | `simulcast-websocket`                      | Your protocol's channel identifier   |
-| Server-Sent Events | `simulcast-sse`                            | One EventSource URL                  |
-| BroadcastChannel   | `simulcast-broadcast-channel`              | Same-origin channel name             |
+| Provider           | Packages to install                                     | Channel means                        |
+| ------------------ | ------------------------------------------------------- | ------------------------------------ |
+| Centrifugo         | `@priemskiyyy/simulcast-centrifugo centrifuge`          | Subscription channel                 |
+| Pusher Channels    | `@priemskiyyy/simulcast-pusher pusher-js`               | Public, private, or presence channel |
+| Ably               | `@priemskiyyy/simulcast-ably ably`                      | Realtime channel                     |
+| Supabase           | `@priemskiyyy/simulcast-supabase @supabase/realtime-js` | Broadcast topic                      |
+| Socket.IO          | `@priemskiyyy/simulcast-socketio socket.io-client`      | Event name                           |
+| Phoenix            | `@priemskiyyy/simulcast-phoenix phoenix`                | Channel topic                        |
+| MQTT               | `@priemskiyyy/simulcast-mqtt mqtt`                      | Topic filter, including wildcards    |
+| PartyKit           | `@priemskiyyy/simulcast-partykit partysocket`           | Room                                 |
+| WebSocket          | `@priemskiyyy/simulcast-websocket`                      | Your protocol's channel identifier   |
+| Server-Sent Events | `@priemskiyyy/simulcast-sse`                            | One EventSource URL                  |
+| BroadcastChannel   | `@priemskiyyy/simulcast-broadcast-channel`              | Same-origin channel name             |
 
 For example, React with Pusher:
 
 ::: code-group
 
 ```sh [npm]
-npm install simulcast simulcast-react simulcast-pusher pusher-js
+npm install @priemskiyyy/simulcast @priemskiyyy/simulcast-react @priemskiyyy/simulcast-pusher pusher-js
 ```
 
 ```sh [pnpm]
-pnpm add simulcast simulcast-react simulcast-pusher pusher-js
+pnpm add @priemskiyyy/simulcast @priemskiyyy/simulcast-react @priemskiyyy/simulcast-pusher pusher-js
 ```
 
 ```sh [yarn]
-yarn add simulcast simulcast-react simulcast-pusher pusher-js
+yarn add @priemskiyyy/simulcast @priemskiyyy/simulcast-react @priemskiyyy/simulcast-pusher pusher-js
 ```
 
 ```sh [bun]
-bun add simulcast simulcast-react simulcast-pusher pusher-js
+bun add @priemskiyyy/simulcast @priemskiyyy/simulcast-react @priemskiyyy/simulcast-pusher pusher-js
 ```
 
 :::
@@ -69,14 +69,14 @@ channel names, authentication, payload formats, and recovery remain provider-spe
 ## Optional packages
 
 ```sh
-pnpm add -D simulcast-devtools simulcast-codegen typescript
+pnpm add -D @priemskiyyy/simulcast-devtools @priemskiyyy/simulcast-codegen typescript
 ```
 
 - [Devtools](devtools.md) mounts a browser inspector. Framework wrappers are
-  separate imports such as `simulcast-devtools/react`. The Svelte devtools wrapper
+  separate imports such as `@priemskiyyy/simulcast-devtools/react`. The Svelte devtools wrapper
   requires Svelte `>=5.29 <6`, while the framework binding itself supports `>=5 <6`.
 - [Code generation](codegen.md) generates framework hooks from your event map.
-- [Application testing](testing.md) uses `simulcast/mock`, included in the core.
+- [Application testing](testing.md) uses `@priemskiyyy/simulcast/mock`, included in the core.
 
 ## Runtime requirements
 

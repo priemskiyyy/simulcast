@@ -1,4 +1,4 @@
-import { RealtimeClient } from "simulcast";
+import { RealtimeClient } from "@priemskiyyy/simulcast";
 import { expect, onTestFinished, test } from "vitest";
 import { websocketFixture } from "./websocketFixture";
 

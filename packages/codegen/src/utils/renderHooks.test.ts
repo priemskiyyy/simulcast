@@ -36,13 +36,13 @@ test("imports hook types from the configured runtime", () => {
       events: { file: "/project/events.ts", type: "Events" },
       dispatcher: { file: "/project/runtime.ts", export: "useChannelEvent" },
       output: "/project/generated",
-      runtime: "simulcast-vue",
+      runtime: "@priemskiyyy/simulcast-vue",
     },
     ["message.created"],
   );
 
   expect(files.get("useMessageCreated.ts")).toContain(
-    'import type { ChannelInput, PublicationHandler, UseChannelOptions } from "simulcast-vue"',
+    'import type { ChannelInput, PublicationHandler, UseChannelOptions } from "@priemskiyyy/simulcast-vue"',
   );
 });
 

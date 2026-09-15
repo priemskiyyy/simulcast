@@ -8,7 +8,7 @@
   },
   "devDependencies": {
     "pusher": "5.3.4",
-    "simulcast": "workspace:*",
-    "simulcast-pusher": "workspace:*"
+    "@priemskiyyy/simulcast": "workspace:*",
+    "@priemskiyyy/simulcast-pusher": "workspace:*"
   }
 }

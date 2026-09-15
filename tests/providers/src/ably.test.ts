@@ -1,9 +1,9 @@
 import { createServer } from "node:http";
 import type { ServerResponse } from "node:http";
 import { setTimeout } from "node:timers/promises";
-import { RealtimeClient } from "simulcast";
-import type { RealtimeDiagnosticEvent } from "simulcast";
-import { ably } from "simulcast-ably";
+import { RealtimeClient } from "@priemskiyyy/simulcast";
+import type { RealtimeDiagnosticEvent } from "@priemskiyyy/simulcast";
+import { ably } from "@priemskiyyy/simulcast-ably";
 import { expect, onTestFinished, test, vi } from "vitest";
 import { listen } from "./listen";
 

@@ -14,4 +14,4 @@ export type {
   EventDefinition,
   DecodedEvent,
   ChannelEventConfiguration,
-} from "simulcast";
+} from "@priemskiyyy/simulcast";

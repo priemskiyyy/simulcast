@@ -1,5 +1,5 @@
 {
-  "name": "simulcast-mqtt",
+  "name": "@priemskiyyy/simulcast-mqtt",
   "version": "0.1.0",
   "description": "MQTT adapter for simulcast, built on mqtt.js.",
   "type": "module",
@@ -37,10 +37,10 @@
   },
   "peerDependencies": {
     "mqtt": ">=5.0.0 <6",
-    "simulcast": ">=0.1.0 <0.2"
+    "@priemskiyyy/simulcast": ">=0.1.0 <0.2"
   },
   "devDependencies": {
-    "simulcast": "workspace:*"
+    "@priemskiyyy/simulcast": "workspace:*"
   },
   "keywords": [
     "mqtt",

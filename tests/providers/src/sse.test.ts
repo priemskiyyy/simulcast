@@ -1,5 +1,5 @@
-import { RealtimeClient } from "simulcast";
-import type { RealtimePublication } from "simulcast";
+import { RealtimeClient } from "@priemskiyyy/simulcast";
+import type { RealtimePublication } from "@priemskiyyy/simulcast";
 import { expect, onTestFinished, test } from "vitest";
 import { sseFixture } from "./sseFixture";
 

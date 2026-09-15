@@ -1,14 +1,14 @@
-# simulcast-vue
+# @priemskiyyy/simulcast-vue
 
 Vue bindings for [simulcast](../core). The provider component owns the session; composables share channel subscriptions and expose state as refs.
 
 ```sh
-pnpm add simulcast simulcast-vue
+pnpm add @priemskiyyy/simulcast @priemskiyyy/simulcast-vue
 ```
 
 ```vue
 <script setup lang="ts">
-import { useChannel, useChannelStatus } from "simulcast-vue";
+import { useChannel, useChannelStatus } from "@priemskiyyy/simulcast-vue";
 
 const props = defineProps<{ roomId: string }>();
 type Message = { id: string; text: string };

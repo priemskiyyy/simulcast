@@ -1,18 +1,18 @@
-# simulcast-pusher
+# @priemskiyyy/simulcast-pusher
 
 [Pusher Channels](https://pusher.com/channels) adapter for [simulcast](../../core). Requires `pusher-js` 8.
 
 ## Installation
 
 ```sh
-pnpm add simulcast simulcast-pusher pusher-js
+pnpm add @priemskiyyy/simulcast @priemskiyyy/simulcast-pusher pusher-js
 ```
 
 ## Create a client
 
 ```ts
-import { RealtimeClient } from "simulcast";
-import { pusher } from "simulcast-pusher";
+import { RealtimeClient } from "@priemskiyyy/simulcast";
+import { pusher } from "@priemskiyyy/simulcast-pusher";
 
 const realtime = new RealtimeClient({
   adapter: pusher({

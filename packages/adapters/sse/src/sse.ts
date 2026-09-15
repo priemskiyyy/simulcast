@@ -1,5 +1,8 @@
-import { createRealtimeAdapter } from "simulcast";
-import type { AdapterSubscribeRequest, AdapterSubscription } from "simulcast";
+import { createRealtimeAdapter } from "@priemskiyyy/simulcast";
+import type {
+  AdapterSubscribeRequest,
+  AdapterSubscription,
+} from "@priemskiyyy/simulcast";
 import type { EventSourceLike } from "src/types/EventSourceLike";
 import type { SseAdapterOptions } from "src/types/SseAdapterOptions";
 

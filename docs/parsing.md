@@ -40,7 +40,7 @@ payload type; there is no need to repeat a generic:
 ```tsx [src/MessagePreview.tsx]
 import type * as React from "react";
 import { useState } from "react";
-import { useChannel } from "simulcast-react";
+import { useChannel } from "@priemskiyyy/simulcast-react";
 import { MessageSchema } from "./MessageSchema";
 
 export const MessagePreview: React.FunctionComponent = () => {
@@ -219,7 +219,7 @@ handler with `safeParse` and return on failure:
 ```tsx [src/TolerantMessagePreview.tsx]
 import type * as React from "react";
 import { useState } from "react";
-import { useChannel } from "simulcast-react";
+import { useChannel } from "@priemskiyyy/simulcast-react";
 import { MessageSchema } from "./MessageSchema";
 
 export const TolerantMessagePreview: React.FunctionComponent = () => {
@@ -265,7 +265,7 @@ For an already decoded envelope such as
 
 ```ts [src/messageEvents.ts]
 import { z } from "zod";
-import { createChannelEventHooks } from "simulcast-react";
+import { createChannelEventHooks } from "@priemskiyyy/simulcast-react";
 import type { Message } from "./MessageSchema";
 
 const EnvelopeSchema = z.object({ name: z.string(), body: z.unknown() });

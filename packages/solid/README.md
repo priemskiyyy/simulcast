@@ -1,9 +1,9 @@
-# simulcast-solid
+# @priemskiyyy/simulcast-solid
 
 Solid bindings for [simulcast](../core). The provider component owns the session; primitives share channel subscriptions and expose state as accessors.
 
 ```sh
-pnpm add simulcast simulcast-solid
+pnpm add @priemskiyyy/simulcast @priemskiyyy/simulcast-solid
 ```
 
 ```tsx
@@ -11,7 +11,7 @@ import {
   RealtimeProvider,
   useChannel,
   useChannelStatus,
-} from "simulcast-solid";
+} from "@priemskiyyy/simulcast-solid";
 
 const Room = (props: { roomId: string }) => {
   const channel = () => `rooms:${props.roomId}`;

@@ -1,7 +1,7 @@
 <script lang="ts">
   import { formatConnectionState, getConnectionTone } from "example-shared";
   import { CircleNotch, Plugs, PlugsConnected } from "phosphor-svelte";
-  import { useConnectionState } from "simulcast-svelte";
+  import { useConnectionState } from "@priemskiyyy/simulcast-svelte";
   import { match } from "ts-pattern";
   import Badge from "src/components/Badge.svelte";
 

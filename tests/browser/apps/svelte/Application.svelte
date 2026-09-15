@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { RealtimeProvider } from "simulcast-svelte";
+  import { RealtimeProvider } from "@priemskiyyy/simulcast-svelte";
   import { createClient } from "../../shared/createClient";
   import { inspect } from "../../shared/inspection";
   import Session from "./Session.svelte";

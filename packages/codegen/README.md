@@ -1,14 +1,14 @@
-# simulcast-codegen
+# @priemskiyyy/simulcast-codegen
 
 Generate named event hooks from a finite TypeScript event map for React, Vue, Solid, or Svelte. The TypeScript compiler resolves imported and composed types; generation does not execute your application modules.
 
 ## Setup
 
 ```sh
-pnpm add -D simulcast-codegen typescript
+pnpm add -D @priemskiyyy/simulcast-codegen typescript
 ```
 
-Requires Node 22.18+ and TypeScript `>=5.8 <6`. Add `simulcast` and your selected framework binding separately. React is the default runtime; configure `runtime` for another binding.
+Requires Node 22.18+ and TypeScript `>=5.8 <6`. Add `@priemskiyyy/simulcast` and your selected framework binding separately. React is the default runtime; configure `runtime` for another binding.
 
 Create your event map and export `useChannelEvent` from `createChannelEventHooks<Events>({ decode })`:
 
@@ -23,7 +23,7 @@ Add `realtime.config.json`:
 
 ```json
 {
-  "$schema": "./node_modules/simulcast-codegen/config.schema.json",
+  "$schema": "./node_modules/@priemskiyyy/simulcast-codegen/config.schema.json",
   "events": { "file": "src/realtime/Events.ts", "type": "Events" },
   "dispatcher": {
     "file": "src/realtime/useChannelEvent.ts",
@@ -33,7 +33,7 @@ Add `realtime.config.json`:
 }
 ```
 
-Paths are relative to the configuration file. JSON comments are supported. `tsconfig` optionally selects an explicit project; otherwise the nearest config above the event-map file is used. `runtime` names the binding the generated hooks import from and defaults to `simulcast-react`; set it to `simulcast-vue`, `simulcast-solid`, or `simulcast-svelte` for those bindings. `imports.extension` defaults to `"js"`, the Node-style relative import; set it to `"none"` for Metro and other bundlers that resolve TypeScript sources without an extension.
+Paths are relative to the configuration file. JSON comments are supported. `tsconfig` optionally selects an explicit project; otherwise the nearest config above the event-map file is used. `runtime` names the binding the generated hooks import from and defaults to `@priemskiyyy/simulcast-react`; set it to `@priemskiyyy/simulcast-vue`, `@priemskiyyy/simulcast-solid`, or `@priemskiyyy/simulcast-svelte` for those bindings. `imports.extension` defaults to `"js"`, the Node-style relative import; set it to `"none"` for Metro and other bundlers that resolve TypeScript sources without an extension.
 
 ```sh
 pnpm exec simulcast-codegen generate
@@ -58,7 +58,7 @@ The output holds one file per hook, an `index.ts`, and `.simulcast-codegen.json`
 ## Programmatic use
 
 ```ts
-import { CodegenFailure, generateHooks } from "simulcast-codegen";
+import { CodegenFailure, generateHooks } from "@priemskiyyy/simulcast-codegen";
 
 try {
   const result = generateHooks("realtime.config.json", { check: true });

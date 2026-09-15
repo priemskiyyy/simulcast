@@ -6,5 +6,5 @@ export default createFixtureConfig({
   root: fileURLToPath(new URL(".", import.meta.url)),
   port: 4178,
   plugins: [svelte({ configFile: false })],
-  aliases: { "simulcast-svelte": "packages/svelte/dist/index.js" },
+  aliases: { "@priemskiyyy/simulcast-svelte": "packages/svelte/dist/index.js" },
 });

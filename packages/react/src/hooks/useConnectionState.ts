@@ -1,4 +1,4 @@
-import type { ConnectionState } from "simulcast";
+import type { ConnectionState } from "@priemskiyyy/simulcast";
 import { useObservableValue } from "src/hooks/internal/useObservableValue";
 import { useRealtimeClient } from "src/hooks/useRealtimeClient";
 

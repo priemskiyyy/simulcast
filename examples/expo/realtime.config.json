@@ -9,7 +9,7 @@
     "export": "useChannelEvent"
   },
   "output": "src/hooks/generated",
-  "runtime": "simulcast-react",
+  "runtime": "@priemskiyyy/simulcast-react",
   "imports": {
     "extension": "none"
   }

@@ -1,5 +1,5 @@
 import { useEffect, useEffectEvent, useSyncExternalStore } from "react";
-import type { ObservableValue } from "simulcast";
+import type { ObservableValue } from "@priemskiyyy/simulcast";
 
 /**
  * Reads an external snapshot and optionally observes subsequent changes with the latest callback.

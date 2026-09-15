@@ -1,5 +1,8 @@
 <script lang="ts">
-  import { useChannelStatus, useConnectionState } from "simulcast-svelte";
+  import {
+    useChannelStatus,
+    useConnectionState,
+  } from "@priemskiyyy/simulcast-svelte";
   import Consumer from "./Consumer.svelte";
 
   let { user }: { user: string } = $props();

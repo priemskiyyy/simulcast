@@ -1,4 +1,4 @@
-import type { RealtimeSnapshot } from "simulcast";
+import type { RealtimeSnapshot } from "@priemskiyyy/simulcast";
 import { ChannelList } from "src/components/Channels/ChannelList";
 import { PanelHeader } from "src/components/Panel/PanelHeader";
 import { ResizeHandle } from "src/components/Panel/ResizeHandle";

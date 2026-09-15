@@ -102,7 +102,7 @@ const client = useSyncExternalStore(
 ```
 
 Adapter packages ship typed shortcuts for this. `useCentrifuge()` from
-`simulcast-centrifugo/react` returns `Centrifuge | null` and narrows at runtime,
+`@priemskiyyy/simulcast-centrifugo/react` returns `Centrifuge | null` and narrows at runtime,
 so it also returns `null` when a different adapter is in use.
 
 ## createChannelEventHooks

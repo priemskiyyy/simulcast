@@ -1,11 +1,11 @@
 import { setTimeout } from "node:timers/promises";
-import { RealtimeClient } from "simulcast";
+import { RealtimeClient } from "@priemskiyyy/simulcast";
 import type {
   AdapterSubscriptionObserver,
   AdapterConnectionObserver,
   RealtimePublication,
-} from "simulcast";
-import { pusher } from "simulcast-pusher";
+} from "@priemskiyyy/simulcast";
+import { pusher } from "@priemskiyyy/simulcast-pusher";
 import { expect, onTestFinished, test, vi } from "vitest";
 import { pusherFixture } from "./pusherFixture";
 

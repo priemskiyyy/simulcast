@@ -1,7 +1,7 @@
 import type React from "react";
 import { formatConnectionState, getConnectionTone } from "example-shared";
 import { CircleNotch, Plugs, PlugsConnected } from "phosphor-react-native";
-import { useConnectionState } from "simulcast-react";
+import { useConnectionState } from "@priemskiyyy/simulcast-react";
 import { match } from "ts-pattern";
 import { Badge } from "src/components/Badge/Badge";
 

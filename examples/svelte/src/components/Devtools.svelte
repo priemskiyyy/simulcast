@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { createDevtools } from "simulcast-devtools/svelte";
+  import { createDevtools } from "@priemskiyyy/simulcast-devtools/svelte";
 
   const devtools = createDevtools();
 </script>

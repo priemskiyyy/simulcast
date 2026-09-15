@@ -10,9 +10,9 @@
   },
   "devDependencies": {
     "@types/ws": "8.18.1",
-    "simulcast": "workspace:*",
-    "simulcast-phoenix": "workspace:*",
-    "simulcast-supabase": "workspace:*",
+    "@priemskiyyy/simulcast": "workspace:*",
+    "@priemskiyyy/simulcast-phoenix": "workspace:*",
+    "@priemskiyyy/simulcast-supabase": "workspace:*",
     "ws": "8.21.3"
   }
 }

@@ -28,7 +28,11 @@ const solidProject = (
 // The devtools core is Solid; its wrappers are tested against every binding, so the Svelte plugin joins in.
 const devtoolsProject = solidProject("devtools", {
   plugins: [svelte({ configFile: false })],
-  alias: { "simulcast-devtools": source("./packages/devtools/src/index.ts") },
+  alias: {
+    "@priemskiyyy/simulcast-devtools": source(
+      "./packages/devtools/src/index.ts",
+    ),
+  },
 });
 // Svelte compiles components for the browser in jsdom, so server rendering
 // gets its own node project without browser resolution.

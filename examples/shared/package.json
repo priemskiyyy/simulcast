@@ -14,9 +14,9 @@
   "dependencies": {
     "centrifuge": "5.7.2",
     "class-variance-authority": "0.7.1",
-    "simulcast": "workspace:*",
-    "simulcast-broadcast-channel": "workspace:*",
-    "simulcast-centrifugo": "workspace:*",
+    "@priemskiyyy/simulcast": "workspace:*",
+    "@priemskiyyy/simulcast-broadcast-channel": "workspace:*",
+    "@priemskiyyy/simulcast-centrifugo": "workspace:*",
     "ts-pattern": "5.9.0",
     "zod": "4.6.5"
   }

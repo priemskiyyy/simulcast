@@ -1,5 +1,5 @@
 import { useEffect, useEffectEvent } from "react";
-import type { RealtimePublication } from "simulcast";
+import type { RealtimePublication } from "@priemskiyyy/simulcast";
 import { useRealtimeClient } from "src/hooks/useRealtimeClient";
 import type { ChannelInput } from "src/types/ChannelInput";
 import type { PublicationHandler } from "src/types/PublicationHandler";

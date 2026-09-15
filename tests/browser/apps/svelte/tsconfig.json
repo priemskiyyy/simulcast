@@ -3,11 +3,11 @@
   "compilerOptions": {
     "types": ["node", "vite/client", "svelte"],
     "paths": {
-      "simulcast": ["../../packages/core/dist/index.d.ts"],
-      "simulcast-centrifugo": [
+      "@priemskiyyy/simulcast": ["../../packages/core/dist/index.d.ts"],
+      "@priemskiyyy/simulcast-centrifugo": [
         "../../packages/adapters/centrifugo/dist/index.d.ts"
       ],
-      "simulcast-svelte": ["../../packages/svelte/dist/index.d.ts"]
+      "@priemskiyyy/simulcast-svelte": ["../../packages/svelte/dist/index.d.ts"]
     }
   },
   "include": ["**/*.ts", "**/*.svelte"]

@@ -1,5 +1,5 @@
 import { Show, createMemo, createSignal } from "solid-js";
-import { RealtimeProvider } from "simulcast-solid";
+import { RealtimeProvider } from "@priemskiyyy/simulcast-solid";
 import { createClient } from "../../shared/createClient";
 import { inspect } from "../../shared/inspection";
 import { Session } from "./Session";

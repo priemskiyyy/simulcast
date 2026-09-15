@@ -4,8 +4,8 @@ import {
   createRealtimeClient,
   resolveSource,
 } from "example-shared";
-import { SimulcastDevtools } from "simulcast-devtools/solid";
-import { RealtimeProvider } from "simulcast-solid";
+import { SimulcastDevtools } from "@priemskiyyy/simulcast-devtools/solid";
+import { RealtimeProvider } from "@priemskiyyy/simulcast-solid";
 import { Show, createMemo } from "solid-js";
 import { createStore } from "solid-js/store";
 import { Dashboard } from "src/components/Dashboard/Dashboard";

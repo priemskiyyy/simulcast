@@ -1,7 +1,10 @@
 import { cleanup, render, screen } from "@testing-library/svelte";
-import { RealtimeClient } from "simulcast";
-import { createMockAdapter } from "simulcast/mock";
-import type { MockAdapterOptions, MockConnection } from "simulcast/mock";
+import { RealtimeClient } from "@priemskiyyy/simulcast";
+import { createMockAdapter } from "@priemskiyyy/simulcast/mock";
+import type {
+  MockAdapterOptions,
+  MockConnection,
+} from "@priemskiyyy/simulcast/mock";
 import { flushSync } from "svelte";
 import { afterEach, expect, test, vi } from "vitest";
 import Harness from "./Harness.fixture.svelte";

@@ -6,5 +6,5 @@ export default createFixtureConfig({
   root: fileURLToPath(new URL(".", import.meta.url)),
   port: 4176,
   plugins: [vue()],
-  aliases: { "simulcast-vue": "packages/vue/dist/index.js" },
+  aliases: { "@priemskiyyy/simulcast-vue": "packages/vue/dist/index.js" },
 });

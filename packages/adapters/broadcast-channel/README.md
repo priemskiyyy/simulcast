@@ -1,18 +1,18 @@
-# simulcast-broadcast-channel
+# @priemskiyyy/simulcast-broadcast-channel
 
 [BroadcastChannel](https://developer.mozilla.org/docs/Web/API/BroadcastChannel) adapter for [simulcast](../../core): same-origin realtime between tabs, workers, and tests, with no server.
 
 ## Installation
 
 ```sh
-pnpm add simulcast simulcast-broadcast-channel
+pnpm add @priemskiyyy/simulcast @priemskiyyy/simulcast-broadcast-channel
 ```
 
 ## Create a client
 
 ```ts
-import { RealtimeClient } from "simulcast";
-import { broadcastChannel } from "simulcast-broadcast-channel";
+import { RealtimeClient } from "@priemskiyyy/simulcast";
+import { broadcastChannel } from "@priemskiyyy/simulcast-broadcast-channel";
 
 const realtime = new RealtimeClient({
   adapter: broadcastChannel({ prefix: "app:" }),

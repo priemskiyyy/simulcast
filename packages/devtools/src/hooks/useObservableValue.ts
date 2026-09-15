@@ -1,6 +1,6 @@
 import { createEffect, createSignal, onCleanup } from "solid-js";
 import type { Accessor } from "solid-js";
-import type { ObservableValue } from "simulcast";
+import type { ObservableValue } from "@priemskiyyy/simulcast";
 
 /** Mirrors a `get`/`subscribe` source into a signal. A new source is followed when the accessor changes. */
 export const useObservableValue = <TValue>(

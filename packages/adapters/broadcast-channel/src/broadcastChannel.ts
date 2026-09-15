@@ -1,5 +1,8 @@
-import { createRealtimeAdapter } from "simulcast";
-import type { AdapterSubscribeRequest, AdapterSubscription } from "simulcast";
+import { createRealtimeAdapter } from "@priemskiyyy/simulcast";
+import type {
+  AdapterSubscribeRequest,
+  AdapterSubscription,
+} from "@priemskiyyy/simulcast";
 import type { BroadcastChannelAdapterOptions } from "src/types/BroadcastChannelAdapterOptions";
 
 const createSubscription = (

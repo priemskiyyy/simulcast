@@ -4,8 +4,8 @@ import {
   createRealtimeClient,
   resolveSource,
 } from "example-shared";
-import { SimulcastDevtools } from "simulcast-devtools/vue";
-import { RealtimeProvider } from "simulcast-vue";
+import { SimulcastDevtools } from "@priemskiyyy/simulcast-devtools/vue";
+import { RealtimeProvider } from "@priemskiyyy/simulcast-vue";
 import { computed, reactive } from "vue";
 import Dashboard from "src/components/Dashboard.vue";
 import Header from "src/components/Header.vue";

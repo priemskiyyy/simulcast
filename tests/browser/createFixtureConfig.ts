@@ -28,10 +28,10 @@ export const createFixtureConfig = ({
         ...Object.fromEntries(
           Object.entries(aliases).map(([name, file]) => [name, dist(file)]),
         ),
-        "simulcast-centrifugo": dist(
+        "@priemskiyyy/simulcast-centrifugo": dist(
           "packages/adapters/centrifugo/dist/index.js",
         ),
-        simulcast: dist("packages/core/dist/index.js"),
+        "@priemskiyyy/simulcast": dist("packages/core/dist/index.js"),
       },
     },
     server: {

@@ -1,18 +1,18 @@
-# simulcast-centrifugo
+# @priemskiyyy/simulcast-centrifugo
 
 [Centrifugo](https://centrifugal.dev/) adapter for [simulcast](../../core). Requires Centrifuge JS `>=5.7.2 <6`.
 
 ## Installation
 
 ```sh
-pnpm add simulcast simulcast-centrifugo centrifuge
+pnpm add @priemskiyyy/simulcast @priemskiyyy/simulcast-centrifugo centrifuge
 ```
 
 ## Create a client
 
 ```ts
-import { RealtimeClient } from "simulcast";
-import { centrifugo } from "simulcast-centrifugo";
+import { RealtimeClient } from "@priemskiyyy/simulcast";
+import { centrifugo } from "@priemskiyyy/simulcast-centrifugo";
 
 const realtime = new RealtimeClient({
   adapter: centrifugo({
@@ -29,7 +29,7 @@ const realtime = new RealtimeClient({
 
 Every session gets a fresh `Centrifuge` instance. Publications keep the SDK's `PublicationContext` in `publication.native`; the SDK's coarse client and subscription states are the contract's states.
 
-`simulcast-centrifugo/react` exports `useCentrifuge()`, which returns the current native client, or `null` while no Centrifugo session is active. It requires `react` and `simulcast-react`.
+`@priemskiyyy/simulcast-centrifugo/react` exports `useCentrifuge()`, which returns the current native client, or `null` while no Centrifugo session is active. It requires `react` and `@priemskiyyy/simulcast-react`.
 
 ## Guides
 

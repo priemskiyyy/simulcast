@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type { RealtimeClient } from "simulcast";
+  import type { RealtimeClient } from "@priemskiyyy/simulcast";
   import {
     useChannel,
     useChannelStatus,

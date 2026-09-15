@@ -1,6 +1,6 @@
 import { useMemo } from "react";
-import { DETACHED_CHANNEL_STATUS } from "simulcast";
-import type { ChannelStatus } from "simulcast";
+import { DETACHED_CHANNEL_STATUS } from "@priemskiyyy/simulcast";
+import type { ChannelStatus } from "@priemskiyyy/simulcast";
 import { useObservableValue } from "src/hooks/internal/useObservableValue";
 import { useRealtimeClient } from "src/hooks/useRealtimeClient";
 

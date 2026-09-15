@@ -59,14 +59,14 @@ adapter emit state during setup and cleanup.
 
 ## createRealtimeAdapter
 
-`createRealtimeAdapter` from `simulcast` adds the bookkeeping every adapter
+`createRealtimeAdapter` from `@priemskiyyy/simulcast` adds the bookkeeping every adapter
 needs: idempotent disposal, subscriptions released with their connection,
 observers silenced after dispose, and a thrown error for `subscribe` on a
 disposed connection. Explicit generics are required, since the publication type
 cannot be inferred from how a callback parameter is used.
 
 ```ts
-import { createRealtimeAdapter } from "simulcast";
+import { createRealtimeAdapter } from "@priemskiyyy/simulcast";
 
 export const provider = (options: ProviderOptions) =>
   createRealtimeAdapter<Client, Message, Channel>({
@@ -113,7 +113,7 @@ seven channel states onto three.
 
 ## Testing
 
-`simulcast/mock` exports `createMockAdapter`, a deliberately unguarded adapter
+`@priemskiyyy/simulcast/mock` exports `createMockAdapter`, a deliberately unguarded adapter
 that records every call and exposes raw observers, so consumer tests can drive
 late, duplicate, synchronous, and reentrant callbacks. Adapter tests should
 construct the real SDK client with its connect method stubbed and drive its

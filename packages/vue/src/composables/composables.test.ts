@@ -1,8 +1,11 @@
 // @vitest-environment jsdom
 import { mount } from "@vue/test-utils";
-import { RealtimeClient } from "simulcast";
-import { createMockAdapter } from "simulcast/mock";
-import type { MockAdapterOptions, MockConnection } from "simulcast/mock";
+import { RealtimeClient } from "@priemskiyyy/simulcast";
+import { createMockAdapter } from "@priemskiyyy/simulcast/mock";
+import type {
+  MockAdapterOptions,
+  MockConnection,
+} from "@priemskiyyy/simulcast/mock";
 import { defineComponent, h, nextTick, ref } from "vue";
 import type { Ref } from "vue";
 import { expect, test, vi } from "vitest";

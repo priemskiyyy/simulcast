@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed, shallowRef } from "vue";
-import { RealtimeProvider } from "simulcast-vue";
+import { RealtimeProvider } from "@priemskiyyy/simulcast-vue";
 import { createClient } from "../../shared/createClient";
 import { inspect } from "../../shared/inspection";
 import Session from "./Session.vue";

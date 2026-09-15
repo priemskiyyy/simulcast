@@ -1,4 +1,4 @@
-import type { RealtimeDiagnosticEvent } from "simulcast";
+import type { RealtimeDiagnosticEvent } from "@priemskiyyy/simulcast";
 import { assertUnreachable } from "src/utils/assertUnreachable";
 
 export type RecordedEventKind =

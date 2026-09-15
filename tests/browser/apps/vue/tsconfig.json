@@ -2,11 +2,11 @@
   "extends": "../../tsconfig.json",
   "compilerOptions": {
     "paths": {
-      "simulcast": ["../../packages/core/dist/index.d.ts"],
-      "simulcast-centrifugo": [
+      "@priemskiyyy/simulcast": ["../../packages/core/dist/index.d.ts"],
+      "@priemskiyyy/simulcast-centrifugo": [
         "../../packages/adapters/centrifugo/dist/index.d.ts"
       ],
-      "simulcast-vue": ["../../packages/vue/dist/index.d.ts"]
+      "@priemskiyyy/simulcast-vue": ["../../packages/vue/dist/index.d.ts"]
     }
   },
   "include": ["**/*.ts", "**/*.vue"]

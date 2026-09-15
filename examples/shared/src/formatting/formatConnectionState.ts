@@ -1,4 +1,4 @@
-import type { ConnectionState } from "simulcast";
+import type { ConnectionState } from "@priemskiyyy/simulcast";
 
 export const formatConnectionState = (state: ConnectionState) => {
   const LABELS: Record<ConnectionState, string> = {

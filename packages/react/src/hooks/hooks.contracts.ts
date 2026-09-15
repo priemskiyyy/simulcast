@@ -1,5 +1,5 @@
 import { expectTypeOf } from "vitest";
-import type { RealtimeClient } from "simulcast";
+import type { RealtimeClient } from "@priemskiyyy/simulcast";
 import type { RealtimeProviderProps } from "src/context/RealtimeProvider";
 import { useChannel } from "src/hooks/useChannel";
 import type { PublicationHandler } from "src/types/PublicationHandler";

@@ -1,6 +1,6 @@
 # PartyKit integration tests
 
-These tests run the real `partysocket` SDK through `simulcast-partykit` against the official PartyKit local development runtime. No account, cloud credentials, or deployment is needed.
+These tests run the real `partysocket` SDK through `@priemskiyyy/simulcast-partykit` against the official PartyKit local development runtime. No account, cloud credentials, or deployment is needed.
 
 From the repository root:
 

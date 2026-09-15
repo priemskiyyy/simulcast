@@ -1,7 +1,7 @@
 import type { Attachment } from "svelte/attachments";
-import { SimulcastDevtools as Devtools } from "simulcast-devtools";
-import type { SimulcastDevtoolsOptions } from "simulcast-devtools";
-import { useRealtimeClient } from "simulcast-svelte";
+import { SimulcastDevtools as Devtools } from "@priemskiyyy/simulcast-devtools";
+import type { SimulcastDevtoolsOptions } from "@priemskiyyy/simulcast-devtools";
+import { useRealtimeClient } from "@priemskiyyy/simulcast-svelte";
 
 export type SimulcastDevtoolsProps = Omit<SimulcastDevtoolsOptions, "client">;
 

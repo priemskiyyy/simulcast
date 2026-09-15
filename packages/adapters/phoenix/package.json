@@ -1,5 +1,5 @@
 {
-  "name": "simulcast-phoenix",
+  "name": "@priemskiyyy/simulcast-phoenix",
   "version": "0.1.0",
   "description": "Phoenix Channels adapter for simulcast.",
   "type": "module",
@@ -37,10 +37,10 @@
   },
   "peerDependencies": {
     "phoenix": ">=1.7.0 <2",
-    "simulcast": ">=0.1.0 <0.2"
+    "@priemskiyyy/simulcast": ">=0.1.0 <0.2"
   },
   "devDependencies": {
-    "simulcast": "workspace:*"
+    "@priemskiyyy/simulcast": "workspace:*"
   },
   "keywords": [
     "phoenix",

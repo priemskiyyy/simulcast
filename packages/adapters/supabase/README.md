@@ -1,18 +1,18 @@
-# simulcast-supabase
+# @priemskiyyy/simulcast-supabase
 
 [Supabase Realtime](https://supabase.com/docs/guides/realtime) adapter for [simulcast](../../core). Requires `@supabase/realtime-js` 2.
 
 ## Installation
 
 ```sh
-pnpm add simulcast simulcast-supabase @supabase/realtime-js
+pnpm add @priemskiyyy/simulcast @priemskiyyy/simulcast-supabase @supabase/realtime-js
 ```
 
 ## Create a client
 
 ```ts
-import { RealtimeClient } from "simulcast";
-import { supabase } from "simulcast-supabase";
+import { RealtimeClient } from "@priemskiyyy/simulcast";
+import { supabase } from "@priemskiyyy/simulcast-supabase";
 
 const realtime = new RealtimeClient({
   adapter: supabase({

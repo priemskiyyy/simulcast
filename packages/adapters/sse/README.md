@@ -1,18 +1,18 @@
-# simulcast-sse
+# @priemskiyyy/simulcast-sse
 
 Server-Sent Events adapter for [simulcast](../../core): one `EventSource` per channel, for streaming endpoints on Workers, Hono, or any HTTP server.
 
 ## Installation
 
 ```sh
-pnpm add simulcast simulcast-sse
+pnpm add @priemskiyyy/simulcast @priemskiyyy/simulcast-sse
 ```
 
 ## Create a client
 
 ```ts
-import { RealtimeClient } from "simulcast";
-import { sse } from "simulcast-sse";
+import { RealtimeClient } from "@priemskiyyy/simulcast";
+import { sse } from "@priemskiyyy/simulcast-sse";
 
 const realtime = new RealtimeClient({
   adapter: sse({

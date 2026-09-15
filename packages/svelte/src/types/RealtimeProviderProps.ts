@@ -1,5 +1,5 @@
 import type { Snippet } from "svelte";
-import type { RealtimeClient } from "simulcast";
+import type { RealtimeClient } from "@priemskiyyy/simulcast";
 
 export type RealtimeProviderProps = {
   client: RealtimeClient;

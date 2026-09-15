@@ -1,5 +1,5 @@
 import type { ConnectionState as AblyConnectionState } from "ably";
-import type { ConnectionState } from "simulcast";
+import type { ConnectionState } from "@priemskiyyy/simulcast";
 
 // `disconnected` and `suspended` keep retrying on their own; `closed` and `failed` do not.
 export const CONNECTION_STATES: Record<AblyConnectionState, ConnectionState> = {

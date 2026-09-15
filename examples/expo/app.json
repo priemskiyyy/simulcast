@@ -4,7 +4,7 @@
     "slug": "simulcast-mission-control",
     "version": "0.1.0",
     "orientation": "portrait",
-    "scheme": "simulcast",
+    "scheme": "@priemskiyyy/simulcast",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "web": {

@@ -1,5 +1,5 @@
 {
-  "name": "simulcast-sse",
+  "name": "@priemskiyyy/simulcast-sse",
   "version": "0.1.0",
   "description": "Server-Sent Events adapter for simulcast: one EventSource per channel.",
   "type": "module",
@@ -36,10 +36,10 @@
     "test:unit": "vitest run --root ../../.. --project sse"
   },
   "peerDependencies": {
-    "simulcast": ">=0.1.0 <0.2"
+    "@priemskiyyy/simulcast": ">=0.1.0 <0.2"
   },
   "devDependencies": {
-    "simulcast": "workspace:*"
+    "@priemskiyyy/simulcast": "workspace:*"
   },
   "keywords": [
     "sse",

@@ -15,14 +15,14 @@
     "example-shared": "workspace:*",
     "react": "19.2.8",
     "react-dom": "19.2.8",
-    "simulcast": "workspace:*",
-    "simulcast-react": "workspace:*",
+    "@priemskiyyy/simulcast": "workspace:*",
+    "@priemskiyyy/simulcast-react": "workspace:*",
     "ts-pattern": "5.9.0"
   },
   "devDependencies": {
     "@tailwindcss/vite": "4.3.3",
-    "simulcast-codegen": "workspace:*",
-    "simulcast-devtools": "workspace:*",
+    "@priemskiyyy/simulcast-codegen": "workspace:*",
+    "@priemskiyyy/simulcast-devtools": "workspace:*",
     "tailwindcss": "4.3.3"
   }
 }

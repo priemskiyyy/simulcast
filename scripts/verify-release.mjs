@@ -26,7 +26,14 @@ const packages = Object.fromEntries(
 const tag = process.env.RELEASE_TAG;
 // A release tag names its package: `<name>-v<version>`.
 const fromTag =
-  tag === undefined ? [] : [tag.replace(/-v[^-]*(-[\w.]+)?$/, "")];
+  tag === undefined
+    ? []
+    : [
+        Object.keys(packages).find(
+          (name) =>
+            name.split("/").at(-1) === tag.replace(/-v[^-]*(-[\w.]+)?$/, ""),
+        ) ?? tag,
+      ];
 const selected = [...process.argv.slice(2), ...fromTag];
 const names = selected.length === 0 ? Object.keys(packages) : selected;
 
@@ -57,7 +64,7 @@ for (const name of names) {
     );
     assert.equal(
       tag,
-      `${name}-v${metadata.version}`,
+      `${name.split("/").at(-1)}-v${metadata.version}`,
       "Release tag must match the package version.",
     );
   }

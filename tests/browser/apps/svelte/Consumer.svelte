@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { useChannel } from "simulcast-svelte";
+  import { useChannel } from "@priemskiyyy/simulcast-svelte";
 
   let { channel, name }: { channel: string; name: string } = $props();
   let messages = $state<string[]>([]);

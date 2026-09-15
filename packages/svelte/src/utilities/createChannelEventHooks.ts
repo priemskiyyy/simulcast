@@ -1,5 +1,8 @@
-import { createChannelEventMatcher } from "simulcast";
-import type { ChannelEventConfiguration, EventDefinition } from "simulcast";
+import { createChannelEventMatcher } from "@priemskiyyy/simulcast";
+import type {
+  ChannelEventConfiguration,
+  EventDefinition,
+} from "@priemskiyyy/simulcast";
 import type { ChannelInput } from "../types/ChannelInput.js";
 import type { PublicationHandler } from "../types/PublicationHandler.js";
 import { extract } from "./internal/extract.js";

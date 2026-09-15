@@ -1,6 +1,9 @@
 import { toValue } from "vue";
-import { createChannelEventMatcher } from "simulcast";
-import type { ChannelEventConfiguration, EventDefinition } from "simulcast";
+import { createChannelEventMatcher } from "@priemskiyyy/simulcast";
+import type {
+  ChannelEventConfiguration,
+  EventDefinition,
+} from "@priemskiyyy/simulcast";
 import { useChannel } from "src/composables/useChannel";
 import type { UseChannelOptions } from "src/composables/useChannel";
 import type { ChannelInput } from "src/types/ChannelInput";

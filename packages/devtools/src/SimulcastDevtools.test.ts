@@ -1,7 +1,7 @@
 import { fireEvent, within } from "@testing-library/dom";
-import { RealtimeClient } from "simulcast";
-import { createMockAdapter } from "simulcast/mock";
-import type { MockConnection } from "simulcast/mock";
+import { RealtimeClient } from "@priemskiyyy/simulcast";
+import { createMockAdapter } from "@priemskiyyy/simulcast/mock";
+import type { MockConnection } from "@priemskiyyy/simulcast/mock";
 import { afterEach, expect, test } from "vitest";
 import { SimulcastDevtools } from "src/SimulcastDevtools";
 

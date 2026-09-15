@@ -4,7 +4,7 @@ description: "Use Simulcast with Expo and React Native, manage background connec
 
 # React Native and Expo
 
-Use `simulcast-react` for React Native. Session ownership, shared subscriptions,
+Use `@priemskiyyy/simulcast-react` for React Native. Session ownership, shared subscriptions,
 typed event hooks, and parsing use the same API as React on the web. The selected
 provider SDK must support your native runtime.
 
@@ -27,11 +27,11 @@ Its dependency versions follow Expo's compatibility requirements.
 For Centrifugo:
 
 ```sh
-pnpm add simulcast simulcast-react simulcast-centrifugo centrifuge
+pnpm add @priemskiyyy/simulcast @priemskiyyy/simulcast-react @priemskiyyy/simulcast-centrifugo centrifuge
 ```
 
 Keep the React version required by your Expo SDK, and check it against
-`simulcast-react`'s `>=19.2 <20` peer requirement. Use Expo's installer for native
+`@priemskiyyy/simulcast-react`'s `>=19.2 <20` peer requirement. Use Expo's installer for native
 libraries; do not independently upgrade React or React Native to resolve a peer
 warning.
 
@@ -44,7 +44,7 @@ the application is inactive and reconnects when active. A minimal provider is:
 import type * as React from "react";
 import { useEffect, useState } from "react";
 import { AppState } from "react-native";
-import { RealtimeProvider } from "simulcast-react";
+import { RealtimeProvider } from "@priemskiyyy/simulcast-react";
 import { realtime } from "./realtime";
 
 type ApplicationRealtimeProps = React.PropsWithChildren;

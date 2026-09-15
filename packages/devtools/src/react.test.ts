@@ -1,9 +1,9 @@
 import { cleanup, render } from "@testing-library/react";
 import { StrictMode, createElement } from "react";
 import { renderToString } from "react-dom/server";
-import { RealtimeClient } from "simulcast";
-import { createMockAdapter } from "simulcast/mock";
-import { RealtimeProvider } from "simulcast-react";
+import { RealtimeClient } from "@priemskiyyy/simulcast";
+import { createMockAdapter } from "@priemskiyyy/simulcast/mock";
+import { RealtimeProvider } from "@priemskiyyy/simulcast-react";
 import { afterEach, expect, test } from "vitest";
 import { SimulcastDevtools } from "src/react";
 

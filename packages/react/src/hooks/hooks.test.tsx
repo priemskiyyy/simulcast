@@ -2,9 +2,12 @@
 import { act, cleanup, render, renderHook } from "@testing-library/react";
 import { StrictMode } from "react";
 import type { PropsWithChildren } from "react";
-import { RealtimeClient } from "simulcast";
-import { createMockAdapter } from "simulcast/mock";
-import type { MockAdapterOptions, MockConnection } from "simulcast/mock";
+import { RealtimeClient } from "@priemskiyyy/simulcast";
+import { createMockAdapter } from "@priemskiyyy/simulcast/mock";
+import type {
+  MockAdapterOptions,
+  MockConnection,
+} from "@priemskiyyy/simulcast/mock";
 import { afterEach, describe, expect, test, vi } from "vitest";
 import { RealtimeProvider } from "src/context/RealtimeProvider";
 import { createChannelEventHooks } from "src/hooks/createChannelEventHooks";

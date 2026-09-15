@@ -1,6 +1,9 @@
-import { RealtimeClient } from "simulcast";
-import type { AdapterConnectionObserver, RealtimePublication } from "simulcast";
-import { socketio } from "simulcast-socketio";
+import { RealtimeClient } from "@priemskiyyy/simulcast";
+import type {
+  AdapterConnectionObserver,
+  RealtimePublication,
+} from "@priemskiyyy/simulcast";
+import { socketio } from "@priemskiyyy/simulcast-socketio";
 import { expect, onTestFinished, test, vi } from "vitest";
 import { socketioFixture } from "./socketioFixture";
 

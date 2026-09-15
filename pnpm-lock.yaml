@@ -149,6 +149,15 @@ importers:
       '@formatjs/intl-relativetimeformat':
         specifier: ^12.3.15
         version: 12.3.15
+      '@priemskiyyy/simulcast':
+        specifier: workspace:*
+        version: link:../../packages/core
+      '@priemskiyyy/simulcast-centrifugo':
+        specifier: workspace:*
+        version: link:../../packages/adapters/centrifugo
+      '@priemskiyyy/simulcast-react':
+        specifier: workspace:*
+        version: link:../../packages/react
       class-variance-authority:
         specifier: 0.7.1
         version: 0.7.1
@@ -188,15 +197,6 @@ importers:
       react-native-web:
         specifier: 0.21.2
         version: 0.21.2(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
-      simulcast:
-        specifier: workspace:*
-        version: link:../../packages/core
-      simulcast-centrifugo:
-        specifier: workspace:*
-        version: link:../../packages/adapters/centrifugo
-      simulcast-react:
-        specifier: workspace:*
-        version: link:../../packages/react
       ts-pattern:
         specifier: 5.9.0
         version: 5.9.0
@@ -204,12 +204,12 @@ importers:
         specifier: 1.12.0
         version: 1.12.0(@expo/metro-config@57.0.12(expo@57.0.23)(typescript@5.8.3))(metro-cache@0.84.6)(metro-transform-worker@0.84.6)(metro@0.84.6)(react-native@0.86.3(@babel/core@7.29.7)(@types/react@19.2.17)(react@19.2.3))(react@19.2.3)(tailwindcss@4.3.3)
     devDependencies:
+      '@priemskiyyy/simulcast-codegen':
+        specifier: workspace:*
+        version: link:../../packages/codegen
       '@types/react':
         specifier: 19.2.17
         version: 19.2.17
-      simulcast-codegen:
-        specifier: workspace:*
-        version: link:../../packages/codegen
       tailwindcss:
         specifier: 4.3.3
         version: 4.3.3
@@ -222,6 +222,12 @@ importers:
       '@phosphor-icons/react':
         specifier: 2.1.10
         version: 2.1.10(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
+      '@priemskiyyy/simulcast':
+        specifier: workspace:*
+        version: link:../../packages/core
+      '@priemskiyyy/simulcast-react':
+        specifier: workspace:*
+        version: link:../../packages/react
       clsx:
         specifier: 2.1.1
         version: 2.1.1
@@ -234,46 +240,40 @@ importers:
       react-dom:
         specifier: 19.2.8
         version: 19.2.8(react@19.2.8)
-      simulcast:
-        specifier: workspace:*
-        version: link:../../packages/core
-      simulcast-react:
-        specifier: workspace:*
-        version: link:../../packages/react
       ts-pattern:
         specifier: 5.9.0
         version: 5.9.0
     devDependencies:
+      '@priemskiyyy/simulcast-codegen':
+        specifier: workspace:*
+        version: link:../../packages/codegen
+      '@priemskiyyy/simulcast-devtools':
+        specifier: workspace:*
+        version: link:../../packages/devtools
       '@tailwindcss/vite':
         specifier: 4.3.3
         version: 4.3.3(vite@8.3.0(@types/node@22.20.2)(jiti@2.7.0)(terser@5.51.2)(yaml@2.9.1))
-      simulcast-codegen:
-        specifier: workspace:*
-        version: link:../../packages/codegen
-      simulcast-devtools:
-        specifier: workspace:*
-        version: link:../../packages/devtools
       tailwindcss:
         specifier: 4.3.3
         version: 4.3.3
 
   examples/shared:
     dependencies:
+      '@priemskiyyy/simulcast':
+        specifier: workspace:*
+        version: link:../../packages/core
+      '@priemskiyyy/simulcast-broadcast-channel':
+        specifier: workspace:*
+        version: link:../../packages/adapters/broadcast-channel
+      '@priemskiyyy/simulcast-centrifugo':
+        specifier: workspace:*
+        version: link:../../packages/adapters/centrifugo
       centrifuge:
         specifier: 5.7.2
         version: 5.7.2
       class-variance-authority:
         specifier: 0.7.1
         version: 0.7.1
-      simulcast:
-        specifier: workspace:*
-        version: link:../../packages/core
-      simulcast-broadcast-channel:
-        specifier: workspace:*
-        version: link:../../packages/adapters/broadcast-channel
-      simulcast-centrifugo:
-        specifier: workspace:*
-        version: link:../../packages/adapters/centrifugo
       ts-pattern:
         specifier: 5.9.0
         version: 5.9.0
@@ -283,6 +283,12 @@ importers:
 
   examples/solid:
     dependencies:
+      '@priemskiyyy/simulcast':
+        specifier: workspace:*
+        version: link:../../packages/core
+      '@priemskiyyy/simulcast-solid':
+        specifier: workspace:*
+        version: link:../../packages/solid
       clsx:
         specifier: 2.1.1
         version: 2.1.1
@@ -292,12 +298,6 @@ importers:
       lucide-solid:
         specifier: 1.46.0
         version: 1.46.0(solid-js@1.9.15)
-      simulcast:
-        specifier: workspace:*
-        version: link:../../packages/core
-      simulcast-solid:
-        specifier: workspace:*
-        version: link:../../packages/solid
       solid-js:
         specifier: 1.9.15
         version: 1.9.15
@@ -305,21 +305,27 @@ importers:
         specifier: 5.9.0
         version: 5.9.0
     devDependencies:
+      '@priemskiyyy/simulcast-codegen':
+        specifier: workspace:*
+        version: link:../../packages/codegen
+      '@priemskiyyy/simulcast-devtools':
+        specifier: workspace:*
+        version: link:../../packages/devtools
       '@tailwindcss/vite':
         specifier: 4.3.3
         version: 4.3.3(vite@8.3.0(@types/node@22.20.2)(jiti@2.7.0)(terser@5.51.2)(yaml@2.9.1))
-      simulcast-codegen:
-        specifier: workspace:*
-        version: link:../../packages/codegen
-      simulcast-devtools:
-        specifier: workspace:*
-        version: link:../../packages/devtools
       tailwindcss:
         specifier: 4.3.3
         version: 4.3.3
 
   examples/svelte:
     dependencies:
+      '@priemskiyyy/simulcast':
+        specifier: workspace:*
+        version: link:../../packages/core
+      '@priemskiyyy/simulcast-svelte':
+        specifier: workspace:*
+        version: link:../../packages/svelte
       clsx:
         specifier: 2.1.1
         version: 2.1.1
@@ -329,12 +335,6 @@ importers:
       phosphor-svelte:
         specifier: 3.1.0
         version: 3.1.0(svelte@5.57.0(@typescript-eslint/types@8.70.0))(vite@8.3.0(@types/node@22.20.2)(jiti@2.7.0)(terser@5.51.2)(yaml@2.9.1))
-      simulcast:
-        specifier: workspace:*
-        version: link:../../packages/core
-      simulcast-svelte:
-        specifier: workspace:*
-        version: link:../../packages/svelte
       svelte:
         specifier: 5.57.0
         version: 5.57.0(@typescript-eslint/types@8.70.0)
@@ -342,15 +342,15 @@ importers:
         specifier: 5.9.0
         version: 5.9.0
     devDependencies:
+      '@priemskiyyy/simulcast-codegen':
+        specifier: workspace:*
+        version: link:../../packages/codegen
+      '@priemskiyyy/simulcast-devtools':
+        specifier: workspace:*
+        version: link:../../packages/devtools
       '@tailwindcss/vite':
         specifier: 4.3.3
         version: 4.3.3(vite@8.3.0(@types/node@22.20.2)(jiti@2.7.0)(terser@5.51.2)(yaml@2.9.1))
-      simulcast-codegen:
-        specifier: workspace:*
-        version: link:../../packages/codegen
-      simulcast-devtools:
-        specifier: workspace:*
-        version: link:../../packages/devtools
       tailwindcss:
         specifier: 4.3.3
         version: 4.3.3
@@ -360,18 +360,18 @@ importers:
       '@phosphor-icons/vue':
         specifier: 2.2.1
         version: 2.2.1(vue@3.5.42(typescript@5.8.3))
+      '@priemskiyyy/simulcast':
+        specifier: workspace:*
+        version: link:../../packages/core
+      '@priemskiyyy/simulcast-vue':
+        specifier: workspace:*
+        version: link:../../packages/vue
       clsx:
         specifier: 2.1.1
         version: 2.1.1
       example-shared:
         specifier: workspace:*
         version: link:../shared
-      simulcast:
-        specifier: workspace:*
-        version: link:../../packages/core
-      simulcast-vue:
-        specifier: workspace:*
-        version: link:../../packages/vue
       ts-pattern:
         specifier: 5.9.0
         version: 5.9.0
@@ -379,15 +379,15 @@ importers:
         specifier: 3.5.42
         version: 3.5.42(typescript@5.8.3)
     devDependencies:
+      '@priemskiyyy/simulcast-codegen':
+        specifier: workspace:*
+        version: link:../../packages/codegen
+      '@priemskiyyy/simulcast-devtools':
+        specifier: workspace:*
+        version: link:../../packages/devtools
       '@tailwindcss/vite':
         specifier: 4.3.3
         version: 4.3.3(vite@8.3.0(@types/node@22.20.2)(jiti@2.7.0)(terser@5.51.2)(yaml@2.9.1))
-      simulcast-codegen:
-        specifier: workspace:*
-        version: link:../../packages/codegen
-      simulcast-devtools:
-        specifier: workspace:*
-        version: link:../../packages/devtools
       tailwindcss:
         specifier: 4.3.3
         version: 4.3.3
@@ -398,13 +398,13 @@ importers:
         specifier: '>=2.0.0 <3'
         version: 2.28.0(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
     devDependencies:
-      simulcast:
+      '@priemskiyyy/simulcast':
         specifier: workspace:*
         version: link:../../core
 
   packages/adapters/broadcast-channel:
     devDependencies:
-      simulcast:
+      '@priemskiyyy/simulcast':
         specifier: workspace:*
         version: link:../../core
 
@@ -417,10 +417,10 @@ importers:
         specifier: '>=19.2.0 <20'
         version: 19.2.8
     devDependencies:
-      simulcast:
+      '@priemskiyyy/simulcast':
         specifier: workspace:*
         version: link:../../core
-      simulcast-react:
+      '@priemskiyyy/simulcast-react':
         specifier: workspace:*
         version: link:../../react
 
@@ -430,7 +430,7 @@ importers:
         specifier: '>=5.0.0 <6'
         version: 5.15.2
     devDependencies:
-      simulcast:
+      '@priemskiyyy/simulcast':
         specifier: workspace:*
         version: link:../../core
 
@@ -440,7 +440,7 @@ importers:
         specifier: '>=1.0.0 <2'
         version: 1.3.0(react@19.2.8)
     devDependencies:
-      simulcast:
+      '@priemskiyyy/simulcast':
         specifier: workspace:*
         version: link:../../core
 
@@ -450,7 +450,7 @@ importers:
         specifier: '>=1.7.0 <2'
         version: 1.8.14
     devDependencies:
-      simulcast:
+      '@priemskiyyy/simulcast':
         specifier: workspace:*
         version: link:../../core
 
@@ -460,7 +460,7 @@ importers:
         specifier: '>=8.0.0 <9'
         version: 8.6.0
     devDependencies:
-      simulcast:
+      '@priemskiyyy/simulcast':
         specifier: workspace:*
         version: link:../../core
 
@@ -470,13 +470,13 @@ importers:
         specifier: '>=4.0.0 <5'
         version: 4.8.3
     devDependencies:
-      simulcast:
+      '@priemskiyyy/simulcast':
         specifier: workspace:*
         version: link:../../core
 
   packages/adapters/sse:
     devDependencies:
-      simulcast:
+      '@priemskiyyy/simulcast':
         specifier: workspace:*
         version: link:../../core
 
@@ -486,13 +486,13 @@ importers:
         specifier: '>=2.0.0 <3'
         version: 2.116.0
     devDependencies:
-      simulcast:
+      '@priemskiyyy/simulcast':
         specifier: workspace:*
         version: link:../../core
 
   packages/adapters/websocket:
     devDependencies:
-      simulcast:
+      '@priemskiyyy/simulcast':
         specifier: workspace:*
         version: link:../../core
 
@@ -531,19 +531,19 @@ importers:
         specifier: ^4.6.2
         version: 4.6.5
     devDependencies:
-      simulcast:
+      '@priemskiyyy/simulcast':
         specifier: workspace:*
         version: link:../core
-      simulcast-react:
+      '@priemskiyyy/simulcast-react':
         specifier: workspace:*
         version: link:../react
-      simulcast-solid:
+      '@priemskiyyy/simulcast-solid':
         specifier: workspace:*
         version: link:../solid
-      simulcast-svelte:
+      '@priemskiyyy/simulcast-svelte':
         specifier: workspace:*
         version: link:../svelte
-      simulcast-vue:
+      '@priemskiyyy/simulcast-vue':
         specifier: workspace:*
         version: link:../vue
 
@@ -553,7 +553,7 @@ importers:
         specifier: '>=19.2.0 <20'
         version: 19.2.8
     devDependencies:
-      simulcast:
+      '@priemskiyyy/simulcast':
         specifier: workspace:*
         version: link:../core
 
@@ -563,7 +563,7 @@ importers:
         specifier: '>=1.8.0 <2'
         version: 1.9.15
     devDependencies:
-      simulcast:
+      '@priemskiyyy/simulcast':
         specifier: workspace:*
         version: link:../core
 
@@ -573,7 +573,7 @@ importers:
         specifier: '>=5.0.0 <6'
         version: 5.57.0(@typescript-eslint/types@8.70.0)
     devDependencies:
-      simulcast:
+      '@priemskiyyy/simulcast':
         specifier: workspace:*
         version: link:../core
 
@@ -583,24 +583,45 @@ importers:
         specifier: '>=3.5.0 <4'
         version: 3.5.42(typescript@5.8.3)
     devDependencies:
-      simulcast:
+      '@priemskiyyy/simulcast':
         specifier: workspace:*
         version: link:../core
 
   tests/partykit:
     devDependencies:
+      '@priemskiyyy/simulcast':
+        specifier: workspace:*
+        version: link:../../packages/core
+      '@priemskiyyy/simulcast-partykit':
+        specifier: workspace:*
+        version: link:../../packages/adapters/partykit
       partykit:
         specifier: 0.0.115
         version: 0.0.115
-      simulcast:
-        specifier: workspace:*
-        version: link:../../packages/core
-      simulcast-partykit:
-        specifier: workspace:*
-        version: link:../../packages/adapters/partykit
 
   tests/providers:
     devDependencies:
+      '@priemskiyyy/simulcast':
+        specifier: workspace:*
+        version: link:../../packages/core
+      '@priemskiyyy/simulcast-ably':
+        specifier: workspace:*
+        version: link:../../packages/adapters/ably
+      '@priemskiyyy/simulcast-broadcast-channel':
+        specifier: workspace:*
+        version: link:../../packages/adapters/broadcast-channel
+      '@priemskiyyy/simulcast-mqtt':
+        specifier: workspace:*
+        version: link:../../packages/adapters/mqtt
+      '@priemskiyyy/simulcast-socketio':
+        specifier: workspace:*
+        version: link:../../packages/adapters/socketio
+      '@priemskiyyy/simulcast-sse':
+        specifier: workspace:*
+        version: link:../../packages/adapters/sse
+      '@priemskiyyy/simulcast-websocket':
+        specifier: workspace:*
+        version: link:../../packages/adapters/websocket
       '@types/ws':
         specifier: 8.18.1
         version: 8.18.1
@@ -610,27 +631,6 @@ importers:
       eventsource:
         specifier: 5.1.1
         version: 5.1.1
-      simulcast:
-        specifier: workspace:*
-        version: link:../../packages/core
-      simulcast-ably:
-        specifier: workspace:*
-        version: link:../../packages/adapters/ably
-      simulcast-broadcast-channel:
-        specifier: workspace:*
-        version: link:../../packages/adapters/broadcast-channel
-      simulcast-mqtt:
-        specifier: workspace:*
-        version: link:../../packages/adapters/mqtt
-      simulcast-socketio:
-        specifier: workspace:*
-        version: link:../../packages/adapters/socketio
-      simulcast-sse:
-        specifier: workspace:*
-        version: link:../../packages/adapters/sse
-      simulcast-websocket:
-        specifier: workspace:*
-        version: link:../../packages/adapters/websocket
       socket.io:
         specifier: 4.8.3
         version: 4.8.3
@@ -640,30 +640,30 @@ importers:
 
   tests/pusher:
     devDependencies:
+      '@priemskiyyy/simulcast':
+        specifier: workspace:*
+        version: link:../../packages/core
+      '@priemskiyyy/simulcast-pusher':
+        specifier: workspace:*
+        version: link:../../packages/adapters/pusher
       pusher:
         specifier: 5.3.4
         version: 5.3.4
-      simulcast:
-        specifier: workspace:*
-        version: link:../../packages/core
-      simulcast-pusher:
-        specifier: workspace:*
-        version: link:../../packages/adapters/pusher
 
   tests/services:
     devDependencies:
+      '@priemskiyyy/simulcast':
+        specifier: workspace:*
+        version: link:../../packages/core
+      '@priemskiyyy/simulcast-phoenix':
+        specifier: workspace:*
+        version: link:../../packages/adapters/phoenix
+      '@priemskiyyy/simulcast-supabase':
+        specifier: workspace:*
+        version: link:../../packages/adapters/supabase
       '@types/ws':
         specifier: 8.18.1
         version: 8.18.1
-      simulcast:
-        specifier: workspace:*
-        version: link:../../packages/core
-      simulcast-phoenix:
-        specifier: workspace:*
-        version: link:../../packages/adapters/phoenix
-      simulcast-supabase:
-        specifier: workspace:*
-        version: link:../../packages/adapters/supabase
       ws:
         specifier: 8.21.3
         version: 8.21.3

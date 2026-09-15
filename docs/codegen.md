@@ -4,7 +4,7 @@ description: "Generate typed React, Vue, Solid, or Svelte event hooks from TypeS
 
 # Code generation
 
-`simulcast-codegen` reads your [event map](typed-events.md) and writes one named
+`@priemskiyyy/simulcast-codegen` reads your [event map](typed-events.md) and writes one named
 hook per event.
 
 ```ts
@@ -27,7 +27,7 @@ so edits to `Message` flow through without regenerating.
 ## Install
 
 ```sh
-pnpm add -D simulcast-codegen typescript
+pnpm add -D @priemskiyyy/simulcast-codegen typescript
 ```
 
 Node `>=22.18`, TypeScript `>=5.8 <6`.
@@ -38,7 +38,7 @@ Create `realtime.config.json` at the application root:
 
 ```json
 {
-  "$schema": "./node_modules/simulcast-codegen/config.schema.json",
+  "$schema": "./node_modules/@priemskiyyy/simulcast-codegen/config.schema.json",
   "events": { "file": "src/realtime/Events.ts", "type": "Events" },
   "dispatcher": {
     "file": "src/realtime/useChannelEvent.ts",
@@ -48,15 +48,15 @@ Create `realtime.config.json` at the application root:
 }
 ```
 
-| Field        | Meaning                                                                                                                                                               |
-| ------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `events`     | The module and exported type name of your event map                                                                                                                   |
-| `dispatcher` | The module and export of your `useChannelEvent`                                                                                                                       |
-| `output`     | Directory for generated hooks                                                                                                                                         |
-| `runtime`    | Optional. The binding generated hooks import from: `simulcast-react` (default), `simulcast-vue`, `simulcast-solid`, or `simulcast-svelte`                             |
-| `imports`    | Optional. `{ "extension": "js" }` (default) keeps Node-style `.js` imports; `"none"` omits them for Metro and other bundlers that resolve TypeScript sources directly |
-| `tsconfig`   | Optional. Defaults to the nearest config above the event-map file                                                                                                     |
-| `hookNames`  | Optional. Overrides for generated names                                                                                                                               |
+| Field        | Meaning                                                                                                                                                                                       |
+| ------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `events`     | The module and exported type name of your event map                                                                                                                                           |
+| `dispatcher` | The module and export of your `useChannelEvent`                                                                                                                                               |
+| `output`     | Directory for generated hooks                                                                                                                                                                 |
+| `runtime`    | Optional. The binding generated hooks import from: `@priemskiyyy/simulcast-react` (default), `@priemskiyyy/simulcast-vue`, `@priemskiyyy/simulcast-solid`, or `@priemskiyyy/simulcast-svelte` |
+| `imports`    | Optional. `{ "extension": "js" }` (default) keeps Node-style `.js` imports; `"none"` omits them for Metro and other bundlers that resolve TypeScript sources directly                         |
+| `tsconfig`   | Optional. Defaults to the nearest config above the event-map file                                                                                                                             |
+| `hookNames`  | Optional. Overrides for generated names                                                                                                                                                       |
 
 Paths are relative to the configuration file, and JSON comments are allowed. The
 `$schema` link gives editors completion and validation; it is generated from the
@@ -97,7 +97,7 @@ message naming the event.
 ## Programmatic use
 
 ```ts
-import { CodegenFailure, generateHooks } from "simulcast-codegen";
+import { CodegenFailure, generateHooks } from "@priemskiyyy/simulcast-codegen";
 
 try {
   const result = generateHooks("realtime.config.json", { check: true });

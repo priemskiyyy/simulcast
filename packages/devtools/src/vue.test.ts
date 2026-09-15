@@ -1,7 +1,7 @@
 import { mount } from "@vue/test-utils";
-import { RealtimeClient } from "simulcast";
-import { createMockAdapter } from "simulcast/mock";
-import { RealtimeProvider } from "simulcast-vue";
+import { RealtimeClient } from "@priemskiyyy/simulcast";
+import { createMockAdapter } from "@priemskiyyy/simulcast/mock";
+import { RealtimeProvider } from "@priemskiyyy/simulcast-vue";
 import { afterEach, expect, test } from "vitest";
 import { defineComponent, h } from "vue";
 import { renderToString } from "vue/server-renderer";

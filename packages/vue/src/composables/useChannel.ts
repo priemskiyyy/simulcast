@@ -1,6 +1,6 @@
 import { onMounted, onWatcherCleanup, toValue, watch } from "vue";
 import type { MaybeRefOrGetter } from "vue";
-import type { RealtimePublication } from "simulcast";
+import type { RealtimePublication } from "@priemskiyyy/simulcast";
 import { useRealtimeClient } from "src/composables/useRealtimeClient";
 import type { ChannelInput } from "src/types/ChannelInput";
 import type { PublicationHandler } from "src/types/PublicationHandler";

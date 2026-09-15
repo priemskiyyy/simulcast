@@ -1,5 +1,5 @@
-import { RealtimeClient } from "simulcast";
-import { createMockAdapter } from "simulcast/mock";
+import { RealtimeClient } from "@priemskiyyy/simulcast";
+import { createMockAdapter } from "@priemskiyyy/simulcast/mock";
 import { createSSRApp, defineComponent, h } from "vue";
 import { renderToString } from "vue/server-renderer";
 import { expect, test } from "vitest";

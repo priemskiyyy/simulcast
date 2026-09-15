@@ -1,6 +1,6 @@
 import { createEffect, createMemo, onCleanup } from "solid-js";
 import type { Accessor } from "solid-js";
-import type { RealtimePublication } from "simulcast";
+import type { RealtimePublication } from "@priemskiyyy/simulcast";
 import { useRealtimeClient } from "src/primitives/useRealtimeClient";
 import type { ChannelInput } from "src/types/ChannelInput";
 import type { PublicationHandler } from "src/types/PublicationHandler";

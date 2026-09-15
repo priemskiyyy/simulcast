@@ -6,8 +6,8 @@ import {
   resolveSource,
 } from "example-shared";
 import { useMemo, useReducer } from "react";
-import { SimulcastDevtools } from "simulcast-devtools/react";
-import { RealtimeProvider } from "simulcast-react";
+import { SimulcastDevtools } from "@priemskiyyy/simulcast-devtools/react";
+import { RealtimeProvider } from "@priemskiyyy/simulcast-react";
 import { Dashboard } from "src/components/Dashboard/Dashboard";
 import { Header } from "src/components/Header/Header";
 import { SimulationControls } from "src/components/SimulationControls/SimulationControls";

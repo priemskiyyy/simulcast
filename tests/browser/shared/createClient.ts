@@ -1,5 +1,5 @@
-import { RealtimeClient } from "simulcast";
-import { centrifugo } from "simulcast-centrifugo";
+import { RealtimeClient } from "@priemskiyyy/simulcast";
+import { centrifugo } from "@priemskiyyy/simulcast-centrifugo";
 import { ObservedWebSocket, trackClient } from "./inspection";
 
 const parameters = new URLSearchParams(location.search);

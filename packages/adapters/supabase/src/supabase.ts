@@ -3,8 +3,11 @@ import type {
   RealtimeChannel,
   RealtimeChannelOptions,
 } from "@supabase/realtime-js";
-import { createRealtimeAdapter } from "simulcast";
-import type { AdapterSubscribeRequest, AdapterSubscription } from "simulcast";
+import { createRealtimeAdapter } from "@priemskiyyy/simulcast";
+import type {
+  AdapterSubscribeRequest,
+  AdapterSubscription,
+} from "@priemskiyyy/simulcast";
 import type { SupabaseAdapterOptions } from "src/types/SupabaseAdapterOptions";
 import type { SupabasePublication } from "src/types/SupabasePublication";
 import { CONNECTION_STATES } from "src/utils/constants/connectionStates";

@@ -1,7 +1,7 @@
 import type { Component } from "solid-js";
 import { formatConnectionState, getConnectionTone } from "example-shared";
 import { LoaderCircle, Plug, PlugZap } from "lucide-solid";
-import { useConnectionState } from "simulcast-solid";
+import { useConnectionState } from "@priemskiyyy/simulcast-solid";
 import { match } from "ts-pattern";
 import { Badge } from "src/components/Badge/Badge";
 

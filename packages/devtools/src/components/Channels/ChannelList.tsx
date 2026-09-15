@@ -1,5 +1,5 @@
 import { Index, Show } from "solid-js";
-import type { RealtimeSnapshot } from "simulcast";
+import type { RealtimeSnapshot } from "@priemskiyyy/simulcast";
 import { formatCount } from "src/formatting/formatCount";
 import { formatErrorSummary } from "src/formatting/formatErrorSummary";
 

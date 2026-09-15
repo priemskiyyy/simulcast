@@ -1,5 +1,5 @@
 import { decodeEnvelope } from "example-shared";
-import { createChannelEventHooks } from "simulcast-vue";
+import { createChannelEventHooks } from "@priemskiyyy/simulcast-vue";
 import type { Events } from "src/realtime/Events";
 
 export const { useChannelEvent } = createChannelEventHooks<Events>({

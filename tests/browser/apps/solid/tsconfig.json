@@ -4,11 +4,11 @@
     "jsx": "preserve",
     "jsxImportSource": "solid-js",
     "paths": {
-      "simulcast": ["../../packages/core/dist/index.d.ts"],
-      "simulcast-centrifugo": [
+      "@priemskiyyy/simulcast": ["../../packages/core/dist/index.d.ts"],
+      "@priemskiyyy/simulcast-centrifugo": [
         "../../packages/adapters/centrifugo/dist/index.d.ts"
       ],
-      "simulcast-solid": ["../../packages/solid/dist/index.d.ts"]
+      "@priemskiyyy/simulcast-solid": ["../../packages/solid/dist/index.d.ts"]
     }
   },
   "include": ["**/*.ts", "**/*.tsx"]

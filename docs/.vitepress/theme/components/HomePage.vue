@@ -5,12 +5,12 @@ import { withBase } from "vitepress";
 const frameworks = [
   {
     name: "React",
-    install: "simulcast-react",
+    install: "@priemskiyyy/simulcast-react",
     guide: "/hooks",
     file: "Room.tsx",
     code: `import type * as React from "react";
 import { useState } from "react";
-import { useChannel } from "simulcast-react";
+import { useChannel } from "@priemskiyyy/simulcast-react";
 import { z } from "zod";
 
 const MessageSchema = z.object({ text: z.string() });
@@ -25,11 +25,11 @@ export const Room: React.FunctionComponent = () => {
   },
   {
     name: "Vue",
-    install: "simulcast-vue",
+    install: "@priemskiyyy/simulcast-vue",
     guide: "/vue",
     file: "Room.vue · script setup",
     code: `import { ref } from "vue";
-import { useChannel } from "simulcast-vue";
+import { useChannel } from "@priemskiyyy/simulcast-vue";
 import { z } from "zod";
 
 const MessageSchema = z.object({ text: z.string() });
@@ -41,12 +41,12 @@ useChannel("rooms:design", (message) => {
   },
   {
     name: "Solid",
-    install: "simulcast-solid",
+    install: "@priemskiyyy/simulcast-solid",
     guide: "/solid",
     file: "Room.tsx",
     code: `import { createSignal } from "solid-js";
 import type { Component } from "solid-js";
-import { useChannel } from "simulcast-solid";
+import { useChannel } from "@priemskiyyy/simulcast-solid";
 import { z } from "zod";
 
 const MessageSchema = z.object({ text: z.string() });
@@ -61,10 +61,10 @@ export const Room: Component = () => {
   },
   {
     name: "Svelte",
-    install: "simulcast-svelte",
+    install: "@priemskiyyy/simulcast-svelte",
     guide: "/svelte",
     file: "Room.svelte · script",
-    code: `import { useChannel } from "simulcast-svelte";
+    code: `import { useChannel } from "@priemskiyyy/simulcast-svelte";
 import { z } from "zod";
 
 const MessageSchema = z.object({ text: z.string() });
@@ -97,9 +97,9 @@ const unsubscribe = realtime.channel("rooms:design")
 const selectedFramework = ref<(typeof frameworks)[number]>(frameworks[0]);
 const installCommand = computed(() =>
   [
-    "pnpm add simulcast",
+    "pnpm add @priemskiyyy/simulcast",
     selectedFramework.value.install,
-    "simulcast-broadcast-channel",
+    "@priemskiyyy/simulcast-broadcast-channel",
     "zod",
   ]
     .filter(Boolean)

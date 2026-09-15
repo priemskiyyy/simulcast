@@ -28,11 +28,11 @@ state on their channels.
 ## Centrifugo
 
 ```sh
-pnpm add simulcast-centrifugo centrifuge
+pnpm add @priemskiyyy/simulcast-centrifugo centrifuge
 ```
 
 ```ts
-import { centrifugo } from "simulcast-centrifugo";
+import { centrifugo } from "@priemskiyyy/simulcast-centrifugo";
 
 const adapter = centrifugo({
   transport: "wss://example.com/connection/websocket",
@@ -45,7 +45,7 @@ const adapter = centrifugo({
 
 `transport` and `options` go to the `Centrifuge` constructor unchanged.
 Publications carry the `PublicationContext` in `native` and no `event`.
-`simulcast-centrifugo/react` exports `useCentrifuge()` for the native client.
+`@priemskiyyy/simulcast-centrifugo/react` exports `useCentrifuge()` for the native client.
 
 States map one to one: Centrifugo's `connecting` and `subscribing` already cover
 its own retries.
@@ -53,11 +53,11 @@ its own retries.
 ## Pusher Channels
 
 ```sh
-pnpm add simulcast-pusher pusher-js
+pnpm add @priemskiyyy/simulcast-pusher pusher-js
 ```
 
 ```ts
-import { pusher } from "simulcast-pusher";
+import { pusher } from "@priemskiyyy/simulcast-pusher";
 
 const adapter = pusher({
   key: PUSHER_KEY,
@@ -79,11 +79,11 @@ channel reports `subscribing` after subscribe and again while reconnecting.
 ## Ably
 
 ```sh
-pnpm add simulcast-ably ably
+pnpm add @priemskiyyy/simulcast-ably ably
 ```
 
 ```ts
-import { ably } from "simulcast-ably";
+import { ably } from "@priemskiyyy/simulcast-ably";
 
 const adapter = ably({
   options: { authUrl: "/ably/token" },
@@ -100,11 +100,11 @@ States: `disconnected` and `suspended` report `connecting`; `attaching` and
 ## Supabase Realtime
 
 ```sh
-pnpm add simulcast-supabase @supabase/realtime-js
+pnpm add @priemskiyyy/simulcast-supabase @supabase/realtime-js
 ```
 
 ```ts
-import { supabase } from "simulcast-supabase";
+import { supabase } from "@priemskiyyy/simulcast-supabase";
 
 const adapter = supabase({
   url: "wss://project.supabase.co/realtime/v1",
@@ -128,11 +128,11 @@ after every close until dispose.
 ## Socket.IO
 
 ```sh
-pnpm add simulcast-socketio socket.io-client
+pnpm add @priemskiyyy/simulcast-socketio socket.io-client
 ```
 
 ```ts
-import { socketio } from "simulcast-socketio";
+import { socketio } from "@priemskiyyy/simulcast-socketio";
 
 const adapter = socketio({
   url: "https://example.com",
@@ -150,11 +150,11 @@ reports `disconnected` and `unsubscribed`.
 ## Phoenix Channels
 
 ```sh
-pnpm add simulcast-phoenix phoenix
+pnpm add @priemskiyyy/simulcast-phoenix phoenix
 ```
 
 ```ts
-import { phoenix } from "simulcast-phoenix";
+import { phoenix } from "@priemskiyyy/simulcast-phoenix";
 
 const adapter = phoenix({
   url: "wss://example.com/socket",
@@ -174,11 +174,11 @@ until dispose.
 ## MQTT
 
 ```sh
-pnpm add simulcast-mqtt mqtt
+pnpm add @priemskiyyy/simulcast-mqtt mqtt
 ```
 
 ```ts
-import { mqtt } from "simulcast-mqtt";
+import { mqtt } from "@priemskiyyy/simulcast-mqtt";
 
 const adapter = mqtt({
   url: "wss://broker.example.com/mqtt",
@@ -202,11 +202,11 @@ close when `reconnectPeriod` is `0`.
 ## Generic WebSocket
 
 ```sh
-pnpm add simulcast-websocket
+pnpm add @priemskiyyy/simulcast-websocket
 ```
 
 ```ts
-import { websocket } from "simulcast-websocket";
+import { websocket } from "@priemskiyyy/simulcast-websocket";
 
 const adapter = websocket({
   url: () => `wss://example.com/realtime?token=${readToken()}`,
@@ -237,11 +237,11 @@ States: `connecting` while reopening, with every channel `subscribing`; a
 ## Server-Sent Events
 
 ```sh
-pnpm add simulcast-sse
+pnpm add @priemskiyyy/simulcast-sse
 ```
 
 ```ts
-import { sse } from "simulcast-sse";
+import { sse } from "@priemskiyyy/simulcast-sse";
 
 const adapter = sse({
   url: (channel) => `/events/${encodeURIComponent(channel)}`,
@@ -258,11 +258,11 @@ States: `subscribing` until the stream opens or while the browser retries,
 ## PartyKit
 
 ```sh
-pnpm add simulcast-partykit partysocket
+pnpm add @priemskiyyy/simulcast-partykit partysocket
 ```
 
 ```ts
-import { partykit } from "simulcast-partykit";
+import { partykit } from "@priemskiyyy/simulcast-partykit";
 
 const adapter = partykit({ host: "chat.example.partykit.dev", party: "chat" });
 ```
@@ -278,11 +278,11 @@ the high-level client does not expose each room's PartySocket for publishing.
 ## BroadcastChannel
 
 ```sh
-pnpm add simulcast-broadcast-channel
+pnpm add @priemskiyyy/simulcast-broadcast-channel
 ```
 
 ```ts
-import { broadcastChannel } from "simulcast-broadcast-channel";
+import { broadcastChannel } from "@priemskiyyy/simulcast-broadcast-channel";
 
 const adapter = broadcastChannel({ prefix: "app:" });
 ```

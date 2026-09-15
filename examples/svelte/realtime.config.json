@@ -9,5 +9,5 @@
     "export": "useChannelEvent"
   },
   "output": "src/hooks/generated",
-  "runtime": "simulcast-svelte"
+  "runtime": "@priemskiyyy/simulcast-svelte"
 }

@@ -97,7 +97,7 @@ test("resolves imported, re-exported, and intersected event maps without copying
   );
   expect(hook).toContain('RealtimeEvents["message.created"]');
   expect(hook).toContain('channel: ChannelInput<EventDefinition["channel"]>');
-  expect(hook).toContain('from "simulcast-react"');
+  expect(hook).toContain('from "@priemskiyyy/simulcast-react"');
   expect(hook).not.toContain("text: string");
   expect(project.read("generated/index.ts")).toContain(
     'from "./useMessageCreated.js"',
