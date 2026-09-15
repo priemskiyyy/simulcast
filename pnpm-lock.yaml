@@ -138,6 +138,22 @@ importers:
         specifier: 3.3.11
         version: 3.3.11(typescript@5.8.3)
 
+  packages/adapters/centrifugo:
+    dependencies:
+      centrifuge:
+        specifier: '>=5.7.2 <6'
+        version: 5.7.2
+      react:
+        specifier: '>=19.2.0 <20'
+        version: 19.2.8
+    devDependencies:
+      simulcast:
+        specifier: workspace:*
+        version: link:../../core
+      simulcast-react:
+        specifier: workspace:*
+        version: link:../../react
+
   packages/core: {}
 
   packages/react:

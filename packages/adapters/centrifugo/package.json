@@ -1,0 +1,73 @@
+{
+  "name": "simulcast-centrifugo",
+  "version": "0.1.0",
+  "description": "Centrifugo adapter for simulcast, with an optional React hook for the native Centrifuge client.",
+  "type": "module",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/priemskiyyy/simulcast.git",
+    "directory": "packages/adapters/centrifugo"
+  },
+  "bugs": {
+    "url": "https://github.com/priemskiyyy/simulcast/issues"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "sideEffects": false,
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./react": {
+      "types": "./dist/react.d.ts",
+      "import": "./dist/react.js"
+    }
+  },
+  "scripts": {
+    "build": "tsdown",
+    "lint:typescript": "tsc --noEmit -p .",
+    "lint:eslint": "eslint src",
+    "test:unit": "vitest run --root ../../.. --project centrifugo"
+  },
+  "peerDependencies": {
+    "centrifuge": ">=5.7.2 <6",
+    "react": ">=19.2.0 <20",
+    "simulcast": ">=0.1.0 <0.2",
+    "simulcast-react": ">=0.1.0 <0.2"
+  },
+  "peerDependenciesMeta": {
+    "react": {
+      "optional": true
+    },
+    "simulcast-react": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "simulcast": "workspace:*",
+    "simulcast-react": "workspace:*"
+  },
+  "keywords": [
+    "centrifugo",
+    "centrifuge",
+    "centrifugal",
+    "realtime",
+    "websocket",
+    "pubsub",
+    "react",
+    "typescript",
+    "simulcast",
+    "subscriptions"
+  ],
+  "homepage": "https://priemskiyyy.github.io/simulcast/"
+}
