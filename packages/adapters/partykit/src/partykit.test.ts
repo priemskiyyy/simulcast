@@ -29,7 +29,7 @@ class FakeWebSocket extends EventTarget {
 
   drop(code: number) {
     this.readyState = 3;
-    this.dispatchEvent(new CloseEvent("close", { code }));
+    this.dispatchEvent(Object.assign(new Event("close"), { code }));
   }
 
   receive(data: string) {
