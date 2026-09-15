@@ -1,0 +1,15 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "jsx": "preserve",
+    "jsxImportSource": "solid-js",
+    "paths": {
+      "simulcast": ["../../packages/core/dist/index.d.ts"],
+      "simulcast-centrifugo": [
+        "../../packages/adapters/centrifugo/dist/index.d.ts"
+      ],
+      "simulcast-solid": ["../../packages/solid/dist/index.d.ts"]
+    }
+  },
+  "include": ["**/*.ts", "**/*.tsx"]
+}

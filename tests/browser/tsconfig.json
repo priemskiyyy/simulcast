@@ -1,0 +1,24 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "simulcast": ["../../packages/core/dist/index.d.ts"],
+      "simulcast-react": ["../../packages/react/dist/index.d.ts"],
+      "simulcast-centrifugo": [
+        "../../packages/adapters/centrifugo/dist/index.d.ts"
+      ],
+      "simulcast-centrifugo/react": [
+        "../../packages/adapters/centrifugo/dist/react.d.ts"
+      ],
+      "simulcast-devtools": ["../../packages/devtools/dist/index.d.ts"],
+      "simulcast-devtools/react": ["../../packages/devtools/dist/react.d.ts"]
+    }
+  },
+  "include": [
+    "*.ts",
+    "shared/**/*.ts",
+    "apps/react/**/*.ts",
+    "apps/react/**/*.tsx"
+  ]
+}
