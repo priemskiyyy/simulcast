@@ -1,0 +1,63 @@
+{
+  "name": "simulcast-svelte",
+  "version": "0.1.0",
+  "description": "Svelte bindings for simulcast: a provider component that owns the realtime session and rune-based utilities for shared channel subscriptions, typed events, channel status, and connection state.",
+  "type": "module",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/priemskiyyy/simulcast.git",
+    "directory": "packages/svelte"
+  },
+  "bugs": {
+    "url": "https://github.com/priemskiyyy/simulcast/issues"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "sideEffects": false,
+  "files": [
+    "dist",
+    "!dist/**/*.test.*",
+    "!dist/**/*.fixture.*",
+    "!dist/**/*.contracts.*",
+    "README.md",
+    "LICENSE"
+  ],
+  "svelte": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "svelte": "./dist/index.js"
+    }
+  },
+  "scripts": {
+    "build": "svelte-package -i src -o dist",
+    "lint:typescript": "svelte-check --tsconfig ./tsconfig.json --fail-on-warnings",
+    "lint:eslint": "eslint src",
+    "test:unit": "vitest run --root ../.. --project svelte --project svelte-ssr"
+  },
+  "peerDependencies": {
+    "simulcast": ">=0.1.0 <0.2",
+    "svelte": ">=5.0.0 <6"
+  },
+  "devDependencies": {
+    "simulcast": "workspace:*"
+  },
+  "keywords": [
+    "svelte",
+    "svelte5",
+    "runes",
+    "realtime",
+    "real-time",
+    "websocket",
+    "pubsub",
+    "subscriptions",
+    "typed-events",
+    "typescript",
+    "ssr",
+    "simulcast"
+  ],
+  "homepage": "https://priemskiyyy.github.io/simulcast/"
+}

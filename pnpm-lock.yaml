@@ -160,6 +160,16 @@ importers:
         specifier: workspace:*
         version: link:../core
 
+  packages/svelte:
+    dependencies:
+      svelte:
+        specifier: '>=5.0.0 <6'
+        version: 5.57.0(@typescript-eslint/types@8.70.0)
+    devDependencies:
+      simulcast:
+        specifier: workspace:*
+        version: link:../core
+
   packages/vue:
     dependencies:
       vue:
