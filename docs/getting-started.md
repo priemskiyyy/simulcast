@@ -145,7 +145,7 @@ import type * as React from "react";
 import { z } from "zod";
 import { useChannel } from "simulcast-react";
 
-const messageSchema = z.object({ text: z.string() });
+const MessageSchema = z.object({ text: z.string() });
 
 const Room: React.FunctionComponent = () => {
   useChannel(
@@ -153,7 +153,7 @@ const Room: React.FunctionComponent = () => {
     (message) => {
       console.log(message.text);
     },
-    { parse: messageSchema.parse },
+    { parse: MessageSchema.parse },
   );
 
   return null;

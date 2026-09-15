@@ -13,12 +13,12 @@ import { useState } from "react";
 import { useChannel } from "simulcast-react";
 import { z } from "zod";
 
-const messageSchema = z.object({ text: z.string() });
+const MessageSchema = z.object({ text: z.string() });
 
 export const Room: React.FunctionComponent = () => {
   const [text, setText] = useState("Waiting for a message");
   useChannel("rooms:design", (message) => setText(message.text), {
-    parse: messageSchema.parse,
+    parse: MessageSchema.parse,
   });
   return <p>{text}</p>;
 };`,
@@ -32,12 +32,12 @@ export const Room: React.FunctionComponent = () => {
 import { useChannel } from "simulcast-vue";
 import { z } from "zod";
 
-const messageSchema = z.object({ text: z.string() });
+const MessageSchema = z.object({ text: z.string() });
 const text = ref("Waiting for a message");
 
 useChannel("rooms:design", (message) => {
   text.value = message.text;
-}, { parse: messageSchema.parse });`,
+}, { parse: MessageSchema.parse });`,
   },
   {
     name: "Solid",
@@ -49,13 +49,13 @@ import type { Component } from "solid-js";
 import { useChannel } from "simulcast-solid";
 import { z } from "zod";
 
-const messageSchema = z.object({ text: z.string() });
+const MessageSchema = z.object({ text: z.string() });
 
 export const Room: Component = () => {
   const [text, setText] = createSignal("Waiting for a message");
   useChannel("rooms:design", (message) => {
     setText(message.text);
-  }, { parse: messageSchema.parse });
+  }, { parse: MessageSchema.parse });
   return <p>{text()}</p>;
 };`,
   },
@@ -67,12 +67,12 @@ export const Room: Component = () => {
     code: `import { useChannel } from "simulcast-svelte";
 import { z } from "zod";
 
-const messageSchema = z.object({ text: z.string() });
+const MessageSchema = z.object({ text: z.string() });
 let text = $state("Waiting for a message");
 
 useChannel("rooms:design", (message) => {
   text = message.text;
-}, { parse: messageSchema.parse });`,
+}, { parse: MessageSchema.parse });`,
   },
   {
     name: "TypeScript",
@@ -82,12 +82,12 @@ useChannel("rooms:design", (message) => {
     code: `import { z } from "zod";
 import { realtime } from "./realtime";
 
-const messageSchema = z.object({ text: z.string() });
+const MessageSchema = z.object({ text: z.string() });
 const disconnect = realtime.connect();
 
 const unsubscribe = realtime.channel("rooms:design")
   .subscribe((publication) => {
-    const message = messageSchema.parse(publication.data);
+    const message = MessageSchema.parse(publication.data);
     console.log(message.text);
   });
 

@@ -46,7 +46,7 @@ const Room = (props: { roomId: string }) => {
   const status = useChannelStatus(channel);
 
   useChannel<Message>(channel, (message) => console.log(message.text), {
-    parse: messageSchema.parse,
+    parse: MessageSchema.parse,
   });
 
   return (

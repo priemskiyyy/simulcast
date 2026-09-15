@@ -52,7 +52,7 @@ server rendering opens nothing.
   useChannel<Message>(
     () => `rooms:${roomId}`,
     (message) => console.log(message.text),
-    { parse: messageSchema.parse },
+    { parse: MessageSchema.parse },
   );
 </script>
 

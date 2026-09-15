@@ -1,5 +1,5 @@
 ---
-description: "Validate realtime payloads with Zod or TypeScript, decode JSON and MQTT bytes, and choose how to handle malformed messages."
+description: "Validate realtime payloads with Zod, Valibot, ArkType, or TypeScript. Decode JSON and MQTT bytes and handle malformed messages."
 ---
 
 # Parse incoming messages
@@ -23,31 +23,31 @@ pnpm add zod
 Define the payload once and derive its TypeScript type from the schema. These
 examples use [Zod 4](https://zod.dev/basics):
 
-```ts [src/messageSchema.ts]
+```ts [src/MessageSchema.ts]
 import { z } from "zod";
 
-export const messageSchema = z.object({
+export const MessageSchema = z.object({
   id: z.string().min(1),
   text: z.string().min(1),
 });
 
-export type Message = z.infer<typeof messageSchema>;
+export type Message = z.infer<typeof MessageSchema>;
 ```
 
-Pass `messageSchema.parse` by reference. Its return type determines the handler's
+Pass `MessageSchema.parse` by reference. Its return type determines the handler's
 payload type; there is no need to repeat a generic:
 
 ```tsx [src/MessagePreview.tsx]
 import type * as React from "react";
 import { useState } from "react";
 import { useChannel } from "simulcast-react";
-import { messageSchema } from "./messageSchema";
+import { MessageSchema } from "./MessageSchema";
 
 export const MessagePreview: React.FunctionComponent = () => {
   const [text, setText] = useState("Waiting for a message");
 
   useChannel("rooms:demo", (message) => setText(message.text), {
-    parse: messageSchema.parse,
+    parse: MessageSchema.parse,
   });
 
   return <p>{text}</p>;
@@ -63,6 +63,65 @@ keys by default; use `z.strictObject` if extra fields should be an error.
 runtime validation. If you supply both a generic and a parser, their types must
 agree. Named parsers and schema methods give reliable inference; an inline
 parser may need an explicit return type when the handler is also unannotated.
+
+## Validate with Valibot
+
+Install Valibot in your application:
+
+```sh
+pnpm add valibot
+```
+
+[Valibot's `parser`](https://valibot.dev/api/parser/) creates a synchronous
+function that returns the validated output and throws on invalid input:
+
+```ts [src/valibotMessage.ts]
+import * as v from "valibot";
+
+export const MessageSchema = v.object({
+  id: v.pipe(v.string(), v.minLength(1)),
+  text: v.pipe(v.string(), v.minLength(1)),
+});
+
+export type Message = v.InferOutput<typeof MessageSchema>;
+export const parseMessage = v.parser(MessageSchema);
+```
+
+In `MessagePreview`, import `parseMessage` from `./valibotMessage` and use
+`{ parse: parseMessage }`. The handler infers `Message` from the parser.
+For a skip-on-error policy, call
+[`v.safeParse(MessageSchema, data)`](https://valibot.dev/api/safeParse/)
+inside the handler and read `result.output` after checking `result.success`.
+
+## Validate with ArkType
+
+Install ArkType in your application:
+
+```sh
+pnpm add arktype
+```
+
+[ArkType's `assert`](https://arktype.io/docs/type-api#assert) returns the
+validated output or throws. The `string > 0` constraint requires a non-empty
+string:
+
+```ts [src/arktypeMessage.ts]
+import { type } from "arktype";
+
+export const MessageSchema = type({
+  id: "string > 0",
+  text: "string > 0",
+});
+
+export type Message = typeof MessageSchema.infer;
+export const parseMessage = MessageSchema.assert;
+```
+
+In `MessagePreview`, import `parseMessage` from `./arktypeMessage` and use
+`{ parse: parseMessage }`. Use `assert` for the parser option: calling
+`MessageSchema(data)` directly can return an error result, which Simulcast
+would pass to the handler. To skip invalid input, call the schema inside the
+handler and return when `result instanceof type.errors`.
 
 ## Use TypeScript checks without a schema library
 
@@ -106,7 +165,7 @@ The SSE adapter supplies strings. A WebSocket protocol decoder decides what
 reaches `publication.data`; use this parser when that value is JSON text:
 
 ```ts [src/parseJsonMessage.ts]
-import { messageSchema } from "./messageSchema";
+import { MessageSchema } from "./MessageSchema";
 
 export const parseJsonMessage = (data: unknown) => {
   if (typeof data !== "string") {
@@ -114,12 +173,12 @@ export const parseJsonMessage = (data: unknown) => {
   }
 
   const payload: unknown = JSON.parse(data);
-  return messageSchema.parse(payload);
+  return MessageSchema.parse(payload);
 };
 ```
 
 Use `{ parse: parseJsonMessage }` in the consumer. If your WebSocket decoder
-already produces an object, use `messageSchema.parse` directly. This parser
+already produces an object, use `MessageSchema.parse` directly. This parser
 does not accept binary WebSocket frames or `Blob` values.
 
 ### MQTT bytes
@@ -128,7 +187,7 @@ The MQTT adapter supplies a `Buffer`, which is a `Uint8Array`. Decode UTF-8
 before parsing JSON:
 
 ```ts [src/parseMqttMessage.ts]
-import { messageSchema } from "./messageSchema";
+import { MessageSchema } from "./MessageSchema";
 
 const decoder = new TextDecoder("utf-8", { fatal: true });
 
@@ -138,7 +197,7 @@ export const parseMqttMessage = (data: unknown) => {
   }
 
   const payload: unknown = JSON.parse(decoder.decode(data));
-  return messageSchema.parse(payload);
+  return MessageSchema.parse(payload);
 };
 ```
 
@@ -161,13 +220,13 @@ handler with `safeParse` and return on failure:
 import type * as React from "react";
 import { useState } from "react";
 import { useChannel } from "simulcast-react";
-import { messageSchema } from "./messageSchema";
+import { MessageSchema } from "./MessageSchema";
 
 export const TolerantMessagePreview: React.FunctionComponent = () => {
   const [text, setText] = useState("Waiting for a message");
 
   useChannel("rooms:demo", (data) => {
-    const result = messageSchema.safeParse(data);
+    const result = MessageSchema.safeParse(data);
     if (!result.success) {
       console.warn("Skipped an invalid room message", {
         issueCount: result.error.issues.length,
@@ -207,9 +266,9 @@ For an already decoded envelope such as
 ```ts [src/messageEvents.ts]
 import { z } from "zod";
 import { createChannelEventHooks } from "simulcast-react";
-import type { Message } from "./messageSchema";
+import type { Message } from "./MessageSchema";
 
-const envelopeSchema = z.object({ name: z.string(), body: z.unknown() });
+const EnvelopeSchema = z.object({ name: z.string(), body: z.unknown() });
 
 type Events = {
   "message.created": { channel: `rooms:${string}`; payload: Message };
@@ -217,7 +276,7 @@ type Events = {
 
 export const { useChannelEvent } = createChannelEventHooks<Events>({
   decode: ({ data }) => {
-    const result = envelopeSchema.safeParse(data);
+    const result = EnvelopeSchema.safeParse(data);
     if (!result.success) {
       console.warn("Skipped an invalid event envelope");
       return null;
@@ -234,7 +293,7 @@ Validate the matching event's body in its consumer:
 import type * as React from "react";
 import { useState } from "react";
 import { useChannelEvent } from "./messageEvents";
-import { messageSchema } from "./messageSchema";
+import { MessageSchema } from "./MessageSchema";
 
 export const MessageEventPreview: React.FunctionComponent = () => {
   const [text, setText] = useState("Waiting for a message");
@@ -244,7 +303,7 @@ export const MessageEventPreview: React.FunctionComponent = () => {
     "message.created",
     (message) => setText(message.text),
     {
-      parse: messageSchema.parse,
+      parse: MessageSchema.parse,
     },
   );
 

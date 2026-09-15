@@ -39,7 +39,7 @@ useChannel<Message>(
       (current) => (current === undefined ? current : [...current, message]),
     );
   },
-  { parse: messageSchema.parse },
+  { parse: MessageSchema.parse },
 );
 ```
 
