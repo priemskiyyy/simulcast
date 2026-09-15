@@ -259,6 +259,40 @@ importers:
 
   packages/core: {}
 
+  packages/devtools:
+    dependencies:
+      react:
+        specifier: '>=19.2.0 <20'
+        version: 19.2.8
+      solid-js:
+        specifier: '>=1.8.0 <2'
+        version: 1.9.15
+      svelte:
+        specifier: '>=5.29.0 <6'
+        version: 5.57.0(@typescript-eslint/types@8.70.0)
+      vue:
+        specifier: '>=3.5.0 <4'
+        version: 3.5.42(typescript@5.8.3)
+      zod:
+        specifier: ^4.6.2
+        version: 4.6.5
+    devDependencies:
+      simulcast:
+        specifier: workspace:*
+        version: link:../core
+      simulcast-react:
+        specifier: workspace:*
+        version: link:../react
+      simulcast-solid:
+        specifier: workspace:*
+        version: link:../solid
+      simulcast-svelte:
+        specifier: workspace:*
+        version: link:../svelte
+      simulcast-vue:
+        specifier: workspace:*
+        version: link:../vue
+
   packages/react:
     dependencies:
       react:

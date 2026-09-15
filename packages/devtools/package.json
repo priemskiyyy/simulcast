@@ -1,0 +1,116 @@
+{
+  "name": "simulcast-devtools",
+  "version": "0.1.0",
+  "description": "Devtools for simulcast: a framework-independent inspector for the realtime connection, channel subscriptions, and events of any adapter, with React, Vue, Solid, and Svelte wrappers.",
+  "type": "module",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/priemskiyyy/simulcast.git",
+    "directory": "packages/devtools"
+  },
+  "bugs": {
+    "url": "https://github.com/priemskiyyy/simulcast/issues"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "sideEffects": false,
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./react": {
+      "types": "./dist/react.d.ts",
+      "import": "./dist/react.js"
+    },
+    "./vue": {
+      "types": "./dist/vue.d.ts",
+      "import": "./dist/vue.js"
+    },
+    "./solid": {
+      "types": "./dist/solid.d.ts",
+      "import": "./dist/solid.js"
+    },
+    "./svelte": {
+      "types": "./dist/svelte.d.ts",
+      "import": "./dist/svelte.js"
+    }
+  },
+  "scripts": {
+    "build": "vite build && tsdown",
+    "lint:typescript": "tsc --noEmit -p .",
+    "lint:eslint": "eslint src",
+    "test:unit": "vitest run --root ../.. --project devtools"
+  },
+  "peerDependencies": {
+    "react": ">=19.2.0 <20",
+    "simulcast": ">=0.1.0 <0.2",
+    "simulcast-react": ">=0.1.0 <0.2",
+    "simulcast-solid": ">=0.1.0 <0.2",
+    "simulcast-svelte": ">=0.1.0 <0.2",
+    "simulcast-vue": ">=0.1.0 <0.2",
+    "solid-js": ">=1.8.0 <2",
+    "svelte": ">=5.29.0 <6",
+    "vue": ">=3.5.0 <4"
+  },
+  "dependencies": {
+    "zod": "^4.6.2"
+  },
+  "devDependencies": {
+    "simulcast": "workspace:*",
+    "simulcast-react": "workspace:*",
+    "simulcast-solid": "workspace:*",
+    "simulcast-svelte": "workspace:*",
+    "simulcast-vue": "workspace:*"
+  },
+  "keywords": [
+    "realtime",
+    "devtools",
+    "inspector",
+    "debugging",
+    "websocket",
+    "react",
+    "vue",
+    "solid",
+    "svelte",
+    "typescript",
+    "simulcast",
+    "subscriptions"
+  ],
+  "peerDependenciesMeta": {
+    "react": {
+      "optional": true
+    },
+    "simulcast-react": {
+      "optional": true
+    },
+    "simulcast-solid": {
+      "optional": true
+    },
+    "simulcast-svelte": {
+      "optional": true
+    },
+    "simulcast-vue": {
+      "optional": true
+    },
+    "solid-js": {
+      "optional": true
+    },
+    "svelte": {
+      "optional": true
+    },
+    "vue": {
+      "optional": true
+    }
+  },
+  "homepage": "https://priemskiyyy.github.io/simulcast/"
+}
