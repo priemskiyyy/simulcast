@@ -8,6 +8,7 @@ on:
     paths:
       - "package.json"
       - "pnpm-lock.yaml"
+      - "pnpm-workspace.yaml"
       - ".github/actions/setup/**"
       - ".github/workflows/docs.deploy.yml"
       - "docs/**"
