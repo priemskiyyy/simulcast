@@ -1,0 +1,59 @@
+name: packages-verify
+
+on:
+  workflow_call:
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - "package.json"
+      - "pnpm-lock.yaml"
+      - "CHANGELOG.md"
+      - ".github/actions/setup/**"
+      - ".github/workflows/packages.verify.yml"
+      - "scripts/**"
+      - "packages/**"
+  push:
+    branches:
+      - "main"
+    paths:
+      - "package.json"
+      - "pnpm-lock.yaml"
+      - "CHANGELOG.md"
+      - ".github/actions/setup/**"
+      - ".github/workflows/packages.verify.yml"
+      - "scripts/**"
+      - "packages/**"
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - name: Setup workspace
+        uses: ./.github/actions/setup
+
+      - name: Release metadata
+        run: pnpm verify:release
+
+      - name: Build packages
+        run: pnpm build
+
+      # Packs every package, lints it with publint, then installs them into a
+      # throwaway consumer to check exports, adapters, generated types, SSR,
+      # browser bundling, CLI drift detection, and watcher shutdown.
+      - name: Packaged consumer
+        run: pnpm test:package
+
+      - name: Upload verified packages
+        uses: actions/upload-artifact@v4
+        with:
+          name: release
+          path: .artifacts/release/
+          if-no-files-found: error
+          retention-days: 14

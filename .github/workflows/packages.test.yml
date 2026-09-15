@@ -1,0 +1,70 @@
+name: packages-test
+
+on:
+  workflow_call:
+  workflow_dispatch:
+  pull_request:
+    paths-ignore:
+      - "**.md"
+      - "tests/browser/**"
+      - "scripts/**"
+  push:
+    branches:
+      - "main"
+    paths-ignore:
+      - "**.md"
+      - "tests/browser/**"
+      - "scripts/**"
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - node: "22.18.0"
+            react: "19.2.0"
+          - node: "24"
+            react: "19.2.8"
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - name: Setup workspace
+        uses: ./.github/actions/setup
+        with:
+          node-version: ${{ matrix.node }}
+
+      - name: Install peer versions under test
+        env:
+          REACT_VERSION: ${{ matrix.react }}
+        run: pnpm add -Dw --ignore-scripts "react@$REACT_VERSION" "react-dom@$REACT_VERSION"
+
+      - name: Build packages
+        run: pnpm build
+
+      - name: Generated hooks are current
+        run: pnpm validate:generated
+
+      - name: Configuration schema is current
+        run: git diff --exit-code -- packages/codegen/config.schema.json
+
+      - name: Linting Typescript
+        run: pnpm lint:typescript
+
+      - name: Linting Eslint
+        run: pnpm lint:eslint
+
+      - name: Unit tests
+        run: pnpm test:unit
+
+      - name: Local provider integration tests
+        run: pnpm test:providers
+
+      - name: Build example
+        run: pnpm -r --filter './examples/*' build

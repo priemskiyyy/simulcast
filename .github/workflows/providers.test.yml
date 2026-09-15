@@ -1,0 +1,63 @@
+name: providers-test
+
+on:
+  workflow_call:
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - "packages/**"
+      - "tests/partykit/**"
+      - "tests/pusher/**"
+      - "tests/providers/**"
+      - "tests/services/**"
+      - "package.json"
+      - "pnpm-lock.yaml"
+      - "pnpm-workspace.yaml"
+      - ".github/actions/setup/**"
+      - ".github/workflows/providers.test.yml"
+  push:
+    branches: [main]
+    paths:
+      - "packages/**"
+      - "tests/partykit/**"
+      - "tests/pusher/**"
+      - "tests/providers/**"
+      - "tests/services/**"
+      - "package.json"
+      - "pnpm-lock.yaml"
+      - "pnpm-workspace.yaml"
+      - ".github/actions/setup/**"
+      - ".github/workflows/providers.test.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  integration:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        suite: [partykit, pusher, services]
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Setup workspace
+        uses: ./.github/actions/setup
+      - name: Build packages
+        run: pnpm build
+      - name: Start Phoenix and Supabase
+        if: matrix.suite == 'services'
+        run: pnpm --filter test-services services:up
+      - name: Run integration tests
+        env:
+          SUITE: ${{ matrix.suite }}
+        run: pnpm --filter "test-$SUITE" test
+      - name: Service logs
+        if: failure() && matrix.suite == 'services'
+        run: docker compose -f tests/services/compose.yaml logs --no-color
+      - name: Stop Phoenix and Supabase
+        if: always() && matrix.suite == 'services'
+        run: pnpm --filter test-services services:down
