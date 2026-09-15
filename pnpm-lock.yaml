@@ -164,6 +164,16 @@ importers:
         specifier: workspace:*
         version: link:../../react
 
+  packages/adapters/mqtt:
+    dependencies:
+      mqtt:
+        specifier: '>=5.0.0 <6'
+        version: 5.15.2
+    devDependencies:
+      simulcast:
+        specifier: workspace:*
+        version: link:../../core
+
   packages/adapters/phoenix:
     dependencies:
       phoenix:
