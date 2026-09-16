@@ -1,5 +1,13 @@
 # Changelog
 
+## Unreleased
+
+- `@priemskiyyy/simulcast`: `@priemskiyyy/simulcast/testing` exports `testRealtimeAdapter`, a Vitest conformance suite for the adapter contract; every shipped adapter runs it.
+- `@priemskiyyy/simulcast-react`, `-vue`, `-solid`, `-svelte`: a `Register` interface types every hook with the application's client through one module augmentation, and `useNativeConnection()` mirrors the adapter's native client.
+- `@priemskiyyy/simulcast-centrifugo`: removed `useCentrifuge()` and the `/react` entry along with the optional React peers; use `useNativeConnection()` from any binding instead.
+- `@priemskiyyy/simulcast/mock`: `createMockAdapter` takes optional native type arguments so a mock client satisfies an application that registered a real adapter.
+- Documentation: docs-first homepage, hosted React demo at `/demo/`, adapter comparison table, "what Simulcast normalizes", architecture principles and invariant-to-test map, `create-adapter` agent skill, and generated `llms.txt`.
+
 ## @priemskiyyy/simulcast 0.1.0 - 2026-09-16
 
 - Provider-independent realtime runtime: one connection session at a time, one shared native subscription per demanded channel, consumer fan-out, and deterministic cleanup.
