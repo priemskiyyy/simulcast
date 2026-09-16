@@ -41,16 +41,25 @@ See [Installation](installation.md) for framework requirements and every adapter
 
 ## 2. Create the client
 
-```ts [src/realtime.ts]
+```ts
+// src/realtime.ts
 import { RealtimeClient } from "@priemskiyyy/simulcast";
 import { broadcastChannel } from "@priemskiyyy/simulcast-broadcast-channel";
 
 export const realtime = new RealtimeClient({
   adapter: broadcastChannel({ prefix: "demo:" }),
 });
+
+declare module "@priemskiyyy/simulcast-react" {
+  interface Register {
+    client: typeof realtime;
+  }
+}
 ```
 
-Creating a client opens nothing. The provider starts a session when mounted.
+The `Register` augmentation is optional. It tells every hook which adapter the
+provider carries, so `useNativeConnection()` and publication handlers are typed
+instead of `unknown`. Creating a client opens nothing. The provider starts a session when mounted.
 Create one client per application in a browser entry point; for server rendering,
 read the [request isolation guidance](server-rendering.md).
 
@@ -58,7 +67,8 @@ read the [request isolation guidance](server-rendering.md).
 
 Replace your application's `App.tsx` with:
 
-```tsx [src/App.tsx]
+```tsx
+// src/App.tsx
 import type * as React from "react";
 import { useState } from "react";
 import {
@@ -166,6 +176,7 @@ See [Errors and recovery](error-handling.md) for parser failures.
 
 ## Continue
 
+- [Open the live demo](https://priemskiyyy.github.io/simulcast/demo/) to see shared subscriptions and devtools without installing anything.
 - [Choose an adapter](adapters.md) for your server and its channel semantics.
 - [Inspect subscriptions](devtools.md) in browser devtools.
 - [Run the examples](examples.md) for a dashboard in each framework.
