@@ -8,7 +8,7 @@ const repositoryUrl =
 const base =
   process.env.DOCS_BASE_PATH ?? (siteUrl ? new URL(siteUrl).pathname : "/");
 const description =
-  "Typed realtime subscriptions for React, Vue, Solid, Svelte, and TypeScript. Share subscriptions across components, manage connection sessions, and inspect events with browser devtools.";
+  "Provider-independent realtime subscriptions for TypeScript. One lifecycle model for connections and shared channel subscriptions across Centrifugo, Pusher, Ably, MQTT, WebSocket, SSE, and more, from React, Vue, Solid, and Svelte.";
 
 export default defineConfig({
   base,

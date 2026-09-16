@@ -42,6 +42,7 @@ for (const file of files) {
     1,
     `${file}: expected one main heading`,
   );
+  // The documentation home page renders VPDoc like any other page.
   assert.equal(
     document.querySelectorAll("main").length,
     1,
