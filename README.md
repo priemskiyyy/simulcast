@@ -1,76 +1,102 @@
 # Simulcast
 
-**Typed realtime subscriptions for React, Vue, Solid, Svelte, and TypeScript.**
+**Provider-independent realtime subscriptions for TypeScript.**
 
-Share one native subscription across consumers, replace connection sessions when
-accounts change, and inspect events with browser devtools. Eleven adapters connect
-the runtime to hosted providers, self-hosted servers, and browser transports.
+Simulcast owns the lifecycle of realtime subscriptions. A client holds one
+connection session. Components listening to the same channel share one native
+subscription, and the last one to leave releases it. The same API works from
+React, Vue, Solid, Svelte, or plain TypeScript, over eleven provider adapters.
 
-[Get started](docs/getting-started.md) · [Adapters](docs/adapters.md) ·
-[Examples](docs/examples.md) · [Devtools](docs/devtools.md) · [Documentation](docs/README.md) · [GitHub](https://github.com/priemskiyyy/simulcast)
-
-## Why Simulcast?
-
-- **Shared subscriptions.** Multiple components listening to the same channel use
-  one native subscription. The last publication consumer releases it.
-- **Explicit sessions.** Replacing a session reconnects active consumers. Cleanup
-  from an old session cannot disconnect its replacement.
-- **Typed publications.** Infer payload types from parsers, declare event maps,
-  and optionally generate named framework hooks.
-- **Framework bindings.** Use React hooks, Vue composables, Solid primitives,
-  Svelte utilities, or the observable core directly.
-- **Provider APIs stay accessible.** Shared native clients and publication context
-  preserve access to provider-specific functionality where the adapter exposes it.
-- **Browser inspection.** See channel state, listener counts, errors, and event
-  history without creating subscription demand.
+[Documentation](https://priemskiyyy.github.io/simulcast/) ·
+[Get started](https://priemskiyyy.github.io/simulcast/getting-started) ·
+[Live demo](https://priemskiyyy.github.io/simulcast/demo/) ·
+[Adapters](https://priemskiyyy.github.io/simulcast/adapters) ·
+[Devtools](https://priemskiyyy.github.io/simulcast/devtools)
 
 ## Try it without a server
 
 ```sh
-pnpm add @priemskiyyy/simulcast @priemskiyyy/simulcast-broadcast-channel
+pnpm add @priemskiyyy/simulcast @priemskiyyy/simulcast-react @priemskiyyy/simulcast-broadcast-channel
 ```
 
-```ts
+```tsx
 import { RealtimeClient } from "@priemskiyyy/simulcast";
 import { broadcastChannel } from "@priemskiyyy/simulcast-broadcast-channel";
+import { RealtimeProvider, useChannel } from "@priemskiyyy/simulcast-react";
 
 const realtime = new RealtimeClient({
   adapter: broadcastChannel({ prefix: "app:" }),
 });
 
-const disconnect = realtime.connect();
-const unsubscribe = realtime.channel("rooms:demo").subscribe((publication) => {
-  console.log(publication.data);
-});
+const Room = () => {
+  useChannel<{ text: string }>("rooms:demo", (message) => {
+    console.log(message.text);
+  });
+  return null;
+};
 
-const publisher = new BroadcastChannel("app:rooms:demo");
-publisher.postMessage({ text: "Hello, room" });
-
-// When the application is done listening:
-// unsubscribe();
-// disconnect();
-// publisher.close();
+export const App = () => (
+  <RealtimeProvider client={realtime}>
+    <Room />
+  </RealtimeProvider>
+);
 ```
 
-Run this in a browser or a runtime that supports BroadcastChannel. The complete
-[React walkthrough](docs/getting-started.md) adds a provider, a message list, and a
-send button. Simulcast manages subscriptions; publishing uses your transport's API.
+Swap `broadcastChannel(...)` for `centrifugo(...)` or `mqtt(...)` and the
+component does not change. The full
+[getting started guide](https://priemskiyyy.github.io/simulcast/getting-started)
+adds a message list and a send button.
 
-## Packages
+## Why Simulcast?
 
-| Package                                                | Purpose                                          |
-| ------------------------------------------------------ | ------------------------------------------------ |
-| [`@priemskiyyy/simulcast`](packages/core)              | Framework-independent runtime and mock adapter   |
-| [`@priemskiyyy/simulcast-react`](packages/react)       | React and React Native bindings                  |
-| [`@priemskiyyy/simulcast-vue`](packages/vue)           | Vue composables                                  |
-| [`@priemskiyyy/simulcast-solid`](packages/solid)       | Solid primitives                                 |
-| [`@priemskiyyy/simulcast-svelte`](packages/svelte)     | Svelte utilities                                 |
-| [`@priemskiyyy/simulcast-devtools`](packages/devtools) | Browser inspector and framework wrappers         |
-| [`@priemskiyyy/simulcast-codegen`](packages/codegen)   | Event-hook generation from TypeScript event maps |
+- **Shared subscriptions.** Components listening to the same channel use one
+  native subscription. The last publication consumer releases it.
+- **Explicit sessions.** Replacing a session reconnects active consumers. Cleanup
+  from an old session cannot disconnect its replacement.
+- **Passive observation.** Status hooks and devtools watch channels without
+  creating demand.
+- **Typed publications.** Infer payload types from parsers, declare event maps,
+  and optionally generate named hooks.
+- **Provider APIs stay accessible.** Register your client once and
+  `useNativeConnection()` returns the typed native client; every publication
+  carries the provider's own value.
+- **One adapter contract.** Build your own with `createRealtimeAdapter` and run
+  the conformance suite against it.
 
-### Adapters
+```text
+Component A --+
+Component B --+-- rooms:123 -- one native subscription
+Component C --+
 
-| Provider           | Package                                                                           | Channel semantics                    |
+A unmounts  -> subscription remains
+B unmounts  -> subscription remains
+C unmounts  -> native subscription released
+```
+
+## What Simulcast normalizes
+
+| Normalized                                        | Left to the provider        |
+| ------------------------------------------------- | --------------------------- |
+| Connection and session ownership                  | Delivery guarantees and QoS |
+| Logical channels and subscription ownership       | Presence, history, RPC      |
+| Shared consumers and deterministic cleanup        | Provider-specific recovery  |
+| Coarse connection and channel state               | Authorization models        |
+| Publication delivery with native context attached | Publishing semantics        |
+| Diagnostics and devtools                          |                             |
+
+## Frameworks and providers
+
+| Package                                                | Purpose                                            |
+| ------------------------------------------------------ | -------------------------------------------------- |
+| [`@priemskiyyy/simulcast`](packages/core)              | Runtime, adapter contract, mock, conformance suite |
+| [`@priemskiyyy/simulcast-react`](packages/react)       | React and React Native bindings                    |
+| [`@priemskiyyy/simulcast-vue`](packages/vue)           | Vue composables                                    |
+| [`@priemskiyyy/simulcast-solid`](packages/solid)       | Solid primitives                                   |
+| [`@priemskiyyy/simulcast-svelte`](packages/svelte)     | Svelte utilities                                   |
+| [`@priemskiyyy/simulcast-devtools`](packages/devtools) | Browser inspector and framework wrappers           |
+| [`@priemskiyyy/simulcast-codegen`](packages/codegen)   | Event-hook generation from TypeScript event maps   |
+
+| Provider           | Package                                                                           | A channel is                         |
 | ------------------ | --------------------------------------------------------------------------------- | ------------------------------------ |
 | Centrifugo         | [`@priemskiyyy/simulcast-centrifugo`](packages/adapters/centrifugo)               | Subscription channel                 |
 | Pusher Channels    | [`@priemskiyyy/simulcast-pusher`](packages/adapters/pusher)                       | Public, private, or presence channel |
@@ -84,45 +110,46 @@ send button. Simulcast manages subscriptions; publishing uses your transport's A
 | Server-Sent Events | [`@priemskiyyy/simulcast-sse`](packages/adapters/sse)                             | One EventSource URL                  |
 | BroadcastChannel   | [`@priemskiyyy/simulcast-broadcast-channel`](packages/adapters/broadcast-channel) | Same-origin channel name             |
 
-Adapters preserve provider-specific authentication, payload formats, and recovery
-behavior. See [installation](docs/installation.md) for SDK dependencies and
-[adapter setup](docs/adapters.md) for the exact mappings.
+The [adapter comparison](https://priemskiyyy.github.io/simulcast/adapters#compare-the-adapters)
+shows which adapters share a connection, who owns retries, and what
+`realtime.native` exposes.
 
-## See what happened
+## Live demo and devtools
+
+Open the [hosted Mission Control demo](https://priemskiyyy.github.io/simulcast/demo/),
+then the Simulcast Devtools launcher. Add and remove consumers, watch listener
+counts, and confirm one native subscription per channel. No backend, account, or
+credentials.
 
 ![Simulcast browser devtools showing connection state, shared channels, listener counts, and the event timeline.](docs/public/images/devtools.png)
 
-The inspector works with React, Vue, Solid, Svelte, and plain TypeScript. Payload
-capture is opt-in; recording is bounded. [Devtools guide](docs/devtools.md).
+The inspector works with every binding and never creates subscription demand.
+[Devtools guide](https://priemskiyyy.github.io/simulcast/devtools).
 
-## Run the examples
+## Custom adapters
 
-```sh
-pnpm install --frozen-lockfile
-pnpm build
-pnpm generate:hooks
-pnpm --filter example-react dev
-```
+If Simulcast does not ship an adapter for your realtime system, write one with
+`createRealtimeAdapter` and run `testRealtimeAdapter` from
+`@priemskiyyy/simulcast/testing` against it. The
+[adapter guide](https://priemskiyyy.github.io/simulcast/writing-an-adapter)
+covers the contract; coding agents can load the `create-adapter` skill in
+[`.claude/skills`](.claude/skills/create-adapter/SKILL.md).
 
-The Mission Control dashboard also runs in Vue, Solid, Svelte, and Expo. Simulation
-mode needs no backend or credentials. [Example guide](docs/examples.md).
-
-## Development and verification
+## Development
 
 Use Node 22.18 or newer and the pnpm version declared in `package.json`.
 
 ```sh
+pnpm install --frozen-lockfile
 pnpm check
 pnpm build:docs
 ```
 
 `pnpm check` builds packages and examples, checks types, lint and formatting, runs
-unit and local provider tests, and validates generated hooks. Browser tests use a
-Centrifugo container. Packed-package checks install the distributable packages in
-an isolated consumer. Test scope and prerequisites are documented in
-[CONTRIBUTING.md](CONTRIBUTING.md) and [the provider suites](docs/integration-testing.md).
-
-For release procedures, see [RELEASING.md](RELEASING.md).
+unit and local provider tests, and validates generated hooks. See
+[CONTRIBUTING.md](CONTRIBUTING.md), the
+[architecture and invariants](https://priemskiyyy.github.io/simulcast/internals/architecture),
+and [RELEASING.md](RELEASING.md).
 
 ## License
 
