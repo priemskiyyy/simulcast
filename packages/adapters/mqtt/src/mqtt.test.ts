@@ -1,6 +1,8 @@
 import { MqttClient } from "mqtt";
 import type { IPublishPacket, ISubscriptionGrant } from "mqtt";
-import { beforeEach, expect, test, vi } from "vitest";
+import { RealtimeClient } from "@priemskiyyy/simulcast";
+import type { RealtimeChannel } from "@priemskiyyy/simulcast";
+import { beforeEach, expect, expectTypeOf, test, vi } from "vitest";
 import { mqtt } from "src/mqtt";
 
 const configuration = { url: "mqtt://localhost:1" };
@@ -253,3 +255,12 @@ test.each(["rejected grant", "callback error"])(
     connection.dispose();
   },
 );
+
+test("native types flow from the adapter into the client", () => {
+  const client = new RealtimeClient({ adapter: mqtt(configuration) });
+
+  expectTypeOf(client.native.get()).toEqualTypeOf<MqttClient | null>();
+  expectTypeOf(client.channel("sensors/#")).toEqualTypeOf<
+    RealtimeChannel<IPublishPacket>
+  >();
+});
