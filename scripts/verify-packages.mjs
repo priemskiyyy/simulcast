@@ -251,16 +251,17 @@ try {
   );
   write(
     "contracts.ts",
-    `import type { Centrifuge } from "centrifuge";
+    `import type { Centrifuge, PublicationContext } from "centrifuge";
 import { RealtimeClient } from "@priemskiyyy/simulcast";
+import { createMockAdapter } from "@priemskiyyy/simulcast/mock";
 import { ably } from "@priemskiyyy/simulcast-ably";
 import { broadcastChannel } from "@priemskiyyy/simulcast-broadcast-channel";
 import { centrifugo } from "@priemskiyyy/simulcast-centrifugo";
-import { useCentrifuge } from "@priemskiyyy/simulcast-centrifugo/react";
 import { mqtt } from "@priemskiyyy/simulcast-mqtt";
 import { phoenix } from "@priemskiyyy/simulcast-phoenix";
 import { pusher } from "@priemskiyyy/simulcast-pusher";
-import { useChannel, useRealtimeClient } from "@priemskiyyy/simulcast-react";
+import { useChannel, useNativeConnection, useRealtimeClient } from "@priemskiyyy/simulcast-react";
+import type { PublicationHandler } from "@priemskiyyy/simulcast-react";
 import { partykit } from "@priemskiyyy/simulcast-partykit";
 import { socketio } from "@priemskiyyy/simulcast-socketio";
 import { sse } from "@priemskiyyy/simulcast-sse";
@@ -268,8 +269,14 @@ import { supabase } from "@priemskiyyy/simulcast-supabase";
 import { websocket } from "@priemskiyyy/simulcast-websocket";
 import { useMessageCreated } from "./generated/index.js";
 type Equal<A, B> = (<T>() => T extends A ? 1 : 2) extends (<T>() => T extends B ? 1 : 2) ? true : false;
+export const centrifugoClient = new RealtimeClient({ adapter: centrifugo({ transport: "ws://localhost" }) });
+declare module "@priemskiyyy/simulcast-react" {
+  interface Register {
+    client: typeof centrifugoClient;
+  }
+}
 export const clients = [
-  new RealtimeClient({ adapter: centrifugo({ transport: "ws://localhost" }) }),
+  centrifugoClient,
   new RealtimeClient({ adapter: pusher({ key: "key", options: { cluster: "eu" } }) }),
   new RealtimeClient({ adapter: ably({ options: { key: "app.key:secret" } }) }),
   new RealtimeClient({ adapter: supabase({ url: "ws://localhost/realtime/v1", options: { params: { apikey: "anon" } } }) }),
@@ -282,10 +289,14 @@ export const clients = [
   new RealtimeClient({ adapter: broadcastChannel() }),
 ];
 export const useContracts = () => {
-  const client = useCentrifuge();
+  const client = useNativeConnection();
   const nullableClient: Equal<typeof client, Centrifuge | null> = true;
   const native = useRealtimeClient().native.get();
-  const unknownNative: Equal<typeof native, unknown> = true;
+  const registeredNative: Equal<typeof native, Centrifuge | null> = true;
+  const publicationNative: Equal<Parameters<PublicationHandler<unknown>>[1]["native"], PublicationContext> = true;
+  // A mock standing in for this adapter's native types is accepted by the provider.
+  const mock = new RealtimeClient({ adapter: createMockAdapter<Centrifuge, PublicationContext>().adapter });
+  const mockAccepted: Equal<typeof mock, typeof centrifugoClient> = true;
   useChannel<{ text: string }>("raw", (data) => { data.text.toUpperCase(); });
   useChannel("raw", (data) => { data.toFixed(); }, { parse: Number });
   useMessageCreated("rooms:one", (data) => { data.text.toUpperCase(); });
@@ -297,7 +308,7 @@ export const useContracts = () => {
   useMessageCreated("rooms:one", () => {}, { parse: Number });
   // @ts-expect-error The client can be absent.
   client.publish("room", {});
-  return [nullableClient, unknownNative];
+  return [nullableClient, registeredNative, publicationNative, mockAccepted];
 };\n`,
   );
   write(
@@ -306,8 +317,15 @@ export const useContracts = () => {
 import { RealtimeClient } from "@priemskiyyy/simulcast";
 import { createMockAdapter } from "@priemskiyyy/simulcast/mock";
 import { SimulcastDevtools } from "@priemskiyyy/simulcast-devtools/vue";
-import { RealtimeProvider, useChannel, useChannelStatus } from "@priemskiyyy/simulcast-vue";
+import { RealtimeProvider, useChannel, useChannelStatus, useNativeConnection } from "@priemskiyyy/simulcast-vue";
+import type { MockConnection } from "@priemskiyyy/simulcast/mock";
 const realtime = new RealtimeClient({ adapter: createMockAdapter().adapter });
+declare module "@priemskiyyy/simulcast-vue" {
+  interface Register {
+    client: typeof realtime;
+  }
+}
+export const useNative = (): Readonly<{ value: MockConnection | null }> => useNativeConnection();
 const Room = defineComponent(() => {
   const room = ref("demo");
   useChannel<{ text: string }>(() => \`rooms:\${room.value}\`, (message) => { message.text.toUpperCase(); });
@@ -322,9 +340,16 @@ export const Application = defineComponent(() => () => h(RealtimeProvider, { cli
 import { RealtimeClient } from "@priemskiyyy/simulcast";
 import { createMockAdapter } from "@priemskiyyy/simulcast/mock";
 import { SimulcastDevtools } from "@priemskiyyy/simulcast-devtools/solid";
-import { useChannel, useChannelStatus, useRealtimeClient } from "@priemskiyyy/simulcast-solid";
+import { useChannel, useChannelStatus, useNativeConnection, useRealtimeClient } from "@priemskiyyy/simulcast-solid";
+import type { MockConnection } from "@priemskiyyy/simulcast/mock";
 export const devtools = () => SimulcastDevtools({ initialIsOpen: true });
 export const realtime = new RealtimeClient({ adapter: createMockAdapter().adapter });
+declare module "@priemskiyyy/simulcast-solid" {
+  interface Register {
+    client: typeof realtime;
+  }
+}
+export const useNative = (): (() => MockConnection | null) => useNativeConnection();
 export const useRoom = () => {
   const [room] = createSignal("demo");
   useChannel<{ text: string }>(() => \`rooms:\${room()}\`, (message) => { message.text.toUpperCase(); });
@@ -337,9 +362,16 @@ export const useRoom = () => {
     `import { RealtimeClient } from "@priemskiyyy/simulcast";
 import { createMockAdapter } from "@priemskiyyy/simulcast/mock";
 import { createDevtools } from "@priemskiyyy/simulcast-devtools/svelte";
-import { useChannel, useChannelStatus, useRealtimeClient } from "@priemskiyyy/simulcast-svelte";
+import { useChannel, useChannelStatus, useNativeConnection, useRealtimeClient } from "@priemskiyyy/simulcast-svelte";
+import type { MockConnection } from "@priemskiyyy/simulcast/mock";
 export const devtools = () => createDevtools({ maxEvents: 50 });
 export const realtime = new RealtimeClient({ adapter: createMockAdapter().adapter });
+declare module "@priemskiyyy/simulcast-svelte" {
+  interface Register {
+    client: typeof realtime;
+  }
+}
+export const useNative = (): { readonly current: MockConnection | null } => useNativeConnection();
 export const useRoom = (room: () => string) => {
   useChannel<{ text: string }>(() => \`rooms:\${room()}\`, (message) => { message.text.toUpperCase(); });
   const status = useChannelStatus(room);
