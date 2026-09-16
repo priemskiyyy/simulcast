@@ -11,6 +11,42 @@ remain SDK concerns. Shared-connection adapters expose their native client.
 PartyKit, SSE, and BroadcastChannel have no shared native client; see
 [native access](client.md#native-access-depends-on-the-adapter). See [Writing an adapter](writing-an-adapter.md) for the contract.
 
+## Compare the adapters
+
+| Adapter            | Shared connection | A channel is                         | Named events             | Retries owned by               | `realtime.native`  |
+| ------------------ | ----------------- | ------------------------------------ | ------------------------ | ------------------------------ | ------------------ |
+| Centrifugo         | yes               | Subscription channel                 | no                       | Centrifuge SDK                 | `Centrifuge`       |
+| Pusher Channels    | yes               | Public, private, or presence channel | Pusher event name        | pusher-js                      | `Pusher`           |
+| Ably               | yes               | Realtime channel                     | Message name             | Ably SDK                       | `Realtime`         |
+| Supabase Realtime  | yes               | Broadcast topic                      | Broadcast event          | realtime-js                    | `RealtimeClient`   |
+| Socket.IO          | yes               | Event name; rooms joined server-side | no                       | socket.io-client               | `Socket`           |
+| Phoenix Channels   | yes               | Topic                                | Pushed event name        | Phoenix SDK                    | `Socket`           |
+| MQTT               | yes               | Topic filter with `+` and `#`        | no                       | mqtt.js `reconnectPeriod`      | `MqttClient`       |
+| Generic WebSocket  | yes               | Your protocol's channel identifier   | Your `decode`            | the adapter's `reconnectDelay` | `{ socket, send }` |
+| Server-Sent Events | per channel       | One `EventSource` URL                | Names listed in `events` | the browser                    | `null`             |
+| PartyKit           | per channel       | Room                                 | no                       | partysocket                    | `null`             |
+| BroadcastChannel   | per channel       | Same-origin channel name             | no                       | none needed                    | `null`             |
+
+## What Simulcast normalizes
+
+Simulcast normalizes the lifecycle and ownership of realtime subscriptions, not
+the capabilities of the provider underneath.
+
+| Normalized by Simulcast                                        | Left to the provider SDK                     |
+| -------------------------------------------------------------- | -------------------------------------------- |
+| Connection and session ownership                               | Delivery guarantees and QoS                  |
+| Logical channels and one owned native subscription per channel | Presence and history                         |
+| Shared consumers and deterministic, idempotent cleanup         | RPC and publishing                           |
+| Coarse connection and channel state                            | Provider-specific recovery and resume tokens |
+| Publication delivery with the native context attached          | Authorization models                         |
+| Diagnostics and devtools                                       | Provider-specific error codes                |
+
+The native client stays reachable through `realtime.native` and each binding's
+`useNativeConnection`; each publication carries the provider's value in `native`.
+Swapping `mqtt(...)` for `centrifugo(...)` leaves every `useChannel` call and its
+cleanup unchanged. What a channel means, and who retries it, still come from the
+provider.
+
 ## How states map
 
 The runtime exposes three connection states and four channel states. Adapters
@@ -45,7 +81,7 @@ const adapter = centrifugo({
 
 `transport` and `options` go to the `Centrifuge` constructor unchanged.
 Publications carry the `PublicationContext` in `native` and no `event`.
-`@priemskiyyy/simulcast-centrifugo/react` exports `useCentrifuge()` for the native client.
+`useNativeConnection()` returns the `Centrifuge` client, or `null` while no session is active.
 
 States map one to one: Centrifugo's `connecting` and `subscribing` already cover
 its own retries.
