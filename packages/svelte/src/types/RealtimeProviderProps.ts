@@ -1,8 +1,8 @@
 import type { Snippet } from "svelte";
-import type { RealtimeClient } from "@priemskiyyy/simulcast";
+import type { RegisteredClient } from "./Register.js";
 
 export type RealtimeProviderProps = {
-  client: RealtimeClient;
+  client: RegisteredClient;
   session?: {
     /** Identifies the session, usually the signed-in account. Changing it replaces the connection. */
     id?: string;

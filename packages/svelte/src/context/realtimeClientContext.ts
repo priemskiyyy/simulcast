@@ -1,12 +1,12 @@
 import { getContext, setContext } from "svelte";
-import type { RealtimeClient } from "@priemskiyyy/simulcast";
 import type { ReadableBox } from "../types/ReadableBox.js";
+import type { RegisteredClient } from "../types/Register.js";
 
 const REALTIME_CLIENT_KEY = Symbol("simulcast client");
 
-export const setRealtimeClient = (client: ReadableBox<RealtimeClient>) => {
+export const setRealtimeClient = (client: ReadableBox<RegisteredClient>) => {
   setContext(REALTIME_CLIENT_KEY, client);
 };
 
 export const getRealtimeClient = () =>
-  getContext<ReadableBox<RealtimeClient> | undefined>(REALTIME_CLIENT_KEY);
+  getContext<ReadableBox<RegisteredClient> | undefined>(REALTIME_CLIENT_KEY);

@@ -89,6 +89,24 @@ test("the session ID and enabled flag control the connection while object identi
   expect(connections).toHaveLength(3);
 });
 
+test("useNativeConnection follows the session's native client", async () => {
+  const { client, connections } = createHarness();
+  const onNative = vi.fn();
+  const room = { channel: "rooms:one", onNative };
+  const { rerender } = render(Harness, {
+    client,
+    session: { id: "one", enabled: false },
+    room,
+  });
+
+  expect(onNative).toHaveBeenLastCalledWith(null);
+  await rerender({ client, session: { id: "one", enabled: true }, room });
+  expect(onNative).toHaveBeenLastCalledWith(connections[0]);
+  await rerender({ client, session: { id: "two", enabled: true }, room });
+  expect(connections).toHaveLength(2);
+  expect(onNative).toHaveBeenLastCalledWith(connections[1]);
+});
+
 test("useChannel shares a subscription, follows a getter channel, and honours enabled", async () => {
   const { client, connections } = createHarness();
   const onFirst = vi.fn();

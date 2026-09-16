@@ -4,6 +4,7 @@
     useChannel,
     useChannelStatus,
     useConnectionState,
+    useNativeConnection,
     useRealtimeClient,
   } from "../index.js";
   import type { PublicationHandler } from "../index.js";
@@ -16,6 +17,7 @@
     onSecond?: PublicationHandler<unknown>;
     onCreated?: PublicationHandler<unknown>;
     onClient?: (client: RealtimeClient) => void;
+    onNative?: (native: unknown) => void;
   };
 
   let {
@@ -25,10 +27,12 @@
     onSecond = () => {},
     onCreated = () => {},
     onClient = () => {},
+    onNative = () => {},
   }: Props = $props();
 
   const client = useRealtimeClient();
   const connection = useConnectionState();
+  const native = useNativeConnection();
   const status = useChannelStatus(() => channel);
 
   useChannel(
@@ -48,6 +52,9 @@
 
   $effect(() => {
     onClient(client.current);
+  });
+  $effect(() => {
+    onNative(native.current);
   });
 </script>
 

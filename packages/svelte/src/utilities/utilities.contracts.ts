@@ -4,10 +4,12 @@ import type {
   PublicationHandler,
   ReadableBox,
   RealtimeProviderProps,
+  RegisteredClient,
 } from "../index.js";
 import {
   createChannelEventHooks,
   useChannel,
+  useNativeConnection,
   useRealtimeClient,
 } from "../index.js";
 
@@ -26,6 +28,10 @@ expectTypeOf<RealtimeClient<{ id: string }, { offset: number }>>().toExtend<
 >();
 
 export const useTypeContracts = () => {
+  // Nothing is registered inside the package, so the native client is unknown.
+  expectTypeOf<RegisteredClient>().toEqualTypeOf<RealtimeClient>();
+  expectTypeOf(useNativeConnection()).toEqualTypeOf<ReadableBox<unknown>>();
+
   expectTypeOf(useRealtimeClient()).toEqualTypeOf<
     ReadableBox<RealtimeClient>
   >();

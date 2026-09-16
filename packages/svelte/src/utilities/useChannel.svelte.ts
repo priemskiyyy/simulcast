@@ -1,6 +1,6 @@
-import type { RealtimePublication } from "@priemskiyyy/simulcast";
 import type { ChannelInput } from "../types/ChannelInput.js";
 import type { PublicationHandler } from "../types/PublicationHandler.js";
+import type { RegisteredPublication } from "../types/Register.js";
 import { extract } from "./internal/extract.js";
 import { useRealtimeClient } from "./useRealtimeClient.js";
 
@@ -31,7 +31,7 @@ export const useChannel = <TData = unknown>(
 ) => {
   const client = useRealtimeClient();
 
-  const handlePublication = (publication: RealtimePublication) => {
+  const handlePublication = (publication: RegisteredPublication) => {
     if (typeof options.parse !== "function") {
       return onEvent(publication.data as TData, publication);
     }
