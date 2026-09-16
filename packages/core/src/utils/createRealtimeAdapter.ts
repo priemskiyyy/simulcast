@@ -70,12 +70,13 @@ export const createRealtimeAdapter = <
         const subscription = connection.subscribe({
           channel,
           observer: {
-            state: (state) => {
+            // Forwarded as received: an absent detail stays absent.
+            state: (...report) => {
               if (released) {
                 return;
               }
 
-              observer.state(state);
+              observer.state(...report);
             },
             error: (error) => {
               if (released) {

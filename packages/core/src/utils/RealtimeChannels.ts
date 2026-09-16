@@ -39,7 +39,11 @@ const updateStatus = (
 ) => {
   const current = status.get();
 
-  if (current.state === next.state && current.error === next.error) {
+  if (
+    current.state === next.state &&
+    current.error === next.error &&
+    current.recovered === next.recovered
+  ) {
     return;
   }
 
@@ -245,7 +249,7 @@ export class RealtimeChannels<TNativePublication> {
       const subscription = session.connection.subscribe({
         channel: channel.name,
         observer: {
-          state: (state) => {
+          state: (state, detail = { recovered: false }) => {
             if (!scope.isActive()) {
               return;
             }
@@ -253,7 +257,11 @@ export class RealtimeChannels<TNativePublication> {
             this.#diagnostics.record("channel", "state", state, channel.name);
 
             if (state === "subscribed") {
-              updateStatus(channel.status, { state, error: null });
+              updateStatus(channel.status, {
+                state,
+                error: null,
+                recovered: detail.recovered,
+              });
               return;
             }
 
@@ -261,6 +269,7 @@ export class RealtimeChannels<TNativePublication> {
               updateStatus(channel.status, {
                 state,
                 error: channel.status.get().error,
+                recovered: false,
               });
               return;
             }

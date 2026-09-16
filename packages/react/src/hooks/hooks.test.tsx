@@ -219,9 +219,17 @@ describe("provider and subscriptions", () => {
     act(() => {
       subscription.observer.state("subscribed");
     });
-    expect(result.current).toEqual({ state: "subscribed", error: null });
+    expect(result.current).toEqual({
+      state: "subscribed",
+      error: null,
+      recovered: false,
+    });
     rerender({ enabled: false });
-    expect(result.current).toEqual({ state: "detached", error: null });
+    expect(result.current).toEqual({
+      state: "detached",
+      error: null,
+      recovered: false,
+    });
     rerender({ enabled: true });
     expect(subscriptionFor(connections, "rooms:one")).not.toBe(subscription);
   });

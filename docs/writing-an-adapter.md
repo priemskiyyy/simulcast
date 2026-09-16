@@ -35,7 +35,10 @@ type AdapterSubscription<TNativeSubscription> = {
 
 Observers take `state`, `error`, and for subscriptions `publication`. None of
 their methods are optional: a provider without an explicit state callback has the
-adapter emit state during setup and cleanup.
+adapter emit state during setup and cleanup. A subscription may pass a detail
+alongside `subscribed`: `observer.state("subscribed", { recovered })`, where
+`recovered` says the provider replayed what was missed. Omit it and the runtime
+reports `recovered: false`.
 
 ## Rules
 

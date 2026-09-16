@@ -1,5 +1,11 @@
 # Changelog
 
+## Unreleased
+
+- **Breaking:** `@priemskiyyy/simulcast`: `ChannelStatus` carries `recovered`, telling consumers whether the provider replayed the publications missed since the last subscription. Every binding's `useChannelStatus` reports it, including the server-rendered snapshot, and `diagnostics` snapshots carry it too.
+- `@priemskiyyy/simulcast`: adapters report recovery with `observer.state("subscribed", { recovered })`, typed as `AdapterSubscriptionDetail`. Omitting the detail keeps `recovered: false`, which also covers providers with no recovery to offer.
+- `@priemskiyyy/simulcast-centrifugo`: reports recovery from the `subscribed` event's `wasRecovering` and `recovered`.
+
 ## @priemskiyyy/simulcast 0.2.0 - 2026-09-16
 
 - `@priemskiyyy/simulcast/testing` exports `testRealtimeAdapter`, a Vitest conformance suite for the adapter contract. `vitest` is an optional peer dependency used only by that entry.

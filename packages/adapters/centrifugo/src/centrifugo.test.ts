@@ -1,5 +1,9 @@
 import { Centrifuge, State, Subscription, SubscriptionState } from "centrifuge";
-import type { PublicationContext, SubscriptionErrorContext } from "centrifuge";
+import type {
+  PublicationContext,
+  SubscribedContext,
+  SubscriptionErrorContext,
+} from "centrifuge";
 import { RealtimeClient, createRealtimeAdapter } from "@priemskiyyy/simulcast";
 import type { RealtimeChannel } from "@priemskiyyy/simulcast";
 import { beforeEach, expect, expectTypeOf, test, vi } from "vitest";
@@ -23,6 +27,18 @@ beforeEach(() => {
       newState: State.Connecting,
     });
   });
+});
+
+const subscribedContext = ({
+  wasRecovering = false,
+  recovered = false,
+}): SubscribedContext => ({
+  channel: "rooms:one",
+  recoverable: true,
+  positioned: false,
+  wasRecovering,
+  recovered,
+  hasRecoveredPublications: recovered,
 });
 
 test("creating the adapter opens nothing", () => {
@@ -67,6 +83,38 @@ test("each connect creates a fresh client that reports mapped states until dispo
   other.dispose();
 });
 
+test("resubscribing reports whether Centrifugo replayed the gap", () => {
+  const adapter = centrifugo({ transport });
+  const connection = adapter.connect(connectionObserver());
+  const observer = subscriptionObserver();
+  const subscription = connection.subscribe({
+    channel: "rooms:one",
+    observer,
+  });
+
+  subscription.native.emit(
+    "subscribed",
+    subscribedContext({ wasRecovering: true, recovered: true }),
+  );
+  expect(observer.state).toHaveBeenLastCalledWith("subscribed", {
+    recovered: true,
+  });
+
+  // Recovery was attempted and failed, so publications were missed.
+  subscription.native.emit(
+    "subscribed",
+    subscribedContext({ wasRecovering: true, recovered: false }),
+  );
+  expect(observer.state).toHaveBeenLastCalledWith("subscribed", {
+    recovered: false,
+  });
+
+  subscription.dispose();
+  subscription.native.emit("subscribed", subscribedContext({}));
+  expect(observer.state).toHaveBeenCalledTimes(3);
+  connection.dispose();
+});
+
 test("subscribe creates one native subscription that maps states, publications, and errors until disposed", () => {
   const adapter = centrifugo({ transport });
   const connection = adapter.connect(connectionObserver());
@@ -87,12 +135,16 @@ test("subscribe creates one native subscription that maps states, publications, 
     native: publication,
   });
   expect(observer.publication.mock.calls[0]?.[0].native).toBe(publication);
+  // Centrifugo emits `state` first, but only `subscribed` knows what was recovered.
   subscription.native.emit("state", {
     channel: "rooms:one",
     oldState: SubscriptionState.Subscribing,
     newState: SubscriptionState.Subscribed,
   });
-  expect(observer.state).toHaveBeenLastCalledWith("subscribed");
+  subscription.native.emit("subscribed", subscribedContext({}));
+  expect(observer.state).toHaveBeenLastCalledWith("subscribed", {
+    recovered: false,
+  });
   const error: SubscriptionErrorContext = {
     channel: "rooms:one",
     type: "subscribe",

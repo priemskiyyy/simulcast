@@ -222,7 +222,11 @@ test("status and connection accessors follow adapter reports", () => {
   connections[0]?.observer.state("connected");
   subscriptionFor(connections, "rooms:one").observer.state("subscribed");
   expect(result.connection()).toBe("connected");
-  expect(result.status()).toEqual({ state: "subscribed", error: null });
+  expect(result.status()).toEqual({
+    state: "subscribed",
+    error: null,
+    recovered: false,
+  });
 });
 
 test("typed events match provider event names without a decoder", () => {

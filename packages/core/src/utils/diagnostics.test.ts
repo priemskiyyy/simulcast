@@ -24,6 +24,7 @@ test("inspection creates no channels and never keeps subscriptions alive", () =>
       name: "rooms:one",
       state: "detached",
       error: null,
+      recovered: false,
       consumers: { publications: 0, status: 1 },
     },
   ]);

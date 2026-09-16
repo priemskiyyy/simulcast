@@ -21,19 +21,33 @@ const createSubscription = (
   options: SubscriptionOptions | undefined,
 ): AdapterSubscription<Subscription> => {
   const subscription = client.newSubscription(channel, options);
-  const handleState: SubscriptionEvents["state"] = ({ newState }) =>
-    observer.state(SUBSCRIPTION_STATES[newState]);
+  const handleState: SubscriptionEvents["state"] = ({ newState }) => {
+    const state = SUBSCRIPTION_STATES[newState];
+
+    // `subscribed` follows immediately and carries the recovery result with it.
+    if (state === "subscribed") {
+      return;
+    }
+
+    observer.state(state);
+  };
+  const handleSubscribed: SubscriptionEvents["subscribed"] = ({
+    wasRecovering,
+    recovered,
+  }) => observer.state("subscribed", { recovered: wasRecovering && recovered });
   const handlePublication: SubscriptionEvents["publication"] = (publication) =>
     observer.publication({ data: publication.data, native: publication });
   const handleError: SubscriptionEvents["error"] = (error) =>
     observer.error({ error });
 
   subscription.on("state", handleState);
+  subscription.on("subscribed", handleSubscribed);
   subscription.on("publication", handlePublication);
   subscription.on("error", handleError);
 
   const dispose = () => {
     subscription.off("state", handleState);
+    subscription.off("subscribed", handleSubscribed);
     subscription.off("publication", handlePublication);
     subscription.off("error", handleError);
     client.removeSubscription(subscription);

@@ -11,6 +11,7 @@ export type RealtimeSnapshot = {
     name: string;
     state: ChannelState;
     error: AdapterError | null;
+    recovered: boolean;
     consumers: { publications: number; status: number };
   }>;
 };

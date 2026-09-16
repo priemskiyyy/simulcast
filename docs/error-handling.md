@@ -42,7 +42,14 @@ lifecycle and ownership layer, not a cache.
 
 ## Recovering missed publications
 
-Recovery, history, and rewind are provider features and stay on the native
-client. With Centrifugo, the `subscribed` event on the native subscription
-reports `wasRecovering` and `recovered`; when recovery fails, refetch from your
-API.
+How a provider recovers is its own business, but whether it did is on the
+channel status. `useChannelStatus(channel).recovered` is `true` only when the
+provider replayed the publications missed since the last subscription, so
+`false` is the safe default: it covers failed recovery and providers that offer
+none. Centrifugo reports it from its `subscribed` event; providers without the
+concept always report `false`.
+
+Replayed publications arrive after the status update, so a `subscribed` status
+with `recovered: true` is seen before the gap is delivered. When it is `false`,
+refetch from your API: see
+[Refetch after a gap](recipes.md#refetch-after-a-gap).

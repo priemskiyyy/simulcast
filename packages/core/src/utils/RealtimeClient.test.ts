@@ -169,13 +169,57 @@ test("status keeps the last error until the subscription succeeds", () => {
 
   observer.state("subscribing");
   observer.error(error);
-  expect(channel.status.get()).toEqual({ state: "subscribing", error });
+  expect(channel.status.get()).toEqual({
+    state: "subscribing",
+    error,
+    recovered: false,
+  });
   observer.state("unsubscribed");
-  expect(channel.status.get()).toEqual({ state: "unsubscribed", error });
+  expect(channel.status.get()).toEqual({
+    state: "unsubscribed",
+    error,
+    recovered: false,
+  });
   observer.state("subscribed");
-  expect(channel.status.get()).toEqual({ state: "subscribed", error: null });
+  expect(channel.status.get()).toEqual({
+    state: "subscribed",
+    error: null,
+    recovered: false,
+  });
   unsubscribe();
-  expect(channel.status.get()).toEqual({ state: "detached", error: null });
+  expect(channel.status.get()).toEqual({
+    state: "detached",
+    error: null,
+    recovered: false,
+  });
+  stop();
+});
+
+test("status reports whether the provider replayed the gap", () => {
+  const { client, connections } = createClient();
+  const channel = client.channel("rooms:one");
+  const stop = client.connect();
+  const unsubscribe = channel.subscribe(() => {});
+  const { observer } = subscriptionFor(
+    connectionAt(connections, 0),
+    "rooms:one",
+  );
+
+  observer.state("subscribed");
+  expect(channel.status.get().recovered).toBe(false);
+  observer.state("subscribing");
+  observer.state("subscribed", { recovered: true });
+  expect(channel.status.get()).toEqual({
+    state: "subscribed",
+    error: null,
+    recovered: true,
+  });
+
+  // A subscription that drops recovered nothing, whatever the last one replayed.
+  observer.state("subscribing");
+  expect(channel.status.get().recovered).toBe(false);
+
+  unsubscribe();
   stop();
 });
 
@@ -210,7 +254,11 @@ test("channel consumers follow session changes and stop listening while the sess
   expect(client.native.get()).toBe(secondConnection);
   second();
   expect(secondSubscription.disposeCount).toBe(1);
-  expect(channel.status.get()).toEqual({ state: "detached", error: null });
+  expect(channel.status.get()).toEqual({
+    state: "detached",
+    error: null,
+    recovered: false,
+  });
   stopPublications();
 
   const third = client.connect();
@@ -236,7 +284,11 @@ test("a late adapter callback after the last consumer leaves is ignored", () => 
   subscription.observer.publication({ data: 1, native: null });
 
   expect(handler).not.toHaveBeenCalled();
-  expect(channel.status.get()).toEqual({ state: "detached", error: null });
+  expect(channel.status.get()).toEqual({
+    state: "detached",
+    error: null,
+    recovered: false,
+  });
   stop();
 });
 
@@ -259,7 +311,11 @@ test("subscription setup failure rolls back ownership so the channel can be retr
 
   expect(() => channel.subscribe(() => {})).toThrow(failure);
   expect(connection.subscriptions).toEqual([]);
-  expect(channel.status.get()).toEqual({ state: "detached", error: null });
+  expect(channel.status.get()).toEqual({
+    state: "detached",
+    error: null,
+    recovered: false,
+  });
   const unsubscribe = channel.subscribe(() => {});
   expect(activeChannels(connection)).toEqual(["rooms:one"]);
   unsubscribe();
@@ -313,8 +369,16 @@ test.each(["subscription", "connection"])(
     }
     expect(client.native.get()).toBeNull();
     expect(client.connection.get()).toBe("disconnected");
-    expect(first.status.get()).toEqual({ state: "detached", error: null });
-    expect(second.status.get()).toEqual({ state: "detached", error: null });
+    expect(first.status.get()).toEqual({
+      state: "detached",
+      error: null,
+      recovered: false,
+    });
+    expect(second.status.get()).toEqual({
+      state: "detached",
+      error: null,
+      recovered: false,
+    });
 
     const stop = client.connect();
     const connection = connectionAt(connections, -1);

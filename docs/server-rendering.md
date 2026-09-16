@@ -9,11 +9,11 @@ description: "Understand server snapshots, hydration, client components, and req
 Server rendering opens no socket. The provider's effect never runs, so hooks
 render from inactive snapshots:
 
-| Hook                 | Server value                         |
-| -------------------- | ------------------------------------ |
-| `useConnectionState` | `"disconnected"`                     |
-| `useChannelStatus`   | `{ state: "detached", error: null }` |
-| `useChannel`         | nothing; the callback does not run   |
+| Hook                 | Server value                                           |
+| -------------------- | ------------------------------------------------------ |
+| `useConnectionState` | `"disconnected"`                                       |
+| `useChannelStatus`   | `{ state: "detached", error: null, recovered: false }` |
+| `useChannel`         | nothing; the callback does not run                     |
 
 Hydration begins from those same snapshots, so the first client render matches
 the server markup. The connection starts afterwards, in an effect.

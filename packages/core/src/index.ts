@@ -23,5 +23,6 @@ export type { AdapterSubscribeRequest } from "src/types/AdapterSubscribeRequest"
 export type { AdapterSubscription } from "src/types/AdapterSubscription";
 export type { AdapterSubscriptionObserver } from "src/types/AdapterSubscriptionObserver";
 export type { AdapterSubscriptionState } from "src/types/AdapterSubscriptionState";
+export type { AdapterSubscriptionDetail } from "src/types/AdapterSubscriptionDetail";
 export type { AdapterError } from "src/types/AdapterError";
 export type { RealtimePublication } from "src/types/RealtimePublication";

@@ -47,13 +47,13 @@ Parse at the boundary so a malformed publication never reaches the cache.
 
 ## Refetch after a gap
 
-For adapters that retry subscriptions, a transition from
-`subscribing` back to `subscribed` after the first subscription means messages
-may have been missed on providers without recovery:
+A subscription that returns to `subscribed` may have missed publications while
+it was away. `recovered` tells you whether the provider replayed them, so a
+refetch only runs when there is a gap left to fill:
 
 ```tsx
 useChannelStatus(`rooms:${roomId}`, (status) => {
-  if (status.state !== "subscribed") {
+  if (status.state !== "subscribed" || status.recovered) {
     return;
   }
 
@@ -62,7 +62,8 @@ useChannelStatus(`rooms:${roomId}`, (status) => {
 ```
 
 The callback fires on changes only, so the first `subscribed` also triggers one
-refetch, which most rooms want anyway.
+refetch, which most rooms want anyway. Providers without recovery report
+`recovered: false` throughout, which refetches after every reconnect.
 
 ## One decoder for several channels
 

@@ -77,14 +77,14 @@ demand, so a badge or devtools panel never keeps a subscription alive.
 
 ## What Simulcast normalizes
 
-| Normalized                                  | Left to the provider               |
-| ------------------------------------------- | ---------------------------------- |
-| Connection and session ownership            | Delivery guarantees and QoS        |
-| Logical channels and subscription ownership | Presence and history               |
-| Shared consumers and deterministic cleanup  | RPC and provider-specific recovery |
-| Coarse connection and channel state         | Authorization models               |
-| Publication delivery with native context    | Publishing semantics               |
-| Diagnostics and devtools                    |                                    |
+| Normalized                                  | Left to the provider                   |
+| ------------------------------------------- | -------------------------------------- |
+| Connection and session ownership            | Delivery guarantees and QoS            |
+| Logical channels and subscription ownership | Presence and history                   |
+| Shared consumers and deterministic cleanup  | RPC, history, and how recovery happens |
+| Coarse connection and channel state         | Authorization models                   |
+| Publication delivery with native context    | Publishing semantics                   |
+| Diagnostics and devtools                    |                                        |
 
 ```text
 React / Vue / Solid / Svelte / TypeScript

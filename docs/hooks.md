@@ -60,6 +60,7 @@ useChannelStatus(
 type ChannelStatus = {
   state: "detached" | "unsubscribed" | "subscribing" | "subscribed";
   error: { error: unknown } | null;
+  recovered: boolean;
 };
 ```
 
@@ -72,6 +73,12 @@ that reports it has stopped. If a channel stays `detached`, check both its enabl
 
 `error.error` is the provider's own error value. The optional callback fires on
 changes after registration; it never replays the current value.
+
+`recovered` answers whether the provider replayed the publications missed since
+the last subscription, and only `subscribed` can report `true`. Read it as
+"assume a gap unless told otherwise": `false` covers a provider that recovered
+nothing, one whose recovery failed, and one with no recovery to offer. See
+[Refetch after a gap](recipes.md#refetch-after-a-gap).
 
 ## useConnectionState
 
