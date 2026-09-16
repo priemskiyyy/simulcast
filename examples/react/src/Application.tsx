@@ -5,11 +5,12 @@ import {
   initialApplicationState,
   resolveSource,
 } from "example-shared";
-import { useMemo, useReducer } from "react";
+import { useMemo, useReducer, useState } from "react";
 import { SimulcastDevtools } from "@priemskiyyy/simulcast-devtools/react";
 import { RealtimeProvider } from "@priemskiyyy/simulcast-react";
 import { Dashboard } from "src/components/Dashboard/Dashboard";
 import { Header } from "src/components/Header/Header";
+import { SharedSubscriptionPanel } from "src/components/SharedSubscriptionPanel/SharedSubscriptionPanel";
 import { SimulationControls } from "src/components/SimulationControls/SimulationControls";
 import "src/styles.css";
 
@@ -18,6 +19,7 @@ export const Application: React.FunctionComponent = () => {
     applicationReducer,
     initialApplicationState,
   );
+  const [dashboardMounted, setDashboardMounted] = useState(true);
   const { sourceType, endpoint } = state;
   // The adapter captures its endpoint, so the client changes exactly when the source does.
   const client = useMemo(
@@ -42,7 +44,14 @@ export const Application: React.FunctionComponent = () => {
         {state.sourceType === "SIMULATION" ? (
           <SimulationControls roomId={state.roomId} />
         ) : null}
-        <Dashboard key={state.roomId} roomId={state.roomId} />
+        <SharedSubscriptionPanel
+          roomId={state.roomId}
+          dashboardMounted={dashboardMounted}
+          onDashboardToggle={() => setDashboardMounted((current) => !current)}
+        />
+        {dashboardMounted ? (
+          <Dashboard key={state.roomId} roomId={state.roomId} />
+        ) : null}
       </main>
       {/* Always rendered: this example is the hosted demo, where devtools are the point. */}
       <SimulcastDevtools />
