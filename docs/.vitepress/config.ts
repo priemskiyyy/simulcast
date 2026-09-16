@@ -1,4 +1,4 @@
-import { writeFile } from "node:fs/promises";
+import { readdir, readFile, writeFile } from "node:fs/promises";
 import { join } from "node:path";
 import { defineConfig } from "vitepress";
 
@@ -9,6 +9,42 @@ const base =
   process.env.DOCS_BASE_PATH ?? (siteUrl ? new URL(siteUrl).pathname : "/");
 const description =
   "Provider-independent realtime subscriptions for TypeScript. One lifecycle model for connections and shared channel subscriptions across Centrifugo, Pusher, Ably, MQTT, WebSocket, SSE, and more, from React, Vue, Solid, and Svelte.";
+
+// llms.txt lists every guide with its description; llms-full.txt inlines them.
+const writeLlmsText = async (srcDir: string, outDir: string) => {
+  const origin = siteUrl ? siteUrl.replace(/\/$/, "") : base.replace(/\/$/, "");
+  const files = (await readdir(srcDir, { recursive: true }))
+    .filter((file) => file.endsWith(".md"))
+    .filter((file) => !file.startsWith(".vitepress"))
+    .filter((file) => file !== "README.md" && file !== "index.md")
+    .sort();
+  const pages = await Promise.all(
+    files.map(async (file) => {
+      const source = await readFile(join(srcDir, file), "utf8");
+      const title = source.match(/^# (.+)$/m)?.[1] ?? file;
+      const summary = source.match(/^description: "(.+)"$/m)?.[1] ?? "";
+      const url = `${origin}/${file.replace(/\.md$/, "")}`;
+      return { title, summary, url, source };
+    }),
+  );
+  const index = [
+    "# Simulcast",
+    "",
+    `> ${description}`,
+    "",
+    "## Docs",
+    "",
+    ...pages.map(
+      ({ title, summary, url }) => `- [${title}](${url}): ${summary}`,
+    ),
+    "",
+  ].join("\n");
+  const full = pages
+    .map(({ url, source }) => `<!-- ${url} -->\n${source.trim()}`)
+    .join("\n\n---\n\n");
+  await writeFile(join(outDir, "llms.txt"), index);
+  await writeFile(join(outDir, "llms-full.txt"), `${full}\n`);
+};
 
 export default defineConfig({
   base,
@@ -26,7 +62,7 @@ export default defineConfig({
     ["meta", { name: "theme-color", content: "#0f766e" }],
   ],
   ...(siteUrl ? { sitemap: { hostname: siteUrl } } : {}),
-  buildEnd: async ({ outDir }) => {
+  buildEnd: async ({ outDir, srcDir }) => {
     const sitemap = siteUrl
       ? `Sitemap: ${new URL("sitemap.xml", `${siteUrl.replace(/\/$/, "")}/`).href}\n`
       : "";
@@ -34,6 +70,7 @@ export default defineConfig({
       join(outDir, "robots.txt"),
       `User-agent: *\nAllow: /\n${sitemap}`,
     );
+    await writeLlmsText(srcDir, outDir);
   },
   transformHead: ({ pageData }) => {
     const title =
