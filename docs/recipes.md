@@ -74,14 +74,59 @@ decoder, so codegen and hand-written calls share one source of truth:
 export const { useChannelEvent } = createChannelEventHooks<Events>();
 ```
 
+## Migrate between providers
+
+Two clients can run side by side. Each provider owns its own session, and hooks
+resolve the nearest one, so a component belongs to exactly one client:
+
+```tsx
+<RealtimeProvider client={pusherRealtime}>
+  <LegacyFeature />
+  <RealtimeProvider client={centrifugoRealtime}>
+    <MigratedFeature />
+  </RealtimeProvider>
+</RealtimeProvider>
+```
+
+`MigratedFeature` and everything below it use Centrifugo; `LegacyFeature` keeps
+Pusher. Move features into the inner tree one at a time. A component cannot use
+both clients through hooks, so reach the other one imperatively with
+`client.channel(name).subscribe(...)` if one component needs both.
+
+If the application [registers its client](hooks.md#type-the-client-once), name
+both while the migration runs:
+
+```ts
+declare module "@priemskiyyy/simulcast-react" {
+  interface Register {
+    client: typeof pusherRealtime | typeof centrifugoRealtime;
+  }
+}
+```
+
+`useNativeConnection()` then returns `Pusher | Centrifuge | null`, so narrow it
+before a provider-specific call:
+
+```ts
+const native = useNativeConnection();
+
+if (native instanceof Centrifuge) {
+  await native.publish("rooms:demo", { text });
+}
+```
+
+Drop the old client from the registration once the migration finishes. Every
+provider still holding it fails to compile, which turns the last step into a
+compile-time checklist.
+
 ## Provider-specific calls
 
 For shared-connection adapters, provider-specific operations stay on the native client. Reach it
-through the adapter's hook, or `useRealtimeClient().native` in a
-`useSyncExternalStore`, and guard against `null` while no session is active:
+through `useNativeConnection()`, typed once you [register the client](hooks.md#type-the-client-once),
+and guard against `null` while no session is active:
 
 ```tsx
-const client = useCentrifuge();
+const client = useNativeConnection(); // Centrifuge | null
 
 const send = async (text: string) => {
   if (client === null) {
