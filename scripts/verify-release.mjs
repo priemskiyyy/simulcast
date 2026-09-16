@@ -24,14 +24,15 @@ const packages = Object.fromEntries(
   ),
 );
 const tag = process.env.RELEASE_TAG;
-// A release tag names its package: `<name>-v<version>`.
+// A release tag names its package: `<name>-v<version>`. The version always
+// starts with a digit, so a name ending in `-v...`, such as simulcast-vue, is
+// not mistaken for the version.
 const fromTag =
   tag === undefined
     ? []
     : [
         Object.keys(packages).find(
-          (name) =>
-            name.split("/").at(-1) === tag.replace(/-v[^-]*(-[\w.]+)?$/, ""),
+          (name) => name.split("/").at(-1) === tag.replace(/-v\d[\w.+-]*$/, ""),
         ) ?? tag,
       ];
 const selected = [...process.argv.slice(2), ...fromTag];
