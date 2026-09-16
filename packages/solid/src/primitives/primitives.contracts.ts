@@ -6,6 +6,8 @@ import { createChannelEventHooks } from "src/primitives/createChannelEventHooks"
 import { useChannel } from "src/primitives/useChannel";
 import type { PublicationHandler } from "src/types/PublicationHandler";
 import { useRealtimeClient } from "src/primitives/useRealtimeClient";
+import { useNativeConnection } from "src/primitives/useNativeConnection";
+import type { RegisteredClient } from "src/types/Register";
 
 type Message = { text: string };
 const handleMessage: PublicationHandler<Message> = () => {};
@@ -22,6 +24,10 @@ expectTypeOf<RealtimeClient<{ id: string }, { offset: number }>>().toExtend<
 >();
 
 export const useTypeContracts = () => {
+  // Nothing is registered inside the package, so the native client is unknown.
+  expectTypeOf<RegisteredClient>().toEqualTypeOf<RealtimeClient>();
+  expectTypeOf(useNativeConnection()).toEqualTypeOf<Accessor<unknown>>();
+
   expectTypeOf(useRealtimeClient()).toEqualTypeOf<Accessor<RealtimeClient>>();
 
   useChannel("rooms:one", (data) => {

@@ -1,9 +1,9 @@
 import { createEffect, createMemo, onCleanup } from "solid-js";
 import type { Accessor } from "solid-js";
-import type { RealtimePublication } from "@priemskiyyy/simulcast";
 import { useRealtimeClient } from "src/primitives/useRealtimeClient";
 import type { ChannelInput } from "src/types/ChannelInput";
 import type { PublicationHandler } from "src/types/PublicationHandler";
+import type { RegisteredPublication } from "src/types/Register";
 import { access } from "src/utils/internal/access";
 
 export type UseChannelOptions<TData = unknown> = {
@@ -32,7 +32,7 @@ export const useChannel = <TData = unknown>(
 ) => {
   const client = useRealtimeClient();
 
-  const handlePublication = (publication: RealtimePublication) => {
+  const handlePublication = (publication: RegisteredPublication) => {
     if (typeof options.parse !== "function") {
       return onEvent(publication.data as TData, publication);
     }

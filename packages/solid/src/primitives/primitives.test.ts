@@ -14,6 +14,7 @@ import { createChannelEventHooks } from "src/primitives/createChannelEventHooks"
 import { useChannel } from "src/primitives/useChannel";
 import { useChannelStatus } from "src/primitives/useChannelStatus";
 import { useConnectionState } from "src/primitives/useConnectionState";
+import { useNativeConnection } from "src/primitives/useNativeConnection";
 import { useRealtimeClient } from "src/primitives/useRealtimeClient";
 
 afterEach(cleanup);
@@ -111,6 +112,32 @@ test("the session ID and enabled flag control the connection while object identi
   expect(result()).toBe("disconnected");
   setSession({ id: "two", enabled: true });
   expect(connections).toHaveLength(3);
+});
+
+test("useNativeConnection follows the session's native client", () => {
+  const { client, connections } = createHarness();
+  const [session, setSession] = createSignal<
+    NonNullable<RealtimeProviderProps["session"]>
+  >({ id: "one", enabled: false });
+  const { result } = renderHook(() => useNativeConnection(), {
+    wrapper: (props: ParentProps) =>
+      createComponent(RealtimeProvider, {
+        client,
+        get session() {
+          return session();
+        },
+        get children() {
+          return props.children;
+        },
+      }),
+  });
+
+  expect(result()).toBeNull();
+  setSession({ id: "one", enabled: true });
+  expect(result()).toBe(connections[0]);
+  setSession({ id: "two", enabled: true });
+  expect(connections).toHaveLength(2);
+  expect(result()).toBe(connections[1]);
 });
 
 test("useChannel shares a subscription, follows an accessor channel, and honours enabled", () => {

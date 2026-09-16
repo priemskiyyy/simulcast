@@ -6,11 +6,11 @@ import {
   onCleanup,
 } from "solid-js";
 import type { Component, ParentProps } from "solid-js";
-import type { RealtimeClient } from "@priemskiyyy/simulcast";
 import { RealtimeClientContext } from "src/context/RealtimeClientContext";
+import type { RegisteredClient } from "src/types/Register";
 
 export type RealtimeProviderProps = ParentProps<{
-  client: RealtimeClient;
+  client: RegisteredClient;
   session?: {
     /** Identifies the session, usually the signed-in account. Changing it replaces the connection. */
     id?: string;
