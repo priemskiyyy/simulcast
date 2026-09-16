@@ -46,8 +46,25 @@ const record = <TResource>(
  * Deterministic adapter for core tests. It records calls and exposes raw
  * observers; it is deliberately not well behaved, so tests can drive late,
  * duplicate, synchronous, and reentrant callbacks.
+ *
+ * The type arguments make the mock stand in for a provider's native types, so
+ * its client satisfies an application that registered a real adapter. The
+ * recorded connections and observers keep their own mock types, so tests still
+ * emit `native: null`.
+ *
+ * @example
+ * ```ts
+ * const { adapter, connections } = createMockAdapter();
+ * const centrifugo = createMockAdapter<Centrifuge, PublicationContext>();
+ * ```
  */
-export const createMockAdapter = (options: MockAdapterOptions = {}) => {
+export const createMockAdapter = <
+  TNativeConnection = MockConnection,
+  TNativePublication = unknown,
+  TNativeSubscription = MockSubscription,
+>(
+  options: MockAdapterOptions = {},
+) => {
   const connections: MockConnection[] = [];
 
   const adapter: RealtimeAdapter<MockConnection, unknown, MockSubscription> = {
@@ -96,5 +113,14 @@ export const createMockAdapter = (options: MockAdapterOptions = {}) => {
     },
   };
 
-  return { adapter, connections };
+  return {
+    // A mock stands in for the provider it replaces: the recorded objects keep
+    // their mock types while the adapter claims the provider's native types.
+    adapter: adapter as unknown as RealtimeAdapter<
+      TNativeConnection,
+      TNativePublication,
+      TNativeSubscription
+    >,
+    connections,
+  };
 };
