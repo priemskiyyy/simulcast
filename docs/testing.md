@@ -13,6 +13,25 @@ state, or fail exactly when it wants to.
 pnpm add -D @priemskiyyy/simulcast
 ```
 
+## Registered applications
+
+If your application [registers its client](hooks.md#type-the-client-once), the
+provider only accepts that client's type. Give the mock the same native types
+and it stands in for the real adapter:
+
+```ts
+import type { Centrifuge, PublicationContext } from "centrifuge";
+import { createMockAdapter } from "@priemskiyyy/simulcast/mock";
+
+const { adapter, connections } = createMockAdapter<
+  Centrifuge,
+  PublicationContext
+>();
+```
+
+The recorded connections and observers keep their own mock types, so tests still
+emit `native: null`. Applications that do not register need no type arguments.
+
 ## A component test
 
 ```tsx
