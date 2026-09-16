@@ -11,6 +11,10 @@ on:
       - ".github/actions/setup/**"
       - ".github/workflows/docs.test.yml"
       - "docs/**"
+      - "examples/react/**"
+      - "examples/shared/**"
+      - "packages/**"
+      - "scripts/build-demo.mjs"
       - "scripts/verify-docs.mjs"
 
 permissions:
@@ -30,8 +34,12 @@ jobs:
       - name: Setup workspace
         uses: ./.github/actions/setup
 
+      - name: Build packages for the hosted demo
+        run: pnpm build
+
       # VitePress fails the build on dead internal links, so this doubles as a
-      # link check for every page.
+      # link check for every page. The build also bundles the React example into
+      # dist/demo.
       - name: Check documentation component types
         run: pnpm lint:docs
 

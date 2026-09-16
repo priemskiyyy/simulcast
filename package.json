@@ -22,7 +22,7 @@
     "test:package": "node scripts/verify-packages.mjs",
     "verify:release": "node scripts/verify-release.mjs",
     "check:release": "pnpm check && pnpm lint:docs && pnpm build:docs && pnpm verify:docs && pnpm test:browser && pnpm test:package && pnpm verify:release",
-    "build:docs": "vitepress build docs",
+    "build:docs": "vitepress build docs && node scripts/build-demo.mjs",
     "dev:docs": "vitepress dev docs",
     "test:examples": "pnpm build && pnpm generate:hooks && pnpm -r --filter './examples/*' build && playwright test -c examples/playwright.config.ts",
     "test:providers": "pnpm --filter test-providers test",

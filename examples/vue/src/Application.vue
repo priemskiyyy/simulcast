@@ -13,12 +13,12 @@ import SimulationControls from "src/components/SimulationControls.vue";
 
 const state = reactive({ ...initialApplicationState });
 // The adapter captures its endpoint, so the client changes exactly when the source does.
+const isDevelopment = import.meta.env.DEV;
 const client = computed(() =>
   createRealtimeClient(
     resolveSource({ sourceType: state.sourceType, endpoint: state.endpoint }),
   ),
 );
-const isDevelopment = import.meta.env.DEV;
 </script>
 
 <template>

@@ -10,7 +10,8 @@ const siteUrl = process.env.DOCS_SITE_URL;
 const base =
   process.env.DOCS_BASE_PATH ?? (siteUrl ? new URL(siteUrl).pathname : "/");
 const files = readdirSync(output, { recursive: true }).filter(
-  (file) => file.endsWith(".html") && file !== "404.html",
+  (file) =>
+    file.endsWith(".html") && file !== "404.html" && !file.startsWith("demo/"),
 );
 assert.ok(files.length > 0, "Build the documentation before verifying it");
 const pageIds = new Map();
@@ -42,7 +43,6 @@ for (const file of files) {
     1,
     `${file}: expected one main heading`,
   );
-  // The documentation home page renders VPDoc like any other page.
   assert.equal(
     document.querySelectorAll("main").length,
     1,

@@ -4,12 +4,13 @@ Run `pnpm dev:docs` for the documentation site or browse these guides on GitHub.
 
 ## Start here
 
-| Guide                                 | What you will learn                                     |
-| ------------------------------------- | ------------------------------------------------------- |
-| [Getting started](getting-started.md) | Build a working React subscription without credentials  |
-| [Installation](installation.md)       | Choose framework packages and provider SDKs             |
-| [Adapters](adapters.md)               | Compare all eleven adapters and their channel semantics |
-| [Examples](examples.md)               | Run Mission Control in five frameworks                  |
+| Guide                                                      | What you will learn                                     |
+| ---------------------------------------------------------- | ------------------------------------------------------- |
+| [Getting started](getting-started.md)                      | Build a working React subscription without credentials  |
+| [Installation](installation.md)                            | Choose framework packages and provider SDKs             |
+| [Adapters](adapters.md)                                    | Compare all eleven adapters and their channel semantics |
+| [Examples](examples.md)                                    | Run Mission Control in five frameworks                  |
+| [Live demo](https://priemskiyyy.github.io/simulcast/demo/) | Open the hosted React example with devtools             |
 
 ## Build and inspect
 

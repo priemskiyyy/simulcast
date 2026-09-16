@@ -8,6 +8,13 @@ The repository includes the same Mission Control dashboard in React, Vue, Solid,
 Svelte, and Expo. Each example receives messages, metrics, alerts, and deployment
 updates through six generated event hooks and four shared subscriptions.
 
+## Open the live demo
+
+The React example is hosted at [priemskiyyy.github.io/simulcast/demo](https://priemskiyyy.github.io/simulcast/demo/)
+with no backend, account, or credentials. Open the Simulcast Devtools launcher,
+add and remove consumers, watch listener counts, and confirm that several widgets
+share one native subscription per channel.
+
 ## Run an example without credentials
 
 From a checkout of the repository:
@@ -57,13 +64,14 @@ On a physical phone, use your computer's reachable LAN address instead of
 
 ## Learn from the source
 
-| Concern                                    | Implementation                           |
-| ------------------------------------------ | ---------------------------------------- |
-| Payload validation and event map           | `examples/shared/src/realtime`           |
-| Framework bindings and component lifecycle | Each framework's `src` directory         |
-| Generated event hooks                      | Each example's configured codegen output |
-| Shared simulation, reducer, and web styles | `examples/shared/src`                    |
-| Native lifecycle and layout                | `examples/expo/src`                      |
+| Concern                                    | Implementation                            |
+| ------------------------------------------ | ----------------------------------------- |
+| Payload validation and event map           | `examples/shared/src/realtime`            |
+| Client registration for typed hooks        | Each example's `src/realtime/register.ts` |
+| Framework bindings and component lifecycle | Each framework's `src` directory          |
+| Generated event hooks                      | Each example's configured codegen output  |
+| Shared simulation, reducer, and web styles | `examples/shared/src`                     |
+| Native lifecycle and layout                | `examples/expo/src`                       |
 
 The examples use Zod parsers, exhaustive domain matching with ts-pattern, CVA
 variants, and `clsx` class composition. Components use each framework's own

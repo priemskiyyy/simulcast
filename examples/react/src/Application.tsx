@@ -44,7 +44,8 @@ export const Application: React.FunctionComponent = () => {
         ) : null}
         <Dashboard key={state.roomId} roomId={state.roomId} />
       </main>
-      {import.meta.env.DEV ? <SimulcastDevtools /> : null}
+      {/* Always rendered: this example is the hosted demo, where devtools are the point. */}
+      <SimulcastDevtools />
     </RealtimeProvider>
   );
 };

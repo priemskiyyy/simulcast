@@ -84,6 +84,8 @@ export default defineConfig({
     return head;
   },
   srcExclude: ["README.md"],
+  // The hosted React example is copied into dist/demo after the site builds.
+  ignoreDeadLinks: [/^\/demo\//],
   cleanUrls: true,
   lastUpdated: true,
   themeConfig: {

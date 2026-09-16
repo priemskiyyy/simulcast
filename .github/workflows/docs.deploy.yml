@@ -12,6 +12,10 @@ on:
       - ".github/actions/setup/**"
       - ".github/workflows/docs.deploy.yml"
       - "docs/**"
+      - "examples/react/**"
+      - "examples/shared/**"
+      - "packages/**"
+      - "scripts/build-demo.mjs"
       - "scripts/verify-docs.mjs"
 
 permissions:
@@ -38,6 +42,9 @@ jobs:
       - name: Configure Pages
         id: pages
         uses: actions/configure-pages@v5
+
+      - name: Build packages for the hosted demo
+        run: pnpm build
 
       - name: Check documentation component types
         run: pnpm lint:docs
