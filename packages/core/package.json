@@ -31,6 +31,10 @@
     "./mock": {
       "types": "./dist/mock.d.ts",
       "import": "./dist/mock.js"
+    },
+    "./testing": {
+      "types": "./dist/testing.d.ts",
+      "import": "./dist/testing.js"
     }
   },
   "scripts": {
@@ -53,5 +57,13 @@
     "react-native",
     "expo"
   ],
-  "homepage": "https://priemskiyyy.github.io/simulcast/"
+  "homepage": "https://priemskiyyy.github.io/simulcast/",
+  "peerDependencies": {
+    "vitest": ">=3"
+  },
+  "peerDependenciesMeta": {
+    "vitest": {
+      "optional": true
+    }
+  }
 }
