@@ -63,7 +63,8 @@ useChannel<Message>(channel, (message) => console.log(message.text), {
 | `useChannel(channel, handler, options?)` | nothing                                 | yes                  |
 | `useChannelStatus(channel)`              | `Readonly<ShallowRef<ChannelStatus>>`   | no                   |
 | `useConnectionState()`                   | `Readonly<ShallowRef<ConnectionState>>` | no                   |
-| `useRealtimeClient()`                    | `Ref<RealtimeClient>`                   | no                   |
+| `useNativeConnection()`                  | `Readonly<ShallowRef<TNative \| null>>` | no                   |
+| `useRealtimeClient()`                    | `Ref<RegisteredClient>`                 | no                   |
 
 Every `channel` argument is a `MaybeRefOrGetter<string>`. A ref or getter
 resubscribes when its value changes; a plain string is fixed for the component's
@@ -79,6 +80,32 @@ watch(status, ({ state, error }) => {
   }
 });
 ```
+
+`useNativeConnection()` mirrors the provider's native adapter connection into
+a ref that reads `null` on the server and while no session is active. Its
+type is `unknown` until the client is registered:
+
+```ts
+// src/realtime.ts
+export const realtime = new RealtimeClient({
+  adapter: centrifugo({ transport }),
+});
+
+declare module "@priemskiyyy/simulcast-vue" {
+  interface Register {
+    client: typeof realtime;
+  }
+}
+```
+
+```ts
+const centrifuge = useNativeConnection(); // Readonly<ShallowRef<Centrifuge | null>>
+```
+
+Registering also types `useRealtimeClient()` and the `native` field of every
+publication handler. Nothing changes at runtime. The augmentation is program-wide, so
+it assumes one client per application; see the
+[React notes](hooks.md#type-the-client-once) for several clients and libraries.
 
 ## Typed events
 

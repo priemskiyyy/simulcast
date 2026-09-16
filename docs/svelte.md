@@ -59,12 +59,13 @@ server rendering opens nothing.
 <p>{connection.current} · {status.current.state}</p>
 ```
 
-| Utility                                  | Returns                        | Opens a subscription |
-| ---------------------------------------- | ------------------------------ | -------------------- |
-| `useChannel(channel, handler, options?)` | nothing                        | yes                  |
-| `useChannelStatus(channel)`              | `ReadableBox<ChannelStatus>`   | no                   |
-| `useConnectionState()`                   | `ReadableBox<ConnectionState>` | no                   |
-| `useRealtimeClient()`                    | `ReadableBox<RealtimeClient>`  | no                   |
+| Utility                                  | Returns                         | Opens a subscription |
+| ---------------------------------------- | ------------------------------- | -------------------- |
+| `useChannel(channel, handler, options?)` | nothing                         | yes                  |
+| `useChannelStatus(channel)`              | `ReadableBox<ChannelStatus>`    | no                   |
+| `useConnectionState()`                   | `ReadableBox<ConnectionState>`  | no                   |
+| `useNativeConnection()`                  | `ReadableBox<TNative \| null>`  | no                   |
+| `useRealtimeClient()`                    | `ReadableBox<RegisteredClient>` | no                   |
 
 Every `channel` argument is a value or a getter. A getter resubscribes when its
 value changes; a plain string is fixed for the component's lifetime.
@@ -82,6 +83,32 @@ $effect(() => {
   }
 });
 ```
+
+`useNativeConnection()` mirrors the provider's native adapter connection into
+a box that reads `null` on the server and while no session is active. Its
+type is `unknown` until the client is registered:
+
+```ts
+// src/realtime.ts
+export const realtime = new RealtimeClient({
+  adapter: centrifugo({ transport }),
+});
+
+declare module "@priemskiyyy/simulcast-svelte" {
+  interface Register {
+    client: typeof realtime;
+  }
+}
+```
+
+```ts
+const centrifuge = useNativeConnection(); // ReadableBox<Centrifuge | null>
+```
+
+Registering also types `useRealtimeClient()` and the `native` field of every
+publication handler. Nothing changes at runtime. The augmentation is program-wide, so
+it assumes one client per application; see the
+[React notes](hooks.md#type-the-client-once) for several clients and libraries.
 
 ## Typed events
 
