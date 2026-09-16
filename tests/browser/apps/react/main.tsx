@@ -7,17 +7,24 @@ import {
 } from "react";
 import { createRoot } from "react-dom/client";
 import type { ClientEvents, SubscriptionEvents } from "centrifuge";
-import { useCentrifuge } from "@priemskiyyy/simulcast-centrifugo/react";
 import { SimulcastDevtools } from "@priemskiyyy/simulcast-devtools/react";
 import {
   RealtimeProvider,
   useChannel,
   useChannelStatus,
   useConnectionState,
+  useNativeConnection,
 } from "@priemskiyyy/simulcast-react";
 import { createClient } from "../../shared/createClient";
 import { inspect } from "../../shared/inspection";
 import "../../shared/styles.css";
+
+declare module "@priemskiyyy/simulcast-react" {
+  // eslint-disable-next-line @typescript-eslint/consistent-type-definitions -- declaration merging needs an interface.
+  interface Register {
+    client: ReturnType<typeof createClient>;
+  }
+}
 
 const parameters = new URLSearchParams(location.search);
 const initialUser = parameters.get("user") ?? "browser-test";
@@ -113,7 +120,7 @@ const Session = ({ user }: { user: string }) => {
   const [error, setError] = useState("");
   const connection = useConnectionState();
   const status = useChannelStatus(channel);
-  const client = useCentrifuge();
+  const client = useNativeConnection();
 
   useEffect(() => {
     if (client === null) return;

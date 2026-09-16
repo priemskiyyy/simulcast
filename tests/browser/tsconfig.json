@@ -8,9 +8,6 @@
       "@priemskiyyy/simulcast-centrifugo": [
         "../../packages/adapters/centrifugo/dist/index.d.ts"
       ],
-      "@priemskiyyy/simulcast-centrifugo/react": [
-        "../../packages/adapters/centrifugo/dist/react.d.ts"
-      ],
       "@priemskiyyy/simulcast-devtools": [
         "../../packages/devtools/dist/index.d.ts"
       ],

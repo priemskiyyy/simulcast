@@ -1,7 +1,7 @@
 {
   "name": "@priemskiyyy/simulcast-centrifugo",
   "version": "0.1.0",
-  "description": "Centrifugo adapter for simulcast, with an optional React hook for the native Centrifuge client.",
+  "description": "Centrifugo adapter for simulcast.",
   "type": "module",
   "license": "MIT",
   "repository": {
@@ -27,10 +27,6 @@
     ".": {
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js"
-    },
-    "./react": {
-      "types": "./dist/react.d.ts",
-      "import": "./dist/react.js"
     }
   },
   "scripts": {
@@ -41,21 +37,10 @@
   },
   "peerDependencies": {
     "centrifuge": ">=5.7.2 <6",
-    "react": ">=19.2.0 <20",
-    "@priemskiyyy/simulcast": ">=0.1.0 <0.2",
-    "@priemskiyyy/simulcast-react": ">=0.1.0 <0.2"
-  },
-  "peerDependenciesMeta": {
-    "react": {
-      "optional": true
-    },
-    "@priemskiyyy/simulcast-react": {
-      "optional": true
-    }
+    "@priemskiyyy/simulcast": ">=0.1.0 <0.2"
   },
   "devDependencies": {
-    "@priemskiyyy/simulcast": "workspace:*",
-    "@priemskiyyy/simulcast-react": "workspace:*"
+    "@priemskiyyy/simulcast": "workspace:*"
   },
   "keywords": [
     "centrifugo",
@@ -64,7 +49,6 @@
     "realtime",
     "websocket",
     "pubsub",
-    "react",
     "typescript",
     "simulcast",
     "subscriptions"

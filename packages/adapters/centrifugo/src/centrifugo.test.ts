@@ -1,6 +1,8 @@
 import { Centrifuge, State, Subscription, SubscriptionState } from "centrifuge";
-import type { SubscriptionErrorContext } from "centrifuge";
-import { beforeEach, expect, test, vi } from "vitest";
+import type { PublicationContext, SubscriptionErrorContext } from "centrifuge";
+import { RealtimeClient, createRealtimeAdapter } from "@priemskiyyy/simulcast";
+import type { RealtimeChannel } from "@priemskiyyy/simulcast";
+import { beforeEach, expect, expectTypeOf, test, vi } from "vitest";
 import { centrifugo } from "src/centrifugo";
 
 const transport = "ws://localhost:8000/connection/websocket";
@@ -177,4 +179,30 @@ test("a failing connect disconnects the client and reports nothing", () => {
   expect(() => centrifugo({ transport }).connect(observer)).toThrow(failure);
   expect(disconnect).toHaveBeenCalledTimes(1);
   expect(observer.state).not.toHaveBeenCalled();
+});
+
+test("native types flow from the adapter into the client without extra generics", () => {
+  const client = new RealtimeClient({ adapter: centrifugo({ transport }) });
+
+  expectTypeOf(client.native.get()).toEqualTypeOf<Centrifuge | null>();
+  expectTypeOf(client.channel("rooms:one")).toEqualTypeOf<
+    RealtimeChannel<PublicationContext>
+  >();
+
+  type Client = { id: string };
+  type Message = { body: string };
+  type Channel = { name: string };
+  const custom = new RealtimeClient({
+    adapter: createRealtimeAdapter<Client, Message, Channel>({
+      name: "custom",
+      connect: () => {
+        throw new Error("Type-only adapter");
+      },
+    }),
+  });
+
+  expectTypeOf(custom.native.get()).toEqualTypeOf<Client | null>();
+  expectTypeOf(custom.channel("rooms:one")).toEqualTypeOf<
+    RealtimeChannel<Message>
+  >();
 });

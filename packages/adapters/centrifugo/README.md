@@ -27,9 +27,9 @@ const realtime = new RealtimeClient({
 
 ## Behavior
 
-Every session gets a fresh `Centrifuge` instance. Publications keep the SDK's `PublicationContext` in `publication.native`; the SDK's coarse client and subscription states are the contract's states.
+A Simulcast channel is a Centrifugo subscription channel. Every session gets a fresh `Centrifuge` instance. Publications keep the SDK's `PublicationContext` in `publication.native`; the SDK's coarse client and subscription states are the contract's states.
 
-`@priemskiyyy/simulcast-centrifugo/react` exports `useCentrifuge()`, which returns the current native client, or `null` while no Centrifugo session is active. It requires `react` and `@priemskiyyy/simulcast-react`.
+`useNativeConnection()` from any binding returns `Centrifuge | null` for provider-specific calls such as `publish`, once the client is registered with the binding's `Register` interface.
 
 ## Guides
 
