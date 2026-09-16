@@ -1,9 +1,9 @@
 import { onMounted, onWatcherCleanup, toValue, watch } from "vue";
 import type { MaybeRefOrGetter } from "vue";
-import type { RealtimePublication } from "@priemskiyyy/simulcast";
 import { useRealtimeClient } from "src/composables/useRealtimeClient";
 import type { ChannelInput } from "src/types/ChannelInput";
 import type { PublicationHandler } from "src/types/PublicationHandler";
+import type { RegisteredPublication } from "src/types/Register";
 
 export type UseChannelOptions<TData = unknown> = {
   /** Whether this listener is active. Defaults to true. */
@@ -31,7 +31,7 @@ export const useChannel = <TData = unknown>(
 ) => {
   const client = useRealtimeClient();
 
-  const handlePublication = (publication: RealtimePublication) => {
+  const handlePublication = (publication: RegisteredPublication) => {
     if (typeof options.parse !== "function") {
       return onEvent(publication.data as TData, publication);
     }

@@ -1,11 +1,13 @@
 import { expectTypeOf } from "vitest";
-import type { Ref } from "vue";
+import type { Ref, ShallowRef } from "vue";
 import type { RealtimeClient } from "@priemskiyyy/simulcast";
 import type { RealtimeProviderProps } from "src/components/RealtimeProvider";
 import { createChannelEventHooks } from "src/composables/createChannelEventHooks";
 import { useChannel } from "src/composables/useChannel";
 import type { PublicationHandler } from "src/types/PublicationHandler";
 import { useRealtimeClient } from "src/composables/useRealtimeClient";
+import { useNativeConnection } from "src/composables/useNativeConnection";
+import type { RegisteredClient } from "src/types/Register";
 
 type Message = { text: string };
 const handleMessage: PublicationHandler<Message> = () => {};
@@ -22,6 +24,12 @@ expectTypeOf<RealtimeClient<{ id: string }, { offset: number }>>().toExtend<
 >();
 
 export const useTypeContracts = () => {
+  // Nothing is registered inside the package, so the native client is unknown.
+  expectTypeOf<RegisteredClient>().toEqualTypeOf<RealtimeClient>();
+  expectTypeOf(useNativeConnection()).toEqualTypeOf<
+    Readonly<ShallowRef<unknown>>
+  >();
+
   expectTypeOf(useRealtimeClient()).toEqualTypeOf<
     Readonly<Ref<RealtimeClient>>
   >();

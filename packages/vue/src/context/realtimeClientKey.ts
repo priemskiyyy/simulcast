@@ -1,5 +1,6 @@
 import type { InjectionKey, Ref } from "vue";
-import type { RealtimeClient } from "@priemskiyyy/simulcast";
+import type { RegisteredClient } from "src/types/Register";
 
-export const REALTIME_CLIENT_KEY: InjectionKey<Readonly<Ref<RealtimeClient>>> =
-  Symbol("simulcast client");
+export const REALTIME_CLIENT_KEY: InjectionKey<
+  Readonly<Ref<RegisteredClient>>
+> = Symbol("simulcast client");

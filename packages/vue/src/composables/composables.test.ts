@@ -15,6 +15,7 @@ import { createChannelEventHooks } from "src/composables/createChannelEventHooks
 import { useChannel } from "src/composables/useChannel";
 import { useChannelStatus } from "src/composables/useChannelStatus";
 import { useConnectionState } from "src/composables/useConnectionState";
+import { useNativeConnection } from "src/composables/useNativeConnection";
 import { useRealtimeClient } from "src/composables/useRealtimeClient";
 
 const createHarness = (options?: MockAdapterOptions) => {
@@ -128,6 +129,41 @@ test("the session ID and enabled flag control the connection while object identi
   session.value = { id: "two", enabled: true };
   await nextTick();
   expect(connections).toHaveLength(3);
+  wrapper.unmount();
+});
+
+test("useNativeConnection follows the session's native client", async () => {
+  const { client, connections } = createHarness();
+  const session = ref<NonNullable<RealtimeProviderProps["session"]>>({
+    id: "one",
+    enabled: false,
+  });
+  let native: Readonly<Ref<unknown>> | undefined;
+  const wrapper = mount(
+    defineComponent(() => {
+      const Child = defineComponent(() => {
+        native = useNativeConnection();
+        return () => null;
+      });
+
+      return () =>
+        h(
+          RealtimeProvider,
+          { client, session: session.value },
+          { default: () => h(Child) },
+        );
+    }),
+  );
+
+  await nextTick();
+  expect(native?.value).toBeNull();
+  session.value = { id: "one", enabled: true };
+  await nextTick();
+  expect(native?.value).toBe(connections[0]);
+  session.value = { id: "two", enabled: true };
+  await nextTick();
+  expect(connections).toHaveLength(2);
+  expect(native?.value).toBe(connections[1]);
   wrapper.unmount();
 });
 

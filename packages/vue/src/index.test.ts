@@ -8,6 +8,7 @@ test("the package exposes the provider and composables without runtime internals
     "useChannel",
     "useChannelStatus",
     "useConnectionState",
+    "useNativeConnection",
     "useRealtimeClient",
   ]);
 });

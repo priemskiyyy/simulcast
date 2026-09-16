@@ -7,11 +7,11 @@ import {
   toRef,
   watch,
 } from "vue";
-import type { RealtimeClient } from "@priemskiyyy/simulcast";
 import { REALTIME_CLIENT_KEY } from "src/context/realtimeClientKey";
+import type { RegisteredClient } from "src/types/Register";
 
 export type RealtimeProviderProps = {
-  client: RealtimeClient;
+  client: RegisteredClient;
   session?: {
     /** Identifies the session, usually the signed-in account. Changing it replaces the connection. */
     id?: string;
