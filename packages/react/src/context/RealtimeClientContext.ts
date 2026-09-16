@@ -1,6 +1,6 @@
 import { createContext } from "react";
-import type { RealtimeClient } from "@priemskiyyy/simulcast";
+import type { RegisteredClient } from "src/types/Register";
 
-export const RealtimeClientContext = createContext<RealtimeClient | undefined>(
-  undefined,
-);
+export const RealtimeClientContext = createContext<
+  RegisteredClient | undefined
+>(undefined);

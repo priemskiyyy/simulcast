@@ -8,6 +8,7 @@ test("the package exposes the provider and hooks without runtime internals", () 
     "useChannel",
     "useChannelStatus",
     "useConnectionState",
+    "useNativeConnection",
     "useRealtimeClient",
   ]);
 });

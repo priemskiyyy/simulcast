@@ -1,9 +1,15 @@
 import { expectTypeOf } from "vitest";
 import type { RealtimeClient } from "@priemskiyyy/simulcast";
+import type { RealtimePublication } from "@priemskiyyy/simulcast";
 import type { RealtimeProviderProps } from "src/context/RealtimeProvider";
 import { useChannel } from "src/hooks/useChannel";
 import type { PublicationHandler } from "src/types/PublicationHandler";
 import { useRealtimeClient } from "src/hooks/useRealtimeClient";
+import type {
+  RegisteredClient,
+  RegisteredPublication,
+} from "src/types/Register";
+import { useNativeConnection } from "src/hooks/useNativeConnection";
 import { createChannelEventHooks } from "src/hooks/createChannelEventHooks";
 
 type Message = { text: string };
@@ -23,6 +29,11 @@ expectTypeOf<RealtimeClient<{ id: string }, { offset: number }>>().toExtend<
 >();
 
 export const useTypeContracts = () => {
+  // Nothing is registered inside the package, so the native client is unknown.
+  expectTypeOf<RegisteredClient>().toEqualTypeOf<RealtimeClient>();
+  expectTypeOf<RegisteredPublication>().toEqualTypeOf<RealtimePublication>();
+  expectTypeOf(useNativeConnection()).toEqualTypeOf<unknown>();
+
   expectTypeOf(useRealtimeClient()).toEqualTypeOf<RealtimeClient>();
 
   useChannel("rooms:one", (data) => {

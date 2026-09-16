@@ -1,8 +1,8 @@
 import { useEffect, useEffectEvent } from "react";
-import type { RealtimePublication } from "@priemskiyyy/simulcast";
 import { useRealtimeClient } from "src/hooks/useRealtimeClient";
 import type { ChannelInput } from "src/types/ChannelInput";
 import type { PublicationHandler } from "src/types/PublicationHandler";
+import type { RegisteredPublication } from "src/types/Register";
 
 export type UseChannelOptions<TData = unknown> = {
   /** Whether this listener is active. Defaults to true. */
@@ -32,7 +32,7 @@ export const useChannel = <TData = unknown>(
   const enabled = options.enabled ?? true;
 
   const handlePublication = useEffectEvent(
-    (publication: RealtimePublication) => {
+    (publication: RegisteredPublication) => {
       if (typeof options.parse !== "function") {
         return onEvent(publication.data as TData, publication);
       }

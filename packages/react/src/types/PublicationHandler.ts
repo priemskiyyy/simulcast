@@ -1,6 +1,6 @@
-import type { RealtimePublication } from "@priemskiyyy/simulcast";
+import type { RegisteredPublication } from "src/types/Register";
 
 export type PublicationHandler<TData> = (
   data: TData,
-  publication: RealtimePublication,
+  publication: RegisteredPublication,
 ) => void | Promise<unknown>;

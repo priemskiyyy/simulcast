@@ -1,10 +1,10 @@
 import { useEffect } from "react";
 import type { PropsWithChildren } from "react";
-import type { RealtimeClient } from "@priemskiyyy/simulcast";
 import { RealtimeClientContext } from "src/context/RealtimeClientContext";
+import type { RegisteredClient } from "src/types/Register";
 
 export type RealtimeProviderProps = PropsWithChildren<{
-  client: RealtimeClient;
+  client: RegisteredClient;
   session?: {
     /** Identifies the session, usually the signed-in account. Changing it replaces the connection. */
     id?: string;

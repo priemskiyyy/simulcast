@@ -14,6 +14,7 @@ import { createChannelEventHooks } from "src/hooks/createChannelEventHooks";
 import { useChannel } from "src/hooks/useChannel";
 import { useChannelStatus } from "src/hooks/useChannelStatus";
 import { useConnectionState } from "src/hooks/useConnectionState";
+import { useNativeConnection } from "src/hooks/useNativeConnection";
 import { useRealtimeClient } from "src/hooks/useRealtimeClient";
 
 const createHarness = (options?: MockAdapterOptions) => {
@@ -243,6 +244,61 @@ describe("provider and subscriptions", () => {
     expect(activeConnections(connections)).toEqual([]);
     expect(activeChannels(connection)).toEqual([]);
   });
+});
+
+test("nested providers own separate sessions and hooks read the nearest", () => {
+  const outer = createHarness();
+  const inner = createHarness();
+  const Capture = ({ onClient }: { onClient: (client: unknown) => void }) => {
+    onClient(useRealtimeClient());
+    useChannel("rooms:one", () => {});
+    return null;
+  };
+  const clients: unknown[] = [];
+  const view = render(
+    <RealtimeProvider client={outer.client}>
+      <Capture onClient={(client) => clients.push(client)} />
+      <RealtimeProvider client={inner.client}>
+        <Capture onClient={(client) => clients.push(client)} />
+      </RealtimeProvider>
+    </RealtimeProvider>,
+  );
+
+  expect(clients).toEqual([outer.client, inner.client]);
+  expect(activeChannels(activeConnections(outer.connections)[0])).toEqual([
+    "rooms:one",
+  ]);
+  expect(activeChannels(activeConnections(inner.connections)[0])).toEqual([
+    "rooms:one",
+  ]);
+
+  view.unmount();
+  expect(activeConnections(outer.connections)).toHaveLength(0);
+  expect(activeConnections(inner.connections)).toHaveLength(0);
+});
+
+test("useNativeConnection follows the session's native client", () => {
+  const { client, connections } = createHarness();
+  let native: unknown = "unset";
+  const Capture = () => {
+    native = useNativeConnection();
+    return null;
+  };
+  const View = ({ id, enabled }: { id: string; enabled: boolean }) => (
+    <RealtimeProvider client={client} session={{ id, enabled }}>
+      <Capture />
+    </RealtimeProvider>
+  );
+  const view = render(<View id="one" enabled={false} />);
+
+  expect(native).toBeNull();
+  view.rerender(<View id="one" enabled />);
+  expect(native).toBe(connections[0]);
+  view.rerender(<View id="two" enabled />);
+  expect(connections).toHaveLength(2);
+  expect(native).toBe(connections[1]);
+  view.unmount();
+  expect(native).toBe(connections[1]);
 });
 
 describe("parsing and typed events", () => {
