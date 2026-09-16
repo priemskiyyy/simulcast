@@ -8,6 +8,19 @@ description: "Understand the Simulcast runtime ownership model, subscription dem
 owns channel registrations and shared subscriptions. Neither is exported; the
 client exposes observable views and `channel()` handles.
 
+## Principles
+
+1. Normalize lifecycle, not protocols.
+2. Provider-native APIs remain accessible.
+3. One logical channel has one owned native subscription per active session.
+4. Consumers share resources.
+5. Passive observation does not create demand.
+6. Cleanup is deterministic and idempotent.
+7. Obsolete resources cannot affect their replacements.
+8. Adapters translate; the core owns policy.
+9. Framework bindings remain thin.
+10. Diagnostics never alter runtime demand.
+
 ## Ownership
 
 A session is a record holding the adapter connection and a `ResourceScope`.
@@ -79,3 +92,25 @@ pass, so later listeners see the latest snapshot once.
 subscription teardown, and observer silencing. The core still performs its own
 scope checks on every callback, because adapters, SDKs, and test doubles can be
 wrong.
+
+## Invariants and the tests that guard them
+
+Each row names the regression test in `packages/core` (or `packages/devtools`)
+that fails when the invariant breaks.
+
+| Invariant                                            | Test                                                                                                           |
+| ---------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
+| One native subscription per channel and session      | many consumers share a single adapter subscription across session replacements                                 |
+| Passive observers create no demand                   | channel handles remain reusable after cleanup without passive observers retaining subscriptions                |
+| Devtools create no demand                            | the panel observes a client without creating subscriptions and hides payloads by default                       |
+| Stale sessions cannot touch their replacement        | stale session cleanup and state events cannot affect the next session                                          |
+| Late adapter callbacks are ignored                   | a late adapter callback after the last consumer leaves is ignored                                              |
+| Cleanup is idempotent and per registration           | identical callbacks retain independent subscriptions and cleanup is idempotent                                 |
+| Cleanup runs in reverse order and tolerates failures | a scope releases resources in reverse order and allows early release; a failed cleanup cannot prevent the rest |
+| Failed setup rolls back                              | subscription setup failure rolls back ownership so the channel can be retried                                  |
+| Reentrant replacement keeps only the latest session  | replacing the session from a channel state callback keeps only the latest connection and subscriptions         |
+| Startup handles channel churn once                   | channel changes during session startup skip evicted channels and subscribe newly retained ones once            |
+| Native context survives delivery                     | publications reach consumers with their event name and native context intact                                   |
+| Consumer failures are isolated                       | snapshot listener failures leave later listeners and future updates intact                                     |
+| Diagnostics are passive                              | events are recorded only while an observer is present                                                          |
+| Adapters are silent after dispose                    | a disposed subscription is released once and no longer reports, plus every adapter's `conformance.test.ts`     |
