@@ -1,10 +1,93 @@
 # Changelog
 
-## Unreleased
+## @priemskiyyy/simulcast 0.3.0 - 2026-09-16
 
-- **Breaking:** `@priemskiyyy/simulcast`: `ChannelStatus` carries `recovered`, telling consumers whether the provider replayed the publications missed since the last subscription. Every binding's `useChannelStatus` reports it, including the server-rendered snapshot, and `diagnostics` snapshots carry it too.
-- `@priemskiyyy/simulcast`: adapters report recovery with `observer.state("subscribed", { recovered })`, typed as `AdapterSubscriptionDetail`. Omitting the detail keeps `recovered: false`, which also covers providers with no recovery to offer.
-- `@priemskiyyy/simulcast-centrifugo`: reports recovery from the `subscribed` event's `wasRecovering` and `recovered`.
+- **Breaking:** `ChannelStatus` carries `recovered`, telling consumers whether the provider replayed the publications missed since the last subscription. `false` is the safe default: it covers failed recovery and providers with none to offer. Diagnostics snapshots carry it per channel.
+- Adapters report it with `observer.state("subscribed", { recovered })`, typed as the new `AdapterSubscriptionDetail`. Omitting the detail keeps `recovered: false`, so adapters without the concept need no change.
+
+## @priemskiyyy/simulcast-react 0.3.0 - 2026-09-16
+
+- `useChannelStatus` reports `recovered`, including the server-rendered snapshot.
+- Requires `@priemskiyyy/simulcast` 0.3.
+
+## @priemskiyyy/simulcast-vue 0.3.0 - 2026-09-16
+
+- `useChannelStatus` reports `recovered`, including the server-rendered snapshot.
+- Requires `@priemskiyyy/simulcast` 0.3.
+
+## @priemskiyyy/simulcast-solid 0.3.0 - 2026-09-16
+
+- `useChannelStatus` reports `recovered`, including the server-rendered snapshot.
+- Requires `@priemskiyyy/simulcast` 0.3.
+
+## @priemskiyyy/simulcast-svelte 0.3.0 - 2026-09-16
+
+- `useChannelStatus` reports `recovered`, including the server-rendered snapshot.
+- Requires `@priemskiyyy/simulcast` 0.3.
+
+## @priemskiyyy/simulcast-centrifugo 0.3.0 - 2026-09-16
+
+- Reports recovery on `ChannelStatus.recovered`, read from the `subscribed` event's `wasRecovering` and `recovered`. Centrifugo emits it after `state` and before the replayed publications, so the status is correct by the time the gap arrives.
+- Requires `@priemskiyyy/simulcast` 0.3 and runs the shared adapter conformance suite.
+
+## @priemskiyyy/simulcast-pusher 0.3.0 - 2026-09-16
+
+- Reports no recovery, so `ChannelStatus.recovered` stays `false` and consumers refetch after a gap.
+- Requires `@priemskiyyy/simulcast` 0.3 and runs the shared adapter conformance suite.
+
+## @priemskiyyy/simulcast-ably 0.3.0 - 2026-09-16
+
+- Reports no recovery, so `ChannelStatus.recovered` stays `false` and consumers refetch after a gap.
+- Requires `@priemskiyyy/simulcast` 0.3 and runs the shared adapter conformance suite.
+
+## @priemskiyyy/simulcast-supabase 0.3.0 - 2026-09-16
+
+- Reports no recovery, so `ChannelStatus.recovered` stays `false` and consumers refetch after a gap.
+- Requires `@priemskiyyy/simulcast` 0.3 and runs the shared adapter conformance suite.
+
+## @priemskiyyy/simulcast-socketio 0.3.0 - 2026-09-16
+
+- Reports no recovery, so `ChannelStatus.recovered` stays `false` and consumers refetch after a gap.
+- Requires `@priemskiyyy/simulcast` 0.3 and runs the shared adapter conformance suite.
+
+## @priemskiyyy/simulcast-phoenix 0.3.0 - 2026-09-16
+
+- Reports no recovery, so `ChannelStatus.recovered` stays `false` and consumers refetch after a gap.
+- Requires `@priemskiyyy/simulcast` 0.3 and runs the shared adapter conformance suite.
+
+## @priemskiyyy/simulcast-mqtt 0.3.0 - 2026-09-16
+
+- Reports no recovery, so `ChannelStatus.recovered` stays `false` and consumers refetch after a gap.
+- Requires `@priemskiyyy/simulcast` 0.3 and runs the shared adapter conformance suite.
+
+## @priemskiyyy/simulcast-websocket 0.3.0 - 2026-09-16
+
+- Reports no recovery, so `ChannelStatus.recovered` stays `false` and consumers refetch after a gap.
+- Requires `@priemskiyyy/simulcast` 0.3 and runs the shared adapter conformance suite.
+
+## @priemskiyyy/simulcast-sse 0.3.0 - 2026-09-16
+
+- Reports no recovery, so `ChannelStatus.recovered` stays `false` and consumers refetch after a gap.
+- Requires `@priemskiyyy/simulcast` 0.3 and runs the shared adapter conformance suite.
+
+## @priemskiyyy/simulcast-partykit 0.3.0 - 2026-09-16
+
+- Reports no recovery, so `ChannelStatus.recovered` stays `false` and consumers refetch after a gap.
+- Requires `@priemskiyyy/simulcast` 0.3 and runs the shared adapter conformance suite.
+
+## @priemskiyyy/simulcast-broadcast-channel 0.3.0 - 2026-09-16
+
+- Reports no recovery, so `ChannelStatus.recovered` stays `false` and consumers refetch after a gap.
+- Requires `@priemskiyyy/simulcast` 0.3 and runs the shared adapter conformance suite.
+
+## @priemskiyyy/simulcast-devtools 0.3.0 - 2026-09-16
+
+- Channel snapshots carry `recovered`.
+- Requires `@priemskiyyy/simulcast` 0.3 and the matching 0.3 framework bindings.
+
+## @priemskiyyy/simulcast-codegen 0.3.0 - 2026-09-16
+
+- Published with the 0.3.0 version line. No changes to the generator or its output.
 
 ## @priemskiyyy/simulcast 0.2.0 - 2026-09-16
 

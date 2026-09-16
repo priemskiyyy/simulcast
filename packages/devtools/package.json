@@ -1,6 +1,6 @@
 {
   "name": "@priemskiyyy/simulcast-devtools",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Devtools for simulcast: a framework-independent inspector for the realtime connection, channel subscriptions, and events of any adapter, with React, Vue, Solid, and Svelte wrappers.",
   "type": "module",
   "license": "MIT",
@@ -53,11 +53,11 @@
   },
   "peerDependencies": {
     "react": ">=19.2.0 <20",
-    "@priemskiyyy/simulcast": ">=0.2.0 <0.3",
-    "@priemskiyyy/simulcast-react": ">=0.2.0 <0.3",
-    "@priemskiyyy/simulcast-solid": ">=0.2.0 <0.3",
-    "@priemskiyyy/simulcast-svelte": ">=0.2.0 <0.3",
-    "@priemskiyyy/simulcast-vue": ">=0.2.0 <0.3",
+    "@priemskiyyy/simulcast": ">=0.3.0 <0.4",
+    "@priemskiyyy/simulcast-react": ">=0.3.0 <0.4",
+    "@priemskiyyy/simulcast-solid": ">=0.3.0 <0.4",
+    "@priemskiyyy/simulcast-svelte": ">=0.3.0 <0.4",
+    "@priemskiyyy/simulcast-vue": ">=0.3.0 <0.4",
     "solid-js": ">=1.8.0 <2",
     "svelte": ">=5.29.0 <6",
     "vue": ">=3.5.0 <4"

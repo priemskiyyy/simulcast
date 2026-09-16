@@ -1,6 +1,6 @@
 {
   "name": "@priemskiyyy/simulcast-partykit",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "PartyKit and PartyServer adapter for simulcast, built on partysocket.",
   "type": "module",
   "license": "MIT",
@@ -37,7 +37,7 @@
   },
   "peerDependencies": {
     "partysocket": ">=1.0.0 <2",
-    "@priemskiyyy/simulcast": ">=0.2.0 <0.3"
+    "@priemskiyyy/simulcast": ">=0.3.0 <0.4"
   },
   "devDependencies": {
     "@priemskiyyy/simulcast": "workspace:*"

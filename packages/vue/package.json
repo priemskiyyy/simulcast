@@ -1,6 +1,6 @@
 {
   "name": "@priemskiyyy/simulcast-vue",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Vue bindings for simulcast: a provider component that owns the realtime session and composables for shared channel subscriptions, typed events, channel status, and connection state.",
   "type": "module",
   "license": "MIT",
@@ -36,7 +36,7 @@
     "test:unit": "vitest run --root ../.. --project vue"
   },
   "peerDependencies": {
-    "@priemskiyyy/simulcast": ">=0.2.0 <0.3",
+    "@priemskiyyy/simulcast": ">=0.3.0 <0.4",
     "vue": ">=3.5.0 <4"
   },
   "devDependencies": {
