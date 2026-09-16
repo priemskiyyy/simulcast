@@ -8,13 +8,9 @@ import { StatusBar } from "expo-status-bar";
 import { useMemo, useReducer } from "react";
 import { ScrollView, View } from "react-native";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
-import { RealtimeClient, createRealtimeAdapter } from "@priemskiyyy/simulcast";
-import type { AdapterSubscriptionObserver } from "@priemskiyyy/simulcast";
 import { useAppActive } from "src/hooks/useAppActive";
-import { centrifugo } from "@priemskiyyy/simulcast-centrifugo";
-import { match } from "ts-pattern";
-import type { Publication } from "example-shared";
 import { RealtimeProvider } from "@priemskiyyy/simulcast-react";
+import { createRealtimeClient } from "src/realtime/createRealtimeClient";
 import { Dashboard } from "src/components/Dashboard/Dashboard";
 import { Header } from "src/components/Header/Header";
 import { SimulationControls } from "src/components/SimulationControls/SimulationControls";
@@ -29,54 +25,7 @@ export const Application: React.FunctionComponent = () => {
   const isAppActive = useAppActive();
   // The adapter captures its endpoint, so the client changes exactly when the source does.
   const realtime = useMemo(
-    () =>
-      match(resolveSource({ sourceType, endpoint }))
-        .with({ type: "SIMULATION" }, () => {
-          // Native has no BroadcastChannel. Keep only active observers for the local demo.
-          const channels = new Map<string, Set<AdapterSubscriptionObserver>>();
-          const adapter = createRealtimeAdapter({
-            name: "simulation",
-            connect: (observer) => {
-              observer.state("connected");
-              return {
-                native: null,
-                subscribe: ({ channel, observer }) => {
-                  const observers =
-                    channels.get(channel) ??
-                    new Set<AdapterSubscriptionObserver>();
-                  channels.set(channel, observers);
-                  observers.add(observer);
-                  observer.state("subscribed");
-                  return {
-                    native: null,
-                    dispose: () => {
-                      observers.delete(observer);
-                      if (observers.size === 0) {
-                        channels.delete(channel);
-                      }
-                    },
-                  };
-                },
-                dispose: () => {},
-              };
-            },
-          });
-          const client = new RealtimeClient({ adapter });
-          const publish = ({ channel, envelope }: Publication) => {
-            for (const observer of [...(channels.get(channel) ?? [])]) {
-              observer.publication({ data: envelope, native: null });
-            }
-          };
-
-          return { client, publish };
-        })
-        .with({ type: "CENTRIFUGO" }, ({ endpoint }) => ({
-          client: new RealtimeClient({
-            adapter: centrifugo({ transport: endpoint }),
-          }),
-          publish: null,
-        }))
-        .exhaustive(),
+    () => createRealtimeClient(resolveSource({ sourceType, endpoint })),
     [sourceType, endpoint],
   );
 
