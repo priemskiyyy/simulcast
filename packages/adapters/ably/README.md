@@ -24,7 +24,7 @@ const realtime = new RealtimeClient({
 
 ## Behavior
 
-Each Ably message becomes a publication whose `event` is the message name, when present, and whose `native` is the `InboundMessage`. Channel states map by meaning: `attaching` and `suspended` report `subscribing` because Ably keeps retrying, while `detached` and `failed` report `unsubscribed`. Connection `disconnected` and `suspended` likewise report `connecting`. State change reasons are reported as errors. Presence, history, and rewind stay on the native channel through `realtime.native`.
+A Simulcast channel is an Ably realtime channel. Each Ably message becomes a publication whose `event` is the message name, when present, and whose `native` is the `InboundMessage`. Channel states map by meaning: `attaching` and `suspended` report `subscribing` because Ably keeps retrying, while `detached` and `failed` report `unsubscribed`. Connection `disconnected` and `suspended` likewise report `connecting`. State change reasons are reported as errors. Presence, history, and rewind stay on the native channel through `realtime.native`.
 
 ## Guides
 

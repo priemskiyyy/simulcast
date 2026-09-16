@@ -27,7 +27,7 @@ const realtime = new RealtimeClient({
 
 ## Behavior
 
-Every application event on a channel becomes a publication whose `event` is the Pusher event name and whose `native` is `{ event, data }`. `pusher:subscription_succeeded` and `pusher:subscription_error` become channel state and error; other `pusher:` events, such as presence members, are not publications and stay available on the native channel through `realtime.native`. A channel that loses its connection reports `subscribing` until Pusher resubscribes it.
+A Simulcast channel is a public, private, or presence Pusher channel. Every application event on a channel becomes a publication whose `event` is the Pusher event name and whose `native` is `{ event, data }`. `pusher:subscription_succeeded` and `pusher:subscription_error` become channel state and error; other `pusher:` events, such as presence members, are not publications and stay available on the native channel through `realtime.native`. A channel that loses its connection reports `subscribing` until Pusher resubscribes it.
 
 `pusher-js` keeps every constructed client in a static `Pusher.instances` list, so a long-lived page that replaces sessions often retains those instances.
 
