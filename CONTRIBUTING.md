@@ -21,7 +21,7 @@ Hooks live in `hooks/` (`composables/`, `primitives/`, and `utilities/` in the o
 
 Prefer descriptive names, early returns, `type` over `interface`, and exhaustive dispatch closed by `assertUnreachable`. Use `src/...` imports within each package, except in `packages/svelte`, which `svelte-package` builds from relative `.js` imports; its `files` list excludes the compiled `*.test.*`, `*.fixture.*`, and `*.contracts.*` outputs so only the library is published. Keep lifecycle decisions in the owner responsible for cleanup. Avoid introducing a shared abstraction for a single use.
 
-An adapter maps one provider onto the contract and nothing more: its state maps live in `utils/constants/`, and `createRealtimeAdapter` supplies the shared bookkeeping. Add behavior tests for changes to subscription ownership, callbacks, or cleanup. Keep hook JSDoc short and include an example.
+An adapter maps one provider onto the contract and nothing more: its state maps live in `utils/constants/`, and `createRealtimeAdapter` supplies the shared bookkeeping. Every adapter runs the shared conformance suite from `@priemskiyyy/simulcast/testing` in `src/conformance.test.ts`; provider-specific behavior gets its own tests next to it. Add behavior tests for changes to subscription ownership, callbacks, or cleanup. Keep hook JSDoc short and include an example.
 
 ## Provider integration tests
 
