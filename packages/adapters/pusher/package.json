@@ -1,6 +1,6 @@
 {
   "name": "@priemskiyyy/simulcast-pusher",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Pusher Channels adapter for simulcast.",
   "type": "module",
   "license": "MIT",
@@ -37,7 +37,7 @@
   },
   "peerDependencies": {
     "pusher-js": ">=8.0.0 <9",
-    "@priemskiyyy/simulcast": ">=0.1.0 <0.2"
+    "@priemskiyyy/simulcast": ">=0.2.0 <0.3"
   },
   "devDependencies": {
     "@priemskiyyy/simulcast": "workspace:*"

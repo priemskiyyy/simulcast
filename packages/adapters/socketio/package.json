@@ -1,6 +1,6 @@
 {
   "name": "@priemskiyyy/simulcast-socketio",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Socket.IO adapter for simulcast.",
   "type": "module",
   "license": "MIT",
@@ -37,7 +37,7 @@
   },
   "peerDependencies": {
     "socket.io-client": ">=4.0.0 <5",
-    "@priemskiyyy/simulcast": ">=0.1.0 <0.2"
+    "@priemskiyyy/simulcast": ">=0.2.0 <0.3"
   },
   "devDependencies": {
     "@priemskiyyy/simulcast": "workspace:*"

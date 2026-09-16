@@ -1,6 +1,6 @@
 {
   "name": "@priemskiyyy/simulcast",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Provider-independent realtime subscription runtime: connection sessions, shared channel subscriptions, consumer fan-out, and deterministic cleanup behind a small adapter contract.",
   "type": "module",
   "license": "MIT",

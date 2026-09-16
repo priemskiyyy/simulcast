@@ -1,6 +1,6 @@
 {
   "name": "@priemskiyyy/simulcast-ably",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Ably adapter for simulcast.",
   "type": "module",
   "license": "MIT",
@@ -37,7 +37,7 @@
   },
   "peerDependencies": {
     "ably": ">=2.0.0 <3",
-    "@priemskiyyy/simulcast": ">=0.1.0 <0.2"
+    "@priemskiyyy/simulcast": ">=0.2.0 <0.3"
   },
   "devDependencies": {
     "@priemskiyyy/simulcast": "workspace:*"

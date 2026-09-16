@@ -1,6 +1,6 @@
 {
   "name": "@priemskiyyy/simulcast-svelte",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Svelte bindings for simulcast: a provider component that owns the realtime session and rune-based utilities for shared channel subscriptions, typed events, channel status, and connection state.",
   "type": "module",
   "license": "MIT",
@@ -39,7 +39,7 @@
     "test:unit": "vitest run --root ../.. --project svelte --project svelte-ssr"
   },
   "peerDependencies": {
-    "@priemskiyyy/simulcast": ">=0.1.0 <0.2",
+    "@priemskiyyy/simulcast": ">=0.2.0 <0.3",
     "svelte": ">=5.0.0 <6"
   },
   "devDependencies": {

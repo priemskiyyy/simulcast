@@ -1,12 +1,82 @@
 # Changelog
 
-## Unreleased
+## @priemskiyyy/simulcast 0.2.0 - 2026-09-16
 
-- `@priemskiyyy/simulcast`: `@priemskiyyy/simulcast/testing` exports `testRealtimeAdapter`, a Vitest conformance suite for the adapter contract; every shipped adapter runs it.
-- `@priemskiyyy/simulcast-react`, `-vue`, `-solid`, `-svelte`: a `Register` interface types every hook with the application's client through one module augmentation, and `useNativeConnection()` mirrors the adapter's native client.
-- `@priemskiyyy/simulcast-centrifugo`: removed `useCentrifuge()` and the `/react` entry along with the optional React peers; use `useNativeConnection()` from any binding instead.
-- `@priemskiyyy/simulcast/mock`: `createMockAdapter` takes optional native type arguments so a mock client satisfies an application that registered a real adapter.
-- Documentation: docs-first homepage, hosted React demo at `/demo/`, adapter comparison table, "what Simulcast normalizes", architecture principles and invariant-to-test map, `create-adapter` agent skill, and generated `llms.txt`.
+- `@priemskiyyy/simulcast/testing` exports `testRealtimeAdapter`, a Vitest conformance suite for the adapter contract. `vitest` is an optional peer dependency used only by that entry.
+- `createMockAdapter` takes optional native type arguments, so a mock client satisfies an application that registered a real adapter.
+
+## @priemskiyyy/simulcast-react 0.2.0 - 2026-09-16
+
+- `Register` types every hook with the application's client through one module augmentation. `useRealtimeClient`, the publication argument of `useChannel`, and the new `useNativeConnection()` follow the registered adapter; applications that skip it keep `unknown`.
+- Requires `@priemskiyyy/simulcast` 0.2.
+
+## @priemskiyyy/simulcast-vue 0.2.0 - 2026-09-16
+
+- `Register` types every composable with the application's client, including the new `useNativeConnection()`.
+- Requires `@priemskiyyy/simulcast` 0.2.
+
+## @priemskiyyy/simulcast-solid 0.2.0 - 2026-09-16
+
+- `Register` types every primitive with the application's client, including the new `useNativeConnection()`.
+- Requires `@priemskiyyy/simulcast` 0.2.
+
+## @priemskiyyy/simulcast-svelte 0.2.0 - 2026-09-16
+
+- `Register` types every utility with the application's client, including the new `useNativeConnection()`.
+- Requires `@priemskiyyy/simulcast` 0.2.
+
+## @priemskiyyy/simulcast-centrifugo 0.2.0 - 2026-09-16
+
+- **Breaking:** removed `useCentrifuge()` and the `/react` entry, along with the optional `react` and `@priemskiyyy/simulcast-react` peers. Register the client and call `useNativeConnection()` from any binding instead.
+- Requires `@priemskiyyy/simulcast` 0.2 and runs the shared adapter conformance suite.
+
+## @priemskiyyy/simulcast-pusher 0.2.0 - 2026-09-16
+
+- Requires `@priemskiyyy/simulcast` 0.2 and runs the shared adapter conformance suite.
+
+## @priemskiyyy/simulcast-ably 0.2.0 - 2026-09-16
+
+- Requires `@priemskiyyy/simulcast` 0.2 and runs the shared adapter conformance suite.
+
+## @priemskiyyy/simulcast-supabase 0.2.0 - 2026-09-16
+
+- Requires `@priemskiyyy/simulcast` 0.2 and runs the shared adapter conformance suite.
+
+## @priemskiyyy/simulcast-socketio 0.2.0 - 2026-09-16
+
+- Requires `@priemskiyyy/simulcast` 0.2 and runs the shared adapter conformance suite.
+
+## @priemskiyyy/simulcast-phoenix 0.2.0 - 2026-09-16
+
+- Requires `@priemskiyyy/simulcast` 0.2 and runs the shared adapter conformance suite.
+
+## @priemskiyyy/simulcast-mqtt 0.2.0 - 2026-09-16
+
+- Requires `@priemskiyyy/simulcast` 0.2 and runs the shared adapter conformance suite.
+
+## @priemskiyyy/simulcast-websocket 0.2.0 - 2026-09-16
+
+- Requires `@priemskiyyy/simulcast` 0.2 and runs the shared adapter conformance suite.
+
+## @priemskiyyy/simulcast-sse 0.2.0 - 2026-09-16
+
+- Requires `@priemskiyyy/simulcast` 0.2 and runs the shared adapter conformance suite.
+
+## @priemskiyyy/simulcast-partykit 0.2.0 - 2026-09-16
+
+- Requires `@priemskiyyy/simulcast` 0.2 and runs the shared adapter conformance suite.
+
+## @priemskiyyy/simulcast-broadcast-channel 0.2.0 - 2026-09-16
+
+- Requires `@priemskiyyy/simulcast` 0.2 and runs the shared adapter conformance suite.
+
+## @priemskiyyy/simulcast-devtools 0.2.0 - 2026-09-16
+
+- Requires `@priemskiyyy/simulcast` 0.2 and the matching 0.2 framework bindings.
+
+## @priemskiyyy/simulcast-codegen 0.2.0 - 2026-09-16
+
+- Published with the 0.2.0 version line. No changes to the generator or its output.
 
 ## @priemskiyyy/simulcast 0.1.0 - 2026-09-16
 
