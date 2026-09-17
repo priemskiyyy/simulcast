@@ -1,5 +1,10 @@
 # Changelog
 
+## Unreleased
+
+- `@priemskiyyy/simulcast`: `createRealtimeAdapter` releases a subscription that arrives after its connection was disposed, and stops forwarding its events. A provider reporting state synchronously from `subscribe` could otherwise leave a native subscription alive and still delivering publications.
+- `@priemskiyyy/simulcast/testing`: the conformance suite covers that sequence, so every adapter is held to it.
+
 ## @priemskiyyy/simulcast 0.3.0 - 2026-09-16
 
 - **Breaking:** `ChannelStatus` carries `recovered`, telling consumers whether the provider replayed the publications missed since the last subscription. `false` is the safe default: it covers failed recovery and providers with none to offer. Diagnostics snapshots carry it per channel.
