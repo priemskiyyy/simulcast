@@ -20,14 +20,18 @@ provider only accepts that client's type. Give the mock the same native types
 and it stands in for the real adapter:
 
 ```ts
-import type { Centrifuge, PublicationContext } from "centrifuge";
+import type { Centrifuge, PublicationContext, Subscription } from "centrifuge";
 import { createMockAdapter } from "@priemskiyyy/simulcast/mock";
 
 const { adapter, connections } = createMockAdapter<
   Centrifuge,
-  PublicationContext
+  PublicationContext,
+  Subscription
 >();
 ```
+
+The three arguments are the adapter's native connection, publication, and
+subscription types, in the order `RealtimeClient` carries them.
 
 The recorded connections and observers keep their own mock types, so tests still
 emit `native: null`. Applications that do not register need no type arguments.

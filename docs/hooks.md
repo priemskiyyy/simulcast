@@ -7,13 +7,15 @@ description: "Reference for React realtime hooks: receive publications, observe 
 Every hook requires a `RealtimeProvider` above it and throws an error if one is
 missing.
 
-| Hook                                          | Returns            | Opens a subscription |
-| --------------------------------------------- | ------------------ | -------------------- |
-| [`useChannel`](#usechannel)                   | nothing            | yes                  |
-| [`useChannelStatus`](#usechannelstatus)       | `ChannelStatus`    | no                   |
-| [`useConnectionState`](#useconnectionstate)   | `ConnectionState`  | no                   |
-| [`useNativeConnection`](#usenativeconnection) | `TNative \| null`  | no                   |
-| [`useRealtimeClient`](#userealtimeclient)     | `RegisteredClient` | no                   |
+| Hook                                          | Returns                       | Opens a subscription |
+| --------------------------------------------- | ----------------------------- | -------------------- |
+| [`useChannel`](#usechannel)                   | nothing                       | yes                  |
+| [`useChannelDemand`](#usechanneldemand)       | nothing                       | yes                  |
+| [`useChannelStatus`](#usechannelstatus)       | `ChannelStatus`               | no                   |
+| [`useConnectionState`](#useconnectionstate)   | `ConnectionState`             | no                   |
+| [`useNativeChannel`](#usenativechannel)       | `TNativeSubscription \| null` | no                   |
+| [`useNativeConnection`](#usenativeconnection) | `TNative \| null`             | no                   |
+| [`useRealtimeClient`](#userealtimeclient)     | `RegisteredClient`            | no                   |
 
 Callbacks always see current render values without recreating the subscription,
 so you never need to memoise them. They may be async, but publications are not
@@ -106,6 +108,68 @@ then it follows the adapter:
 const centrifuge = useNativeConnection(); // Centrifuge | null once registered
 ```
 
+## useChannelDemand
+
+```ts
+useChannelDemand(
+  channel: string,
+  options?: Pick<UseChannelOptions, "enabled">,
+): void
+```
+
+Keeps a channel's native subscription open without consuming publications. A
+subscription exists only while something demands it, and only publication
+consumers demand. Use this when a component watches the provider's own
+subscription through [`useNativeChannel`](#usenativechannel) but reads nothing
+through Simulcast:
+
+```tsx
+useChannelDemand("rooms:demo");
+const subscription = useNativeChannel("rooms:demo");
+```
+
+It is an ordinary consumer, so devtools counts it as one, and the subscription
+is released when the last consumer goes, this one included. A component that
+already calls `useChannel` needs nothing extra.
+
+## useNativeChannel
+
+```ts
+useNativeChannel(channel: string): TNativeSubscription | null
+```
+
+The adapter's native subscription for a channel, or `null` while none exists.
+Reach for it when a provider exposes something on a subscription that Simulcast
+does not normalize, such as Centrifugo's `join` and `leave` events.
+
+Observing it never opens a subscription. It follows the one a consumer demanded
+and returns to `null` when the last consumer leaves, so a component that only
+observes pairs it with [`useChannelDemand`](#usechanneldemand) to keep the
+channel open:
+
+```tsx
+const subscription = useNativeChannel("rooms:demo");
+
+useChannelDemand("rooms:demo");
+
+useEffect(() => {
+  if (subscription === null) {
+    return;
+  }
+
+  subscription.on("join", handleJoin);
+
+  return () => {
+    subscription.off("join", handleJoin);
+  };
+}, [subscription]);
+```
+
+The value changes identity when a session replaces the subscription, so an
+effect depending on it rebinds at the right moment. Its type is `unknown` until
+you [register the client](#type-the-client-once). Adapters without a per-channel
+native object report whatever their adapter returns.
+
 ## Type the client once
 
 Every hook reads the client from the provider, so TypeScript cannot know which
@@ -125,8 +189,9 @@ declare module "@priemskiyyy/simulcast-react" {
 ```
 
 From then on `useNativeConnection()` returns `Centrifuge | null`,
-`useRealtimeClient()` is `typeof realtime`, and every `useChannel` handler
-receives the adapter's publication type in `native`. Nothing changes at runtime,
+`useRealtimeClient()` is `typeof realtime`, `useNativeChannel()` returns the
+adapter's subscription type, and every `useChannel` handler receives the
+adapter's publication type in `native`. Nothing changes at runtime,
 and an application that skips the augmentation keeps `unknown`. TanStack Router
 types its hooks the same way.
 

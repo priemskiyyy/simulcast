@@ -68,6 +68,11 @@ retain subscriptions.
 
 ## Native access depends on the adapter
 
+`realtime.channel(name).native` observes the adapter's native subscription for
+one channel. It reads `null` until a publication consumer demands the channel,
+and returns to `null` when the last one leaves, so observing it never opens a
+subscription.
+
 `realtime.native.get()` exposes a shared native client for adapters such as
 Centrifugo, Pusher, and Ably. It returns `null` for adapters with independent
 per-channel resources: PartyKit, SSE, and BroadcastChannel. Their high-level
