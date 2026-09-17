@@ -238,7 +238,7 @@ test("native types flow from the adapter into the client without extra generics"
 
   expectTypeOf(client.native.get()).toEqualTypeOf<Centrifuge | null>();
   expectTypeOf(client.channel("rooms:one")).toEqualTypeOf<
-    RealtimeChannel<PublicationContext>
+    RealtimeChannel<PublicationContext, Subscription>
   >();
 
   type Client = { id: string };
@@ -255,6 +255,6 @@ test("native types flow from the adapter into the client without extra generics"
 
   expectTypeOf(custom.native.get()).toEqualTypeOf<Client | null>();
   expectTypeOf(custom.channel("rooms:one")).toEqualTypeOf<
-    RealtimeChannel<Message>
+    RealtimeChannel<Message, Channel>
   >();
 });

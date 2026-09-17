@@ -261,6 +261,6 @@ test("native types flow from the adapter into the client", () => {
 
   expectTypeOf(client.native.get()).toEqualTypeOf<MqttClient | null>();
   expectTypeOf(client.channel("sensors/#")).toEqualTypeOf<
-    RealtimeChannel<IPublishPacket>
+    RealtimeChannel<IPublishPacket, MqttClient>
   >();
 });
