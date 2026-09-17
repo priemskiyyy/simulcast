@@ -141,3 +141,38 @@ test.each(
     expect(cleaned).toEqual(["first", "second", "connection"]);
   },
 );
+
+test("a subscription acquired while the connection is disposed is released and silent", () => {
+  const disposeSubscription = vi.fn();
+  const disposeConnection = vi.fn();
+  let publish: ((data: unknown) => void) | undefined;
+  const adapter = createRealtimeAdapter<null, null, null>({
+    name: "reentrant",
+    connect: () => ({
+      native: null,
+      subscribe: ({ observer }) => {
+        // The provider reports before returning, as several SDKs do.
+        observer.state("subscribing");
+        publish = (data) => observer.publication({ data, native: null });
+        return { native: null, dispose: disposeSubscription };
+      },
+      dispose: disposeConnection,
+    }),
+  });
+  const connection = adapter.connect(observer());
+  const subscriptionObserver = observer();
+  const subscription = connection.subscribe({
+    channel: "rooms:one",
+    observer: {
+      ...subscriptionObserver,
+      state: () => connection.dispose(),
+    },
+  });
+
+  publish?.({ late: true });
+  subscription.dispose();
+
+  expect(disposeConnection).toHaveBeenCalledOnce();
+  expect(disposeSubscription).toHaveBeenCalledOnce();
+  expect(subscriptionObserver.publication).not.toHaveBeenCalled();
+});

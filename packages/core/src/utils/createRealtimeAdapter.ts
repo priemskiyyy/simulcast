@@ -72,21 +72,21 @@ export const createRealtimeAdapter = <
           observer: {
             // Forwarded as received: an absent detail stays absent.
             state: (...report) => {
-              if (released) {
+              if (released || disposed) {
                 return;
               }
 
               observer.state(...report);
             },
             error: (error) => {
-              if (released) {
+              if (released || disposed) {
                 return;
               }
 
               observer.error(error);
             },
             publication: (publication) => {
-              if (released) {
+              if (released || disposed) {
                 return;
               }
 
@@ -107,6 +107,16 @@ export const createRealtimeAdapter = <
             subscription.dispose();
           },
         };
+        // An observer can dispose the connection while `subscribe` runs, so the
+        // subscription can arrive after its connection ended. Release it before
+        // anyone owns it, marking it released first so the native cleanup
+        // cannot report through this observer.
+        if (disposed) {
+          released = true;
+          subscription.dispose();
+          return owner;
+        }
+
         owned.add(owner);
         return owner;
       },
