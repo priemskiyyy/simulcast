@@ -2,6 +2,12 @@
 description: "Run credential-free Mission Control examples in React, Vue, Solid, Svelte, and Expo and inspect their shared realtime subscriptions."
 ---
 
+<script setup>
+// The demo is a separate application, not a page of this site, so these links
+// leave the router rather than being handled by it.
+import { withBase } from "vitepress";
+</script>
+
 # Examples
 
 The repository includes the same Mission Control dashboard in React, Vue, Solid,
@@ -10,7 +16,7 @@ updates through six generated event hooks and four shared subscriptions.
 
 ## Open the live demo
 
-The React example is hosted at [priemskiyyy.github.io/simulcast/demo](https://priemskiyyy.github.io/simulcast/demo/)
+The React example is hosted at <a :href="withBase('/demo/')" target="_blank" rel="noreferrer">priemskiyyy.github.io/simulcast/demo</a>
 with no backend, account, or credentials. Open the Simulcast Devtools launcher,
 add and remove consumers, watch listener counts, and confirm that several widgets
 share one native subscription per channel.

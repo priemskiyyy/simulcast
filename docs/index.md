@@ -4,6 +4,12 @@ titleTemplate: Provider-independent realtime subscriptions for TypeScript
 description: Provider-independent realtime subscriptions for TypeScript. One lifecycle model for connections and shared channel subscriptions across Centrifugo, Pusher, Ably, MQTT, WebSocket, SSE, and more, with React, Vue, Solid, and Svelte bindings.
 ---
 
+<script setup>
+// The demo is a separate application, not a page of this site, so these links
+// leave the router rather than being handled by it.
+import { withBase } from "vitepress";
+</script>
+
 # Simulcast
 
 **Provider-independent realtime subscriptions for TypeScript.**
@@ -13,7 +19,7 @@ connection session. Components listening to the same channel share one native
 subscription, and the last one to leave releases it. The same API works from
 React, Vue, Solid, Svelte, or plain TypeScript, over eleven provider adapters.
 
-[Get started](getting-started.md) · [Live demo](/demo/) ·
+[Get started](getting-started.md) · <a :href="withBase('/demo/')" target="_blank" rel="noreferrer">Live demo</a> ·
 [Adapters](adapters.md) · [Devtools](devtools.md) ·
 [GitHub](https://github.com/priemskiyyy/simulcast)
 
@@ -124,4 +130,4 @@ every hook can reach.
   yourself is enough.
 
 [Choose an adapter](adapters.md) · [Write your own](writing-an-adapter.md) ·
-[Open the live demo](/demo/) · [Read the architecture](internals/architecture.md)
+<a :href="withBase('/demo/')" target="_blank" rel="noreferrer">Open the live demo</a> · [Read the architecture](internals/architecture.md)

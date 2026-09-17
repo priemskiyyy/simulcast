@@ -2,6 +2,12 @@
 description: "Build a working React realtime message list with BroadcastChannel, shared subscriptions, and optional payload validation, without a server."
 ---
 
+<script setup>
+// The demo is a separate application, not a page of this site, so these links
+// leave the router rather than being handled by it.
+import { withBase } from "vitepress";
+</script>
+
 # Getting started
 
 Receive a message in a React application with no server, account, or credentials.
@@ -176,7 +182,7 @@ See [Errors and recovery](error-handling.md) for parser failures.
 
 ## Continue
 
-- [Open the live demo](https://priemskiyyy.github.io/simulcast/demo/) to see shared subscriptions and devtools without installing anything.
+- <a :href="withBase('/demo/')" target="_blank" rel="noreferrer">Open the live demo</a> to see shared subscriptions and devtools without installing anything.
 - [Choose an adapter](adapters.md) for your server and its channel semantics.
 - [Inspect subscriptions](devtools.md) in browser devtools.
 - [Run the examples](examples.md) for a dashboard in each framework.
