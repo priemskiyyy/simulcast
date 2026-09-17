@@ -21,19 +21,37 @@ export interface Register {}
 
 /** The registered client, or an untyped `RealtimeClient` when nothing is registered. */
 export type RegisteredClient = Register extends {
-  client: infer TClient extends RealtimeClient<unknown, unknown>;
+  client: infer TClient extends RealtimeClient<unknown, unknown, unknown>;
 }
   ? TClient
   : RealtimeClient;
 
 /** The native connection of the registered client's adapter. */
 export type RegisteredNativeConnection =
-  RegisteredClient extends RealtimeClient<infer TNativeConnection, unknown>
+  RegisteredClient extends RealtimeClient<
+    infer TNativeConnection,
+    unknown,
+    unknown
+  >
     ? TNativeConnection
     : unknown;
 
 /** A publication as the registered client's adapter delivers it. */
 export type RegisteredPublication =
-  RegisteredClient extends RealtimeClient<unknown, infer TNativePublication>
+  RegisteredClient extends RealtimeClient<
+    unknown,
+    infer TNativePublication,
+    unknown
+  >
     ? RealtimePublication<TNativePublication>
     : RealtimePublication;
+
+/** The native subscription the registered client's adapter creates per channel. */
+export type RegisteredNativeSubscription =
+  RegisteredClient extends RealtimeClient<
+    unknown,
+    unknown,
+    infer TNativeSubscription
+  >
+    ? TNativeSubscription
+    : unknown;
