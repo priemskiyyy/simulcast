@@ -1,6 +1,6 @@
 {
   "name": "@priemskiyyy/simulcast-mqtt",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "MQTT adapter for simulcast, built on mqtt.js.",
   "type": "module",
   "license": "MIT",
@@ -37,7 +37,7 @@
   },
   "peerDependencies": {
     "mqtt": ">=5.0.0 <6",
-    "@priemskiyyy/simulcast": ">=0.3.0 <0.4"
+    "@priemskiyyy/simulcast": ">=0.4.0 <0.5"
   },
   "devDependencies": {
     "@priemskiyyy/simulcast": "workspace:*"

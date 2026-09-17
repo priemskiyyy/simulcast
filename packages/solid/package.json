@@ -1,6 +1,6 @@
 {
   "name": "@priemskiyyy/simulcast-solid",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "Solid bindings for simulcast: a provider component that owns the realtime session and primitives for shared channel subscriptions, typed events, channel status, and connection state.",
   "type": "module",
   "license": "MIT",
@@ -36,7 +36,7 @@
     "test:unit": "vitest run --root ../.. --project solid"
   },
   "peerDependencies": {
-    "@priemskiyyy/simulcast": ">=0.3.0 <0.4",
+    "@priemskiyyy/simulcast": ">=0.4.0 <0.5",
     "solid-js": ">=1.8.0 <2"
   },
   "devDependencies": {

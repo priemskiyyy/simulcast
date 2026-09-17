@@ -1,13 +1,91 @@
 # Changelog
 
-## Unreleased
+## @priemskiyyy/simulcast 0.4.0 - 2026-09-17
 
-- `@priemskiyyy/simulcast`: a channel handle exposes `native`, the adapter's subscription for that channel, or `null` while none exists. Observing it creates no demand. `RealtimeClient` carries the adapter's subscription type as a third type argument, so a mock standing in for a registered adapter now takes three type arguments.
-- `@priemskiyyy/simulcast-react`, `-vue`, `-solid`, `-svelte`: `useNativeChannel(channel)` mirrors that observable, typed through the new `RegisteredNativeSubscription`. `useChannelDemand(channel, options?)` holds a channel open without consuming publications, for components that watch the native subscription instead.
-- `@priemskiyyy/simulcast-react`, `-vue`, `-solid`, `-svelte`: the `Register` aliases infer every position of the registered client, so adding the subscription type does not silently fall back to `unknown`.
+- A channel handle exposes `native`, the adapter's subscription for that channel, or `null` while none exists. Observing it registers as a passive consumer, so it never creates demand.
+- **Breaking:** `RealtimeClient` carries the adapter's subscription type as a third type argument. A mock standing in for a registered adapter now takes three type arguments.
+- `createRealtimeAdapter` releases a subscription that arrives after its connection was disposed and stops forwarding its events. A provider reporting state synchronously from `subscribe` could otherwise leave a native subscription alive and still delivering publications.
+- `@priemskiyyy/simulcast/testing` covers that sequence, so every adapter is held to it.
 
-- `@priemskiyyy/simulcast`: `createRealtimeAdapter` releases a subscription that arrives after its connection was disposed, and stops forwarding its events. A provider reporting state synchronously from `subscribe` could otherwise leave a native subscription alive and still delivering publications.
-- `@priemskiyyy/simulcast/testing`: the conformance suite covers that sequence, so every adapter is held to it.
+## @priemskiyyy/simulcast-react 0.4.0 - 2026-09-17
+
+- `useNativeChannel(channel)` mirrors a channel's native subscription, typed by the registered client through the new `RegisteredNativeSubscription`.
+- `useChannelDemand(channel, options?)` holds a channel's subscription open without consuming publications, for a component that watches the native subscription instead.
+- The `Register` aliases infer every position of the registered client, so the runtime's new subscription type does not make them fall back to `unknown`.
+- Requires `@priemskiyyy/simulcast` 0.4.
+
+## @priemskiyyy/simulcast-vue 0.4.0 - 2026-09-17
+
+- `useNativeChannel(channel)` mirrors a channel's native subscription, typed by the registered client through the new `RegisteredNativeSubscription`.
+- `useChannelDemand(channel, options?)` holds a channel's subscription open without consuming publications, for a component that watches the native subscription instead.
+- The `Register` aliases infer every position of the registered client, so the runtime's new subscription type does not make them fall back to `unknown`.
+- Requires `@priemskiyyy/simulcast` 0.4.
+
+## @priemskiyyy/simulcast-solid 0.4.0 - 2026-09-17
+
+- `useNativeChannel(channel)` mirrors a channel's native subscription, typed by the registered client through the new `RegisteredNativeSubscription`.
+- `useChannelDemand(channel, options?)` holds a channel's subscription open without consuming publications, for a component that watches the native subscription instead.
+- The `Register` aliases infer every position of the registered client, so the runtime's new subscription type does not make them fall back to `unknown`.
+- Requires `@priemskiyyy/simulcast` 0.4.
+
+## @priemskiyyy/simulcast-svelte 0.4.0 - 2026-09-17
+
+- `useNativeChannel(channel)` mirrors a channel's native subscription, typed by the registered client through the new `RegisteredNativeSubscription`.
+- `useChannelDemand(channel, options?)` holds a channel's subscription open without consuming publications, for a component that watches the native subscription instead.
+- The `Register` aliases infer every position of the registered client, so the runtime's new subscription type does not make them fall back to `unknown`.
+- Requires `@priemskiyyy/simulcast` 0.4.
+
+## @priemskiyyy/simulcast-centrifugo 0.4.0 - 2026-09-17
+
+- Requires `@priemskiyyy/simulcast` 0.4.
+
+## @priemskiyyy/simulcast-pusher 0.4.0 - 2026-09-17
+
+- Requires `@priemskiyyy/simulcast` 0.4.
+
+## @priemskiyyy/simulcast-ably 0.4.0 - 2026-09-17
+
+- Requires `@priemskiyyy/simulcast` 0.4.
+
+## @priemskiyyy/simulcast-supabase 0.4.0 - 2026-09-17
+
+- Requires `@priemskiyyy/simulcast` 0.4.
+
+## @priemskiyyy/simulcast-socketio 0.4.0 - 2026-09-17
+
+- Requires `@priemskiyyy/simulcast` 0.4.
+
+## @priemskiyyy/simulcast-phoenix 0.4.0 - 2026-09-17
+
+- Requires `@priemskiyyy/simulcast` 0.4.
+
+## @priemskiyyy/simulcast-mqtt 0.4.0 - 2026-09-17
+
+- Requires `@priemskiyyy/simulcast` 0.4.
+
+## @priemskiyyy/simulcast-websocket 0.4.0 - 2026-09-17
+
+- Requires `@priemskiyyy/simulcast` 0.4.
+
+## @priemskiyyy/simulcast-sse 0.4.0 - 2026-09-17
+
+- Requires `@priemskiyyy/simulcast` 0.4.
+
+## @priemskiyyy/simulcast-partykit 0.4.0 - 2026-09-17
+
+- Requires `@priemskiyyy/simulcast` 0.4.
+
+## @priemskiyyy/simulcast-broadcast-channel 0.4.0 - 2026-09-17
+
+- Requires `@priemskiyyy/simulcast` 0.4.
+
+## @priemskiyyy/simulcast-devtools 0.4.0 - 2026-09-17
+
+- Requires `@priemskiyyy/simulcast` 0.4 and the matching 0.4 framework bindings.
+
+## @priemskiyyy/simulcast-codegen 0.4.0 - 2026-09-17
+
+- Published with the 0.4.0 version line. No changes to the generator or its output.
 
 ## @priemskiyyy/simulcast 0.3.0 - 2026-09-16
 

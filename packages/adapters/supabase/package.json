@@ -1,6 +1,6 @@
 {
   "name": "@priemskiyyy/simulcast-supabase",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "Supabase Realtime adapter for simulcast.",
   "type": "module",
   "license": "MIT",
@@ -37,7 +37,7 @@
   },
   "peerDependencies": {
     "@supabase/realtime-js": ">=2.0.0 <3",
-    "@priemskiyyy/simulcast": ">=0.3.0 <0.4"
+    "@priemskiyyy/simulcast": ">=0.4.0 <0.5"
   },
   "devDependencies": {
     "@priemskiyyy/simulcast": "workspace:*"

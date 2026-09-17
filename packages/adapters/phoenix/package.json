@@ -1,6 +1,6 @@
 {
   "name": "@priemskiyyy/simulcast-phoenix",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "Phoenix Channels adapter for simulcast.",
   "type": "module",
   "license": "MIT",
@@ -37,7 +37,7 @@
   },
   "peerDependencies": {
     "phoenix": ">=1.7.0 <2",
-    "@priemskiyyy/simulcast": ">=0.3.0 <0.4"
+    "@priemskiyyy/simulcast": ">=0.4.0 <0.5"
   },
   "devDependencies": {
     "@priemskiyyy/simulcast": "workspace:*"
