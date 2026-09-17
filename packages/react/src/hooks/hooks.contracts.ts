@@ -9,6 +9,7 @@ import type {
   RegisteredClient,
   RegisteredPublication,
 } from "src/types/Register";
+import { useNativeChannel } from "src/hooks/useNativeChannel";
 import { useNativeConnection } from "src/hooks/useNativeConnection";
 import { createChannelEventHooks } from "src/hooks/createChannelEventHooks";
 
@@ -33,6 +34,7 @@ export const useTypeContracts = () => {
   expectTypeOf<RegisteredClient>().toEqualTypeOf<RealtimeClient>();
   expectTypeOf<RegisteredPublication>().toEqualTypeOf<RealtimePublication>();
   expectTypeOf(useNativeConnection()).toEqualTypeOf<unknown>();
+  expectTypeOf(useNativeChannel("rooms:one")).toEqualTypeOf<unknown>();
 
   expectTypeOf(useRealtimeClient()).toEqualTypeOf<RealtimeClient>();
 

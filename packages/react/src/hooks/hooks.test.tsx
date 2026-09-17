@@ -12,8 +12,10 @@ import { afterEach, describe, expect, test, vi } from "vitest";
 import { RealtimeProvider } from "src/context/RealtimeProvider";
 import { createChannelEventHooks } from "src/hooks/createChannelEventHooks";
 import { useChannel } from "src/hooks/useChannel";
+import { useChannelDemand } from "src/hooks/useChannelDemand";
 import { useChannelStatus } from "src/hooks/useChannelStatus";
 import { useConnectionState } from "src/hooks/useConnectionState";
+import { useNativeChannel } from "src/hooks/useNativeChannel";
 import { useNativeConnection } from "src/hooks/useNativeConnection";
 import { useRealtimeClient } from "src/hooks/useRealtimeClient";
 
@@ -307,6 +309,52 @@ test("useNativeConnection follows the session's native client", () => {
   expect(native).toBe(connections[1]);
   view.unmount();
   expect(native).toBe(connections[1]);
+});
+
+test("useChannelDemand opens a subscription and releases it with its consumer", () => {
+  const { connections, wrapper } = createHarness();
+  const View = ({ listening }: { listening: boolean }) => {
+    useChannelDemand("rooms:one", { enabled: listening });
+    return null;
+  };
+  const view = render(<View listening />, { wrapper });
+
+  expect(activeChannels(activeConnections(connections)[0])).toEqual([
+    "rooms:one",
+  ]);
+  // It consumes nothing, so a publication reaches no handler and cannot throw.
+  subscriptionFor(connections, "rooms:one").observer.publication({
+    data: 1,
+    native: null,
+  });
+
+  view.rerender(<View listening={false} />);
+  expect(activeChannels(activeConnections(connections)[0])).toEqual([]);
+  view.unmount();
+});
+
+test("useNativeChannel follows the demanded subscription without demanding one", () => {
+  const { connections, wrapper } = createHarness();
+  let native: unknown = "unset";
+  const Capture = ({ listening }: { listening: boolean }) => {
+    native = useNativeChannel("rooms:one");
+    useChannel("rooms:one", () => {}, { enabled: listening });
+    return null;
+  };
+  const view = render(<Capture listening={false} />, { wrapper });
+
+  // Observing alone opens nothing.
+  expect(native).toBeNull();
+  expect(activeChannels(activeConnections(connections)[0])).toEqual([]);
+
+  view.rerender(<Capture listening />);
+  const subscription = subscriptionFor(connections, "rooms:one");
+
+  expect(native).toBe(subscription);
+
+  view.rerender(<Capture listening={false} />);
+  expect(native).toBeNull();
+  view.unmount();
 });
 
 describe("parsing and typed events", () => {
