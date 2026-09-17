@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+- `@priemskiyyy/simulcast`: a channel handle exposes `native`, the adapter's subscription for that channel, or `null` while none exists. Observing it creates no demand. `RealtimeClient` carries the adapter's subscription type as a third type argument, so a mock standing in for a registered adapter now takes three type arguments.
+- `@priemskiyyy/simulcast-react`, `-vue`, `-solid`, `-svelte`: `useNativeChannel(channel)` mirrors that observable, typed through the new `RegisteredNativeSubscription`. `useChannelDemand(channel, options?)` holds a channel open without consuming publications, for components that watch the native subscription instead.
+- `@priemskiyyy/simulcast-react`, `-vue`, `-solid`, `-svelte`: the `Register` aliases infer every position of the registered client, so adding the subscription type does not silently fall back to `unknown`.
+
 - `@priemskiyyy/simulcast`: `createRealtimeAdapter` releases a subscription that arrives after its connection was disposed, and stops forwarding its events. A provider reporting state synchronously from `subscribe` could otherwise leave a native subscription alive and still delivering publications.
 - `@priemskiyyy/simulcast/testing`: the conformance suite covers that sequence, so every adapter is held to it.
 
