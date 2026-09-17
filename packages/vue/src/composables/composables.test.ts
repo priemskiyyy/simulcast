@@ -13,9 +13,11 @@ import { RealtimeProvider } from "src/components/RealtimeProvider";
 import type { RealtimeProviderProps } from "src/components/RealtimeProvider";
 import { createChannelEventHooks } from "src/composables/createChannelEventHooks";
 import { useChannel } from "src/composables/useChannel";
+import { useChannelDemand } from "src/composables/useChannelDemand";
 import { useChannelStatus } from "src/composables/useChannelStatus";
 import { useConnectionState } from "src/composables/useConnectionState";
 import { useNativeConnection } from "src/composables/useNativeConnection";
+import { useNativeChannel } from "src/composables/useNativeChannel";
 import { useRealtimeClient } from "src/composables/useRealtimeClient";
 
 const createHarness = (options?: MockAdapterOptions) => {
@@ -276,5 +278,59 @@ test("typed events match provider event names without a decoder", () => {
     data: 2,
     native: null,
   });
+  wrapper.unmount();
+});
+
+test("useChannelDemand opens a subscription and releases it with its consumer", async () => {
+  const { client, connections } = createHarness();
+  const listening = ref(true);
+  const wrapper = mountInProvider({ client }, () => {
+    useChannelDemand("rooms:one", { enabled: listening });
+
+    return () => null;
+  });
+
+  await nextTick();
+  expect(activeChannels(connections[0])).toEqual(["rooms:one"]);
+  // It consumes nothing, so a publication reaches no handler and cannot throw.
+  subscriptionFor(connections, "rooms:one").observer.publication({
+    data: 1,
+    native: null,
+  });
+
+  listening.value = false;
+  await nextTick();
+  expect(activeChannels(connections[0])).toEqual([]);
+  wrapper.unmount();
+});
+
+test("useNativeChannel follows the demanded subscription without opening one", async () => {
+  const { client, connections } = createHarness();
+  const demanded = ref(false);
+  let native: Readonly<Ref<unknown>> | undefined;
+  const wrapper = mount(
+    defineComponent(() => {
+      const Child = defineComponent(() => {
+        useChannel("rooms:one", () => {}, { enabled: demanded });
+        native = useNativeChannel("rooms:one");
+        return () => null;
+      });
+
+      return () => h(RealtimeProvider, { client }, { default: () => h(Child) });
+    }),
+  );
+
+  await nextTick();
+  // Observing alone opens nothing.
+  expect(native?.value).toBeNull();
+  expect(connections[0]?.subscriptions).toEqual([]);
+
+  demanded.value = true;
+  await nextTick();
+  expect(native?.value).toBe(connections[0]?.subscriptions[0]);
+
+  demanded.value = false;
+  await nextTick();
+  expect(native?.value).toBeNull();
   wrapper.unmount();
 });

@@ -6,8 +6,10 @@ test("the package exposes the provider and composables without runtime internals
     "RealtimeProvider",
     "createChannelEventHooks",
     "useChannel",
+    "useChannelDemand",
     "useChannelStatus",
     "useConnectionState",
+    "useNativeChannel",
     "useNativeConnection",
     "useRealtimeClient",
   ]);
