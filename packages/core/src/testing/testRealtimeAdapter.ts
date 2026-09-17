@@ -56,14 +56,13 @@ export const testRealtimeAdapter = ({
   const connect = () => {
     const observer = connectionObserver();
     const connection = createAdapter().connect(observer);
-    const subscribe = (channel: string) => {
-      const subscriptionObserverInstance = subscriptionObserver();
+    const subscribe = (channel: string, prepared = subscriptionObserver()) => {
       const subscription = connection.subscribe({
         channel,
-        observer: subscriptionObserverInstance,
+        observer: prepared,
       });
 
-      return { subscription, observer: subscriptionObserverInstance };
+      return { subscription, observer: prepared };
     };
 
     return { connection, observer, subscribe };
@@ -157,6 +156,23 @@ export const testRealtimeAdapter = ({
       expect(subscribed.observer.publication).not.toHaveBeenCalled();
       expect(subscribed.observer.state).toHaveBeenCalledTimes(stateCalls);
       expect(observer.state).toHaveBeenCalledTimes(connectionStateCalls);
+    });
+
+    test("a connection disposed while subscribing leaves nothing behind", async () => {
+      const { connection, subscribe } = connect();
+      const observer = subscriptionObserver();
+      // Providers that report synchronously from `subscribe` let a consumer
+      // dispose the connection before the subscription is owned by anyone.
+      observer.state.mockImplementation(() => connection.dispose());
+      const { subscription } = subscribe(first, observer);
+
+      // A harness may reject once its transport is gone; that is not a failure.
+      await Promise.resolve(publish(connection, first, "late")).catch(() => {});
+      await settle();
+
+      expect(observer.publication).not.toHaveBeenCalled();
+      expect(() => subscription.dispose()).not.toThrow();
+      expect(() => connection.dispose()).not.toThrow();
     });
 
     test("observers report contract states and nothing else", async () => {
