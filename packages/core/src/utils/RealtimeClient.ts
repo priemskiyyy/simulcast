@@ -8,10 +8,14 @@ import { ResourceScope } from "src/utils/internal/ResourceScope";
 import { ValueStore } from "src/utils/internal/ValueStore";
 import { notifyOnChange } from "src/utils/internal/notifyOnChange";
 
-type Session<TNativeConnection, TNativePublication> =
+type Session<TNativeConnection, TNativePublication, TNativeSubscription> =
   | {
       id: number;
-      connection: AdapterConnection<TNativeConnection, TNativePublication>;
+      connection: AdapterConnection<
+        TNativeConnection,
+        TNativePublication,
+        TNativeSubscription
+      >;
       scope: ResourceScope;
     }
   | {
@@ -35,12 +39,18 @@ type Session<TNativeConnection, TNativePublication> =
 export class RealtimeClient<
   TNativeConnection = unknown,
   TNativePublication = unknown,
+  TNativeSubscription = unknown,
 > {
-  #adapter: RealtimeAdapter<TNativeConnection, TNativePublication, unknown>;
+  #adapter: RealtimeAdapter<
+    TNativeConnection,
+    TNativePublication,
+    TNativeSubscription
+  >;
   #sessions = 0;
   #state = new ValueStore<Session<
     TNativeConnection,
-    TNativePublication
+    TNativePublication,
+    TNativeSubscription
   > | null>(null);
   #connection = new ValueStore<ConnectionState>("disconnected");
   #diagnostics: Diagnostics = new Diagnostics(() => {
@@ -53,15 +63,20 @@ export class RealtimeClient<
       channels: this.#channels.inspect(),
     };
   });
-  #channels: RealtimeChannels<TNativePublication> = new RealtimeChannels(
-    { get: () => this.#getSession() },
-    this.#diagnostics,
-  );
+  #channels: RealtimeChannels<TNativePublication, TNativeSubscription> =
+    new RealtimeChannels<TNativePublication, TNativeSubscription>(
+      { get: () => this.#getSession() },
+      this.#diagnostics,
+    );
 
   constructor({
     adapter,
   }: {
-    adapter: RealtimeAdapter<TNativeConnection, TNativePublication, unknown>;
+    adapter: RealtimeAdapter<
+      TNativeConnection,
+      TNativePublication,
+      TNativeSubscription
+    >;
   }) {
     this.#adapter = adapter;
     this.#state.subscribe(this.#diagnostics.changed);

@@ -10,22 +10,28 @@ import { ValueStore } from "src/utils/internal/ValueStore";
 import { assertUnreachable } from "src/utils/internal/assertUnreachable";
 import { invokeIsolated } from "src/utils/internal/invokeIsolated";
 
-type ChannelSession<TNativePublication> = {
+type ChannelSession<TNativePublication, TNativeSubscription> = {
   id: number;
-  connection: Pick<AdapterConnection<unknown, TNativePublication>, "subscribe">;
+  connection: Pick<
+    AdapterConnection<unknown, TNativePublication, TNativeSubscription>,
+    "subscribe"
+  >;
   scope: Pick<ResourceScope, "adopt">;
 };
 
-type SessionSource<TNativePublication> = {
-  get: () => ChannelSession<TNativePublication> | null;
+type SessionSource<TNativePublication, TNativeSubscription> = {
+  get: () => ChannelSession<TNativePublication, TNativeSubscription> | null;
 };
 
-type Channel<TNativePublication> = {
+type Channel<TNativePublication, TNativeSubscription> = {
   name: string;
   status: ValueStore<ChannelStatus>;
+  native: ValueStore<TNativeSubscription | null>;
   consumers: {
     publications: Set<{
-      handle: Parameters<RealtimeChannel<TNativePublication>["subscribe"]>[0];
+      handle: Parameters<
+        RealtimeChannel<TNativePublication, TNativeSubscription>["subscribe"]
+      >[0];
     }>;
     status: Set<symbol>;
   };
@@ -50,13 +56,16 @@ const updateStatus = (
   status.set(next);
 };
 
-export class RealtimeChannels<TNativePublication> {
-  #channels = new Map<string, Channel<TNativePublication>>();
-  #session: SessionSource<TNativePublication>;
+export class RealtimeChannels<TNativePublication, TNativeSubscription> {
+  #channels = new Map<
+    string,
+    Channel<TNativePublication, TNativeSubscription>
+  >();
+  #session: SessionSource<TNativePublication, TNativeSubscription>;
   #diagnostics: Diagnostics;
 
   constructor(
-    session: SessionSource<TNativePublication>,
+    session: SessionSource<TNativePublication, TNativeSubscription>,
     diagnostics: Diagnostics,
   ) {
     this.#session = session;
@@ -73,7 +82,9 @@ export class RealtimeChannels<TNativePublication> {
       },
     }));
 
-  get = (name: string): RealtimeChannel<TNativePublication> => ({
+  get = (
+    name: string,
+  ): RealtimeChannel<TNativePublication, TNativeSubscription> => ({
     subscribe: (onPublication) =>
       this.#registerConsumer(name, (channel) => {
         const consumer = { handle: onPublication };
@@ -103,6 +114,29 @@ export class RealtimeChannels<TNativePublication> {
           };
         }),
     },
+    native: {
+      get: () => {
+        const channel = this.#channels.get(name);
+
+        if (channel === undefined) {
+          return null;
+        }
+
+        return channel.native.get();
+      },
+      // Observing is passive, like `status`: it retains the channel record so
+      // the observer keeps following it, and never creates demand.
+      subscribe: (listener) =>
+        this.#registerConsumer(name, (channel) => {
+          const consumer = Symbol("native observer");
+          channel.consumers.status.add(consumer);
+          const stop = channel.native.subscribe(listener);
+          return () => {
+            stop();
+            channel.consumers.status.delete(consumer);
+          };
+        }),
+    },
   });
 
   subscribeAll = () => {
@@ -118,7 +152,9 @@ export class RealtimeChannels<TNativePublication> {
 
   #registerConsumer = (
     name: string,
-    register: (channel: Channel<TNativePublication>) => () => void,
+    register: (
+      channel: Channel<TNativePublication, TNativeSubscription>,
+    ) => () => void,
   ) => {
     const channel = this.#getOrCreateChannel(name);
     const consumer = new ResourceScope();
@@ -151,16 +187,19 @@ export class RealtimeChannels<TNativePublication> {
     });
   };
 
-  #getOrCreateChannel = (name: string): Channel<TNativePublication> => {
+  #getOrCreateChannel = (
+    name: string,
+  ): Channel<TNativePublication, TNativeSubscription> => {
     const existing = this.#channels.get(name);
 
     if (existing !== undefined) {
       return existing;
     }
 
-    const channel: Channel<TNativePublication> = {
+    const channel: Channel<TNativePublication, TNativeSubscription> = {
       name,
       status: new ValueStore<ChannelStatus>(DETACHED_CHANNEL_STATUS),
+      native: new ValueStore<TNativeSubscription | null>(null),
       consumers: { publications: new Set(), status: new Set() },
       attachment: null,
     };
@@ -170,7 +209,7 @@ export class RealtimeChannels<TNativePublication> {
     return channel;
   };
 
-  #subscribe = (channel: Channel<TNativePublication>) => {
+  #subscribe = (channel: Channel<TNativePublication, TNativeSubscription>) => {
     if (channel.consumers.publications.size === 0) {
       return;
     }
@@ -198,8 +237,8 @@ export class RealtimeChannels<TNativePublication> {
   };
 
   #isAttachable = (
-    channel: Channel<TNativePublication>,
-    session: ChannelSession<TNativePublication>,
+    channel: Channel<TNativePublication, TNativeSubscription>,
+    session: ChannelSession<TNativePublication, TNativeSubscription>,
   ) => {
     if (channel.consumers.publications.size === 0) {
       return false;
@@ -219,8 +258,8 @@ export class RealtimeChannels<TNativePublication> {
   };
 
   #attach = (
-    channel: Channel<TNativePublication>,
-    session: ChannelSession<TNativePublication>,
+    channel: Channel<TNativePublication, TNativeSubscription>,
+    session: ChannelSession<TNativePublication, TNativeSubscription>,
   ) => {
     // Reserve the channel before adapter callbacks can acquire it again.
     const scope = new ResourceScope();
@@ -235,6 +274,7 @@ export class RealtimeChannels<TNativePublication> {
       }
 
       channel.attachment = null;
+      channel.native.set(null);
       channel.status.set(DETACHED_CHANNEL_STATUS);
       this.#diagnostics.record(
         "runtime",
@@ -300,11 +340,12 @@ export class RealtimeChannels<TNativePublication> {
         },
       });
       scope.addCleanup(subscription.dispose);
+      channel.native.set(subscription.native);
     });
   };
 
   #dispatch = (
-    channel: Channel<TNativePublication>,
+    channel: Channel<TNativePublication, TNativeSubscription>,
     scope: ResourceScope,
     publication: RealtimePublication<TNativePublication>,
   ) => {

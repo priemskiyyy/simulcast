@@ -687,3 +687,53 @@ test("many consumers share a single adapter subscription across session replacem
   first();
   second();
 });
+
+test("a channel exposes the adapter's subscription without demanding one", () => {
+  const mock = createMockAdapter();
+  const client = new RealtimeClient({ adapter: mock.adapter });
+  const channel = client.channel("rooms:one");
+  const seen: Array<unknown> = [];
+  const stop = channel.native.subscribe(() => seen.push(channel.native.get()));
+
+  // Observing is passive: no session, no subscription, no demand.
+  expect(channel.native.get()).toBeNull();
+  const disconnect = client.connect();
+  expect(mock.connections[0]?.subscriptions).toEqual([]);
+  expect(channel.native.get()).toBeNull();
+
+  const unsubscribe = channel.subscribe(() => {});
+  const subscription = mock.connections[0]?.subscriptions[0];
+
+  expect(channel.native.get()).toBe(subscription);
+  expect(seen).toEqual([subscription]);
+
+  unsubscribe();
+  expect(channel.native.get()).toBeNull();
+  expect(seen).toEqual([subscription, null]);
+  stop();
+  disconnect();
+});
+
+test("the native subscription follows session replacement and clears with the session", () => {
+  const mock = createMockAdapter();
+  const client = new RealtimeClient({ adapter: mock.adapter });
+  const channel = client.channel("rooms:one");
+  const unsubscribe = channel.subscribe(() => {});
+  const disconnect = client.connect();
+  const first = mock.connections[0]?.subscriptions[0];
+
+  expect(channel.native.get()).toBe(first);
+  const release = client.connect();
+  const second = mock.connections[1]?.subscriptions[0];
+
+  expect(second).not.toBe(first);
+  expect(channel.native.get()).toBe(second);
+
+  // The replaced session's cleanup is stale and cannot release the current one.
+  disconnect();
+  expect(channel.native.get()).toBe(second);
+
+  release();
+  expect(channel.native.get()).toBeNull();
+  unsubscribe();
+});
