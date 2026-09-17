@@ -251,7 +251,7 @@ try {
   );
   write(
     "contracts.ts",
-    `import type { Centrifuge, PublicationContext } from "centrifuge";
+    `import type { Centrifuge, PublicationContext, Subscription } from "centrifuge";
 import { RealtimeClient } from "@priemskiyyy/simulcast";
 import { createMockAdapter } from "@priemskiyyy/simulcast/mock";
 import { ably } from "@priemskiyyy/simulcast-ably";
@@ -295,7 +295,7 @@ export const useContracts = () => {
   const registeredNative: Equal<typeof native, Centrifuge | null> = true;
   const publicationNative: Equal<Parameters<PublicationHandler<unknown>>[1]["native"], PublicationContext> = true;
   // A mock standing in for this adapter's native types is accepted by the provider.
-  const mock = new RealtimeClient({ adapter: createMockAdapter<Centrifuge, PublicationContext>().adapter });
+  const mock = new RealtimeClient({ adapter: createMockAdapter<Centrifuge, PublicationContext, Subscription>().adapter });
   const mockAccepted: Equal<typeof mock, typeof centrifugoClient> = true;
   useChannel<{ text: string }>("raw", (data) => { data.text.toUpperCase(); });
   useChannel("raw", (data) => { data.toFixed(); }, { parse: Number });
