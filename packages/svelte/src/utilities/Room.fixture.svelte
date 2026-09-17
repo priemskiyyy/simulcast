@@ -4,6 +4,7 @@
     useChannel,
     useChannelStatus,
     useConnectionState,
+    useNativeChannel,
     useNativeConnection,
     useRealtimeClient,
   } from "../index.js";
@@ -18,6 +19,7 @@
     onCreated?: PublicationHandler<unknown>;
     onClient?: (client: RealtimeClient) => void;
     onNative?: (native: unknown) => void;
+    onNativeChannel?: (subscription: unknown) => void;
   };
 
   let {
@@ -28,12 +30,14 @@
     onCreated = () => {},
     onClient = () => {},
     onNative = () => {},
+    onNativeChannel = () => {},
   }: Props = $props();
 
   const client = useRealtimeClient();
   const connection = useConnectionState();
   const native = useNativeConnection();
   const status = useChannelStatus(() => channel);
+  const subscription = useNativeChannel(() => channel);
 
   useChannel(
     () => channel,
@@ -55,6 +59,9 @@
   });
   $effect(() => {
     onNative(native.current);
+  });
+  $effect(() => {
+    onNativeChannel(subscription.current);
   });
 </script>
 

@@ -9,6 +9,7 @@ import type {
 import {
   createChannelEventHooks,
   useChannel,
+  useNativeChannel,
   useNativeConnection,
   useRealtimeClient,
 } from "../index.js";
@@ -31,6 +32,9 @@ export const useTypeContracts = () => {
   // Nothing is registered inside the package, so the native client is unknown.
   expectTypeOf<RegisteredClient>().toEqualTypeOf<RealtimeClient>();
   expectTypeOf(useNativeConnection()).toEqualTypeOf<ReadableBox<unknown>>();
+  expectTypeOf(useNativeChannel("rooms:one")).toEqualTypeOf<
+    ReadableBox<unknown>
+  >();
 
   expectTypeOf(useRealtimeClient()).toEqualTypeOf<
     ReadableBox<RealtimeClient>

@@ -199,3 +199,41 @@ test("typed events match provider event names without a decoder", () => {
     native: null,
   });
 });
+
+test("useChannelDemand opens a subscription and releases it with its consumer", async () => {
+  const { client, connections } = createHarness();
+  const { rerender, unmount } = render(Harness, {
+    client,
+    demand: { channel: "rooms:one", enabled: true },
+  });
+
+  expect(activeChannels(connections[0])).toEqual(["rooms:one"]);
+  // It consumes nothing, so a publication reaches no handler and cannot throw.
+  subscriptionFor(connections, "rooms:one").observer.publication({
+    data: 1,
+    native: null,
+  });
+
+  await rerender({ client, demand: { channel: "rooms:one", enabled: false } });
+  expect(activeChannels(connections[0])).toEqual([]);
+  unmount();
+});
+
+test("useNativeChannel follows the demanded subscription", async () => {
+  const { client, connections } = createHarness();
+  const onNativeChannel = vi.fn();
+  const room = { channel: "rooms:one", onNativeChannel };
+  const { rerender } = render(Harness, {
+    client,
+    session: { id: "one", enabled: false },
+    room,
+  });
+
+  expect(onNativeChannel).toHaveBeenLastCalledWith(null);
+  await rerender({ client, session: { id: "one", enabled: true }, room });
+  expect(onNativeChannel).toHaveBeenLastCalledWith(
+    subscriptionFor(connections, "rooms:one"),
+  );
+  await rerender({ client, session: { id: "one", enabled: false }, room });
+  expect(onNativeChannel).toHaveBeenLastCalledWith(null);
+});
