@@ -16,5 +16,8 @@ const getServerNativeConnection = () => null;
  * const publish = (text: string) => centrifuge?.publish("rooms:demo", { text });
  * ```
  */
-export const useNativeConnection = (): RegisteredNativeConnection | null =>
-  useObservableValue(useRealtimeClient().native, getServerNativeConnection);
+export const useNativeConnection = (): RegisteredNativeConnection | null => {
+  const client = useRealtimeClient();
+
+  return useObservableValue(client.native, getServerNativeConnection);
+};
