@@ -12,9 +12,11 @@ import { RealtimeProvider } from "src/components/RealtimeProvider";
 import type { RealtimeProviderProps } from "src/components/RealtimeProvider";
 import { createChannelEventHooks } from "src/primitives/createChannelEventHooks";
 import { useChannel } from "src/primitives/useChannel";
+import { useChannelDemand } from "src/primitives/useChannelDemand";
 import { useChannelStatus } from "src/primitives/useChannelStatus";
 import { useConnectionState } from "src/primitives/useConnectionState";
 import { useNativeConnection } from "src/primitives/useNativeConnection";
+import { useNativeChannel } from "src/primitives/useNativeChannel";
 import { useRealtimeClient } from "src/primitives/useRealtimeClient";
 
 afterEach(cleanup);
@@ -258,4 +260,48 @@ test("typed events match provider event names without a decoder", () => {
     data: 2,
     native: null,
   });
+});
+
+test("useChannelDemand opens a subscription and releases it with its consumer", () => {
+  const { connections, wrapper } = createHarness();
+  const [listening, setListening] = createSignal(true);
+  renderHook(
+    () => {
+      useChannelDemand("rooms:one", { enabled: listening });
+    },
+    { wrapper },
+  );
+
+  expect(activeChannels(connections[0])).toEqual(["rooms:one"]);
+  // It consumes nothing, so a publication reaches no handler and cannot throw.
+  subscriptionFor(connections, "rooms:one").observer.publication({
+    data: 1,
+    native: null,
+  });
+
+  setListening(false);
+  expect(activeChannels(connections[0])).toEqual([]);
+});
+
+test("useNativeChannel follows the demanded subscription without opening one", () => {
+  const { connections, wrapper } = createHarness();
+  const [demanded, setDemanded] = createSignal(false);
+  const { result } = renderHook(
+    () => {
+      useChannel("rooms:one", () => {}, { enabled: demanded });
+
+      return useNativeChannel("rooms:one");
+    },
+    { wrapper },
+  );
+
+  // Observing alone opens nothing.
+  expect(result()).toBeNull();
+  expect(connections[0]?.subscriptions).toEqual([]);
+
+  setDemanded(true);
+  expect(result()).toBe(connections[0]?.subscriptions[0]);
+
+  setDemanded(false);
+  expect(result()).toBeNull();
 });
